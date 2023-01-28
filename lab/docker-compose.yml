@@ -1,16 +1,19 @@
 services:
-  p-jumpbox-01:
-    hostname: p-jumpbox-01.acme-infinity-servers.com
+  c-jumpbox-01:
+    hostname: c-jumpbox-01.acme-infinity-servers.com
     build: 
-      context: machines/p-jumpbox-01
+      context: machines/c-jumpbox-01
       dockerfile: Dockerfile
     networks:
       public:
-        ipv4_address: 172.16.10.10
+        ipv4_address: 172.16.10.13
       corporate:
-        ipv4_address: 10.1.0.10
+        ipv4_address: 10.1.0.13
     ports:
         - "22:22"
+
+
+
 
 
 networks:
