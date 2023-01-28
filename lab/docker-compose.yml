@@ -1,0 +1,34 @@
+services:
+  p-jumpbox-01:
+    hostname: p-jumpbox-01.acme-infinity-servers.com
+    build: 
+      context: machines/p-jumpbox-01
+      dockerfile: Dockerfile
+    networks:
+      public:
+        ipv4_address: 172.16.10.10
+      corporate:
+        ipv4_address: 10.1.0.10
+    ports:
+        - "22:22"
+
+
+networks:
+  public:
+    name: public
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br_public
+    ipam:
+      config:
+        - subnet: "172.16.10.0/24"
+
+  corporate:
+    internal: true
+    name: corporate
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br_corporate
+    ipam:
+      config:
+        - subnet: "10.1.0.0/24"
