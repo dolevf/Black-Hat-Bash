@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - master
-      
+
 jobs:
   shellcheck:
     name: Shellcheck
@@ -11,3 +11,17 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: >-
+            ch01/
+            ch02/
+            ch03/
+            ch04/
+            ch05/
+            ch06/
+            ch07/
+            ch08/
+            ch09/
+            ch10/
+            
+            
