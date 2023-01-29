@@ -15,7 +15,7 @@ containers = [
 
 def test_check_containers_are_up():
     for container_name in containers:
-        container = DOCKER_CLIENT.containers.get(f'lab_{container_name}_1')
+        container = DOCKER_CLIENT.containers.get(container_name)
 
         container_state = container.attrs['State']
 
