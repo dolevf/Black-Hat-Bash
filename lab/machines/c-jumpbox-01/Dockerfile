@@ -8,6 +8,8 @@ LABEL company="ACME Infinity Servers"
 RUN apt-get update -y
 RUN apt-get install -y openssh-server
 RUN apt-get install cron -y
+RUN apt-get install net-tools
+
 
 # Provision Users
 RUN useradd -m -s /bin/bash jmartinez
