@@ -9,6 +9,7 @@ if [[ "$(id -u)" -ne 0 ]]; then
         echo "usermod -aG $USER docker"
         echo "then, rerun the command: su - $USER"
         echo "...or simply use sudo"
+        exit 1
     fi
 fi
 
