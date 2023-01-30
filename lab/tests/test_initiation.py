@@ -4,7 +4,7 @@ import pytest
 DOCKER_CLIENT = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
 containers = [
-    'c-jumpbox-01'
+    'c-jumpbox-01',
     # 'p-ftp-01',
     # 'p-web-01',
     # 'p-web-02'
