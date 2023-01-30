@@ -11,7 +11,6 @@ services:
         ipv4_address: 172.16.10.13
       corporate:
         ipv4_address: 10.1.0.13
-
   c-backup-01:
     container_name: c-backup-01
     hostname: c-backup-01.acme-infinity-servers.com
@@ -22,7 +21,6 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.14
-
   c-redis-01:
     container_name: c-redis-01
     hostname: c-redis-01.acme-infinity-servers.com
@@ -45,7 +43,29 @@ services:
         ipv4_address: 172.16.10.12
       corporate:
         ipv4_address: 10.1.0.12
-      
+
+  p-web-01:
+    container_name: p-web-01
+    hostname: p-web-01.acme-infinity-servers.com
+    profiles: ["all", "ch03"]
+    build: 
+      context: machines/p-web-01
+      dockerfile: Dockerfile
+    networks:
+      public:
+        ipv4_address: 172.16.10.10
+
+  p-web-02:
+    container_name: p-web-02
+    hostname: p-web-02.acme-infinity-servers.com
+    profiles: ["all", "ch03"]
+    build: 
+      context: machines/p-web-01
+      dockerfile: Dockerfile
+    networks:
+      public:
+        ipv4_address: 172.16.10.11
+   
 networks:
   public:
     name: public
