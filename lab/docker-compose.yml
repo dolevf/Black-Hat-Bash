@@ -45,10 +45,7 @@ services:
         ipv4_address: 172.16.10.12
       corporate:
         ipv4_address: 10.1.0.12
-    ports:
-        - "20-21:20-21"
-        - "65500-65515:65500-65515"
-
+      
 networks:
   public:
     name: public
