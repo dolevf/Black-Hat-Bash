@@ -8,7 +8,7 @@ containers = [
     # 'p-ftp-01',
     # 'p-web-01',
     # 'p-web-02'
-    # 'c-backup-01',
+    'c-backup-01',
     # 'c-db-01',
     # 'c-redis-01'
 ]

@@ -2,6 +2,7 @@ services:
   c-jumpbox-01:
     container_name: c-jumpbox-01
     hostname: c-jumpbox-01.acme-infinity-servers.com
+    profiles: ["ch03", "ch04", "ch05", "ch07"]
     build: 
       context: machines/c-jumpbox-01
       dockerfile: Dockerfile
