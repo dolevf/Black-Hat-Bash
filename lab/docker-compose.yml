@@ -60,7 +60,7 @@ services:
     hostname: p-web-02.acme-infinity-servers.com
     profiles: ["all", "ch03"]
     build: 
-      context: machines/p-web-01
+      context: machines/p-web-02
       dockerfile: Dockerfile
     networks:
       public:
