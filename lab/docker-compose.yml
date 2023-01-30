@@ -27,6 +27,17 @@ services:
     ports:
         - "8080:8080"
 
+  c-redis-01:
+    container_name: c-redis-01
+    hostname: c-redis-01.acme-infinity-servers.com
+    profiles: ["all", "ch07", "ch09"]
+    build: 
+      context: machines/c-redis-01
+      dockerfile: Dockerfile
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.15
+
 networks:
   public:
     name: public
