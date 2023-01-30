@@ -10,7 +10,7 @@ RUN apt-get install vsftpd -y
 RUN apt-get install apache2 -y
 RUN apt-get install net-tools -y
 RUN apt-get install iputils-ping -y
-
+RUN apt-get install git -y
 
 # Provision Users
 RUN useradd -m -s /bin/bash jmartinez
@@ -22,8 +22,16 @@ RUN echo "dbrown:wAWSD@ASw2" | chpasswd
 RUN echo "ogarcia:#T9aujf8h33" | chpasswd
 RUN echo "arodriguez:asucj783E@#" | chpasswd
 
+
 # Copy Files to Lab
-COPY files/vsftpd.conf /etc/vsftpd.conf
+RUN mkdir -p /var/www/html/backup/acme-hyper-branding
+RUN mkdir -p /var/www/html/backup/acme-impact-alliance
+COPY p-ftp-01/files/vsftpd.conf /etc/vsftpd.conf
+COPY p-web-01/files/site/app.py /var/www/html/backup/acme-hyper-branding
+
+# Post Actions
+RUN git init /var/www/html/backup/acme-hyper-branding
+# RUN git init var/www/html/backup/acme-hyper-branding
 
 
 # Entry

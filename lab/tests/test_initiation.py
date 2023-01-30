@@ -6,7 +6,7 @@ DOCKER_CLIENT = docker.DockerClient(base_url='unix://var/run/docker.sock')
 containers = [
     'c-jumpbox-01',
     'p-ftp-01',
-    # 'p-web-01',
+    'p-web-01',
     # 'p-web-02'
     'c-backup-01',
     # 'c-db-01',
