@@ -8,14 +8,13 @@ if [[ "$(id -u)" -ne 0 ]]; then
         echo "Docker requires sudo privileges. To add your user \"$USER\" to the docker group, please run:"
         echo "usermod -aG $USER docker"
         echo "then, rerun the command: su - $USER"
-        echo "...or simply use sudo"
         exit 1
     fi
 fi
 
 
 function setup_containers(){
-    sudo docker-compose --profile all up --build -d --remove-orphans > /dev/null
+    sudo docker-compose --profile all up --build -d --remove-orphans
     echo "Running tests..."
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/*; then
         echo "OK: lab appears to be up."
