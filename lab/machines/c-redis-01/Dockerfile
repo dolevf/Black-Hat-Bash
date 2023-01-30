@@ -1,14 +1,14 @@
 FROM ubuntu:23.04
 
 # Metadata
-LABEL name="c-backup-01"
+LABEL name="c-redis-01"
 LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y
 RUN apt-get install cron -y
 RUN apt-get install net-tools
-RUN apt-get install python3 -y
+RUN apt-get install redis-server -y
 
 # Provision Users
 RUN useradd -m -s /bin/bash jmartinez
@@ -20,4 +20,10 @@ RUN echo "dbrown:wAWSD@ASw2" | chpasswd
 RUN echo "ogarcia:#T9aujf8h33" | chpasswd
 RUN echo "arodriguez:asucj783E@#" | chpasswd
 
-CMD echo "Starting backup service..." && python3 -m http.server --directory /etc 8080
+# Copy Files to Lab
+COPY --chown=root:root files/redis.conf /etc/redis/redis.conf
+
+# Entry
+ENTRYPOINT \
+    echo "Starting redis service..." && \
+    service redis-server start

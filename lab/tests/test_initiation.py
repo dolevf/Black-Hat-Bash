@@ -10,7 +10,7 @@ containers = [
     # 'p-web-02'
     'c-backup-01',
     # 'c-db-01',
-    # 'c-redis-01'
+    'c-redis-01'
 ]
 
 def test_check_containers_are_up():
