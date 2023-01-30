@@ -43,7 +43,6 @@ services:
         ipv4_address: 172.16.10.12
       corporate:
         ipv4_address: 10.1.0.12
-
   p-web-01:
     container_name: p-web-01
     hostname: p-web-01.acme-infinity-servers.com
@@ -54,7 +53,6 @@ services:
     networks:
       public:
         ipv4_address: 172.16.10.10
-
   p-web-02:
     container_name: p-web-02
     hostname: p-web-02.acme-infinity-servers.com
