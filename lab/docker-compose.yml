@@ -13,9 +13,18 @@ services:
     ports:
         - "22:22"
 
-
-
-
+  c-backup-01:
+    container_name: c-backup-01
+    hostname: c-backup-01.acme-infinity-servers.com
+    profiles: ["ch05", "ch07", "ch09"]
+    build: 
+      context: machines/c-backup-01
+      dockerfile: Dockerfile
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.14
+    ports:
+        - "8080:8080"
 
 networks:
   public:
