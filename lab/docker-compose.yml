@@ -11,8 +11,6 @@ services:
         ipv4_address: 172.16.10.13
       corporate:
         ipv4_address: 10.1.0.13
-    ports:
-        - "22:22"
 
   c-backup-01:
     container_name: c-backup-01
@@ -24,8 +22,6 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.14
-    ports:
-        - "8080:8080"
 
   c-redis-01:
     container_name: c-redis-01
@@ -37,6 +33,21 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.15
+  p-ftp-01:
+    container_name: p-ftp-01
+    hostname: p-ftp-01.acme-infinity-servers.com
+    profiles: ["all", "ch03"]
+    build: 
+      context: machines/p-ftp-01
+      dockerfile: Dockerfile
+    networks:
+      public:
+        ipv4_address: 172.16.10.12
+      corporate:
+        ipv4_address: 10.1.0.12
+    ports:
+        - "20-21:20-21"
+        - "65500-65515:65500-65515"
 
 networks:
   public:
