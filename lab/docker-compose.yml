@@ -2,6 +2,7 @@ services:
   c-jumpbox-01:
     container_name: c-jumpbox-01
     hostname: c-jumpbox-01.acme-infinity-servers.com
+    profiles: ["all", "ch03", "ch04", "ch05", "ch07"]
     build: 
       context: machines/c-jumpbox-01
       dockerfile: Dockerfile
@@ -13,9 +14,18 @@ services:
     ports:
         - "22:22"
 
-
-
-
+  c-backup-01:
+    container_name: c-backup-01
+    hostname: c-backup-01.acme-infinity-servers.com
+    profiles: ["all", "ch05", "ch07", "ch09"]
+    build: 
+      context: machines/c-backup-01
+      dockerfile: Dockerfile
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.14
+    ports:
+        - "8080:8080"
 
 networks:
   public:

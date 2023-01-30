@@ -15,7 +15,7 @@ fi
 
 
 function setup_containers(){
-    sudo docker-compose up --build -d --remove-orphans > /dev/null
+    sudo docker-compose --profile all up --build -d --remove-orphans > /dev/null
     echo "Running tests..."
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/*; then
         echo "OK: lab appears to be up."
