@@ -1,6 +1,8 @@
 #!/bin/bash
 set -o pipefail
+declare -r LOG=log.txt
 
+truncate -s 0 $LOG
 
 if [[ "$(id -u)" -ne 0 ]]; then
     if ! groups | grep -q docker; then
@@ -14,9 +16,9 @@ fi
 
 
 function setup_containers(){
-    sudo docker-compose --profile all up --build -d --remove-orphans
+    sudo docker-compose --profile all up --build -d --remove-orphans 2>&1 | tee -a $LOG
     echo "Running tests..."
-    if python3 -m pytest -q -W ignore::DeprecationWarning tests/*; then
+    if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
         echo "OK: lab appears to be up."
     fi
     
