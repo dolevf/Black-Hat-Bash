@@ -25,9 +25,15 @@ RUN echo "arodriguez:asucj783E@#" | chpasswd
 
 # Copy Files to Lab
 WORKDIR /app
+#COPY files/site/* ./
+COPY files/site/static static
 COPY files/site/app.py .
-RUN mkdir files
+COPY files/site/index.html .
+COPY files/site/upload.html . 
+
+RUN mkdir files 
+RUN mkdir uploads
 COPY files/acme-hyper-branding-05.csv files/acme-hyper-branding-05.csv
 
 
-ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8081"]

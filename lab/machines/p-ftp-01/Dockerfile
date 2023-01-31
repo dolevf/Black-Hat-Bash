@@ -30,6 +30,7 @@ COPY p-ftp-01/files/vsftpd.conf /etc/vsftpd.conf
 COPY p-web-01/files/site/app.py /var/www/html/backup/acme-hyper-branding
 
 # Post Actions
+RUN git config --global init.defaultBranch master
 RUN git init /var/www/html/backup/acme-hyper-branding
 # RUN git init var/www/html/backup/acme-hyper-branding
 
