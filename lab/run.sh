@@ -16,7 +16,7 @@ fi
 
 
 function deploy(){
-    sudo docker-compose --profile all up --build -d --remove-orphans 2>&1 | tee -a $LOG
+    sudo docker-compose --profile all up --build --detach --remove-orphans 2>&1 | tee -a $LOG
     echo "Running tests..."
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
         echo "OK: lab appears to be up."
@@ -25,12 +25,12 @@ function deploy(){
 }
 
 function teardown(){
-    sudo docker-compose down -v
+    sudo docker-compose down --volumes
     echo "OK: lab has shut down."
 }
 
 function destroy(){
-    sudo docker-compose down -v --rmi all
+    sudo docker-compose down --volumes --rmi all
     echo "OK: lab has been destroyed."
 }
 
