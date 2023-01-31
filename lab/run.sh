@@ -25,12 +25,12 @@ function deploy(){
 }
 
 function teardown(){
-    sudo docker-compose down
+    sudo docker-compose down -v
     echo "OK: lab has shut down."
 }
 
 function destroy(){
-    sudo docker-compose down --rmi all
+    sudo docker-compose down -v --rmi all
     echo "OK: lab has been destroyed."
 }
 
