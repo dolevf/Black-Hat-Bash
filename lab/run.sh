@@ -15,7 +15,7 @@ if [[ "$(id -u)" -ne 0 ]]; then
 fi
 
 
-function setup_containers(){
+function deploy(){
     sudo docker-compose --profile all up --build -d --remove-orphans 2>&1 | tee -a $LOG
     echo "Running tests..."
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
@@ -24,19 +24,32 @@ function setup_containers(){
     
 }
 
-function setup_teardown(){
+function teardown(){
     sudo docker-compose down
     echo "OK: lab has shut down."
 }
 
+function destroy(){
+    sudo docker-compose down --rmi all
+    echo "OK: lab has been destroyed."
+}
+
 case "$1" in
     deploy)
-        setup_containers
+        deploy
     ;;
     teardown)
-        setup_teardown
+        teardown
+    ;;
+    destroy)
+        destroy
     ;;
     *)
-        echo "deploy|teardown"
+        echo "Usage: ./$(basename $0) deploy|teardown|destroy"
+        echo
+        echo "deploy   | build images and start containers"
+        echo "teardown | stop containers"
+        echo "destroy  | stop containers and delete containers and images"
         exit 1
+    ;;
 esac

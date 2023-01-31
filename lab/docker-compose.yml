@@ -44,7 +44,7 @@ services:
       corporate:
         ipv4_address: 10.1.0.12
     volumes:
-      - appdata:/mnt/repodata
+      - appdata:/mnt/scripts
 
   p-web-01:
     container_name: p-web-01
@@ -57,7 +57,7 @@ services:
       public:
         ipv4_address: 172.16.10.10
     volumes:
-      - appdata:/mnt/repodata
+      - appdata:/mnt/scripts/
   # p-web-02:
   #   container_name: p-web-02
   #   hostname: p-web-02.acme-infinity-servers.com
@@ -69,7 +69,7 @@ services:
   #     public:
   #       ipv4_address: 172.16.10.11
   #   volumes:
-  #     - appdata:/mnt/repodata
+  #     - appdata:/mnt/scripts
 
 volumes:
   appdata:

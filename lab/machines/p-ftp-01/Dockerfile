@@ -10,6 +10,7 @@ RUN apt-get install vsftpd -y
 RUN apt-get install apache2 -y
 RUN apt-get install net-tools -y
 RUN apt-get install iputils-ping -y
+RUN apt-get install cron -y
 RUN apt-get install git -y
 
 # Provision Users
@@ -28,16 +29,24 @@ RUN mkdir -p /var/www/html/backup/acme-hyper-branding
 RUN mkdir -p /var/www/html/backup/acme-impact-alliance
 COPY p-ftp-01/files/vsftpd.conf /etc/vsftpd.conf
 COPY p-web-01/files/site/app.py /var/www/html/backup/acme-hyper-branding
+COPY p-ftp-01/files/execute.sh /mnt/scripts/
 
 # Post Actions
 RUN git config --global init.defaultBranch master
 RUN git init /var/www/html/backup/acme-hyper-branding
-# RUN git init var/www/html/backup/acme-hyper-branding
+# RUN git init var/www/html/backup/acme-impact-alliance
+RUN chmod u+x /mnt/scripts/execute.sh
+
+RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab
+RUN crontab /tmp/root-crontab
+RUN rm /tmp/root-crontab
 
 
 # Entry
 ENTRYPOINT \
     service vsftpd restart \
+    && \
+    service cron restart \
     && \
     service apache2 restart \
     && \

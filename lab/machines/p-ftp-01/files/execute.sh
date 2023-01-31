@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# This script is executed every minute on p-ftp-01 to do maintenance work.
+
+declare -r LOG="/tmp/job.log"
+
+echo "$(date) - Starting cleanup script..." >> "$LOG"
+if find /tmp -type f ! -name 'job.log' -exec rm -rf {} +; then
+    echo "cleaned up files from the the /tmp folder."  >> "$LOG"
+fi
+
+echo "$(date) - Cleanup script is finished." >> "$LOG"
+
