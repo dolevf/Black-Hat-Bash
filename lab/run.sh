@@ -16,8 +16,17 @@ fi
 
 
 function deploy(){
-    sudo docker-compose --profile all up --build --detach --remove-orphans 2>&1 | tee -a $LOG
-    echo "Running tests..."
+    sudo docker-compose up --build --detach --remove-orphans 2>&1 | tee -a $LOG
+    local total_expected_containers="$(grep -c container_name docker-compose.yml)"
+    local actual_running_containers="$(docker-compose ps | grep Up | wc -l)"
+
+    if [[ "$running_containers" -eq $total_expected_containers ]]; then
+        echo "[$actual_running_containers/$total_expected_containers] - not all containers are running. check the log file $LOG"
+        exit 1
+    else
+        echo "All containers appear to be running. Moving on to tests..."
+    fi
+
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
         echo "OK: lab appears to be up."
     fi

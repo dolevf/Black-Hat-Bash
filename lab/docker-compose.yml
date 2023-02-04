@@ -2,7 +2,6 @@ services:
   c-jumpbox-01:
     container_name: c-jumpbox-01
     hostname: c-jumpbox-01.acme-infinity-servers.com
-    profiles: ["all", "ch03", "ch04", "ch05", "ch07"]
     build: 
       context: machines/c-jumpbox-01
       dockerfile: Dockerfile
@@ -14,7 +13,6 @@ services:
   c-backup-01:
     container_name: c-backup-01
     hostname: c-backup-01.acme-infinity-servers.com
-    profiles: ["all", "ch05", "ch07", "ch09"]
     build: 
       context: machines/c-backup-01
       dockerfile: Dockerfile
@@ -24,7 +22,6 @@ services:
   c-redis-01:
     container_name: c-redis-01
     hostname: c-redis-01.acme-infinity-servers.com
-    profiles: ["all", "ch07", "ch09"]
     build: 
       context: machines/c-redis-01
       dockerfile: Dockerfile
@@ -34,7 +31,6 @@ services:
   p-ftp-01:
     container_name: p-ftp-01
     hostname: p-ftp-01.acme-infinity-servers.com
-    profiles: ["all", "ch03"]
     build: 
       context: machines/
       dockerfile: p-ftp-01/Dockerfile
@@ -45,11 +41,9 @@ services:
         ipv4_address: 10.1.0.12
     volumes:
       - appdata:/mnt/scripts
-
   p-web-01:
     container_name: p-web-01
     hostname: p-web-01.acme-infinity-servers.com
-    profiles: ["all", "ch03"]
     build: 
       context: machines/p-web-01
       dockerfile: Dockerfile
@@ -58,21 +52,46 @@ services:
         ipv4_address: 172.16.10.10
     volumes:
       - appdata:/mnt/scripts/
-  # p-web-02:
-  #   container_name: p-web-02
-  #   hostname: p-web-02.acme-infinity-servers.com
-  #   profiles: ["all", "ch03"]
-  #   build: 
-  #     context: machines/p-web-02
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     public:
-  #       ipv4_address: 172.16.10.11
-  #   volumes:
-  #     - appdata:/mnt/scripts
+  p-web-02:
+    container_name: p-web-02
+    hostname: p-web-02.acme-infinity-servers.com
+    image: wordpress:latest
+    volumes:
+      - wpdata:/var/www/html
+    ports:
+      - 80:80
+    environment:
+      - WORDPRESS_DB_HOST=c-web-02-db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+    
+    networks:
+      public:
+        ipv4_address: 172.16.10.11
+      corporate:
+        ipv4_address: 10.1.0.11
+  c-web-02-db:
+    container_name: c-web-02-db
+    hostname: c-web-02-db.acme-infinity-servers.com
+    image: mariadb:10.6.4-focal
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.17
+
 
 volumes:
   appdata:
+  dbdata:
+  wpdata: 
 
 networks:
   public:

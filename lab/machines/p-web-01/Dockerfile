@@ -5,7 +5,7 @@ LABEL name="c-web-01"
 LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
-RUN apt-get update -y
+RUN apt-get update -y --fix-missing
 RUN apt-get install software-properties-common -y
 RUN add-apt-repository universe
 RUN apt-get update -y

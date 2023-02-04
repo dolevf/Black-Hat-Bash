@@ -5,7 +5,7 @@ LABEL name="p-ftp-01"
 LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
-RUN apt-get update -y
+RUN apt-get update -y --fix-missing
 RUN apt-get install vsftpd -y
 RUN apt-get install apache2 -y
 RUN apt-get install net-tools -y
