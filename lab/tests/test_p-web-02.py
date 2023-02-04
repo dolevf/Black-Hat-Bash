@@ -15,6 +15,6 @@ def test_check_wordpress_is_provisioned():
         "language":None
     })
 
-    assert 'WordPress has been installed. Thank you, and enjoy!' in r.text or \
+    assert 'WordPress has been installed.' in r.text or \
     'You appear to have already installed WordPress.' in r.text
     

@@ -55,34 +55,26 @@ services:
   p-web-02:
     container_name: p-web-02
     hostname: p-web-02.acme-infinity-servers.com
-    image: wordpress:latest
+    build: 
+      context: machines/p-web-02
+      dockerfile: Dockerfile
     volumes:
-      - wpdata:/var/www/html
-    ports:
-      - 80:80
-    environment:
-      - WORDPRESS_DB_HOST=c-web-02-db
-      - WORDPRESS_DB_USER=wordpress
-      - WORDPRESS_DB_PASSWORD=wordpress
-      - WORDPRESS_DB_NAME=wordpress
-    
+      - wpdata:/var/www/html    
     networks:
       public:
         ipv4_address: 172.16.10.11
       corporate:
         ipv4_address: 10.1.0.11
+    depends_on:
+      - c-web-02-db
   c-web-02-db:
     container_name: c-web-02-db
     hostname: c-web-02-db.acme-infinity-servers.com
-    image: mariadb:10.6.4-focal
-    command: '--default-authentication-plugin=mysql_native_password'
+    build: 
+      context: machines/p-web-02-db
+      dockerfile: Dockerfile
     volumes:
       - dbdata:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=wordpress
-      - MYSQL_USER=wordpress
-      - MYSQL_PASSWORD=wordpress
     networks:
       corporate:
         ipv4_address: 10.1.0.17

@@ -26,7 +26,7 @@ function deploy(){
     else
         echo "All containers appear to be running. Moving on to tests..."
     fi
-
+    sleep 5
     if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
         echo "OK: lab appears to be up."
     fi
