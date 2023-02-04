@@ -4,7 +4,7 @@
 <h2>We appreciate any donations made towards our cause of saving cats. <h2>
 <form method="GET" name="<?php echo basename($_SERVER['PHP_SELF']); ?>">
 <input type="TEXT" name="amount" autofocus id="amount" size="80">
-<input type="SUBMIT" value="Execute">
+<input type="SUBMIT" value="donate">
 </form>
 
 <pre>

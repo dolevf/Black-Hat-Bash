@@ -14,20 +14,29 @@ if [[ "$(id -u)" -ne 0 ]]; then
     fi
 fi
 
-
 function deploy(){
-    sudo docker-compose up --build --detach --remove-orphans 2>&1 | tee -a $LOG
-    local total_expected_containers="$(grep -c container_name docker-compose.yml)"
-    local actual_running_containers="$(docker-compose ps | grep Up | wc -l)"
+    local total_expected_containers
+    local actual_running_containers
 
-    if [[ "$running_containers" -eq $total_expected_containers ]]; then
-        echo "[$actual_running_containers/$total_expected_containers] - not all containers are running. check the log file $LOG"
+    echo "Installing... this process can take a few minutes to complete."
+    # shellcheck disable=SC2129
+    echo "Start Time: $(date "+%T")" >> $LOG
+    # shellcheck disable=SC2024  
+    sudo docker-compose up --build --detach --remove-orphans &>> $LOG 
+    # shellcheck disable=SC2129
+    echo "End Time: $(date "+%T")" >> $LOG 
+    
+    total_expected_containers="$(grep -c container_name docker-compose.yml)"
+    actual_running_containers="$(docker-compose ps | grep -c Up)"
+
+    if [[ "$actual_running_containers" -ne $total_expected_containers ]]; then
+        echo "[$actual_running_containers/$total_expected_containers] - not all containers are running. check the log file: $LOG"
         exit 1
     else
-        echo "All containers appear to be running. Moving on to tests..."
+        echo "All containers appear to be running. Moving on to performing unit testing..."
     fi
     sleep 5
-    if python3 -m pytest -q -W ignore::DeprecationWarning tests/* 2>&1 | tee -a $LOG; then
+    if python3 -m pytest -q -W ignore::DeprecationWarning tests/* &>> $LOG; then
         echo "OK: lab appears to be up."
     fi
     
@@ -39,7 +48,7 @@ function teardown(){
 }
 
 function destroy(){
-    sudo docker-compose down --volumes --rmi all
+    sudo docker-compose down --volumes --rmi all &> /dev/null
     echo "OK: lab has been destroyed."
 }
 
@@ -54,7 +63,7 @@ case "$1" in
         destroy
     ;;
     *)
-        echo "Usage: ./$(basename $0) deploy|teardown|destroy"
+        echo "Usage: ./$(basename "$0") deploy|teardown|destroy"
         echo
         echo "deploy   | build images and start containers"
         echo "teardown | stop containers"
