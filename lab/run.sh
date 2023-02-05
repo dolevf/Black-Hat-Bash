@@ -21,7 +21,7 @@ function status(){
     local actual_running_containers
 
     total_expected_containers="$(grep -c container_name docker-compose.yml)"
-    actual_running_containers="$(docker-compose ps | grep -c Up)"
+    actual_running_containers="$(docker ps | grep -c lab_)"
 
     if [[ "$actual_running_containers" -ne "$total_expected_containers" ]]; then
         return 1
@@ -31,7 +31,7 @@ function status(){
 }
 
 function deploy(){
-    echo "Installion started. This process can take a few minutes to complete."
+    echo "Installion started. This process can take a few minutes to complete. Do not close this terminal session while it's running."
     echo "You may run \"tail -f $LOG\" to see the progress of the installation."
     # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
@@ -87,7 +87,7 @@ case "$1" in
         if status; then
             echo "Lab is up."
         else
-            echo "Lab is down"
+            echo "Lab is down."
         fi
         exit 0
     ;;
