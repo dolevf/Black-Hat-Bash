@@ -31,15 +31,15 @@ function status(){
 }
 
 function deploy(){
-    echo "Installion started. This process can take a few minutes to complete. Do not close this terminal session while it's running."
-    echo "You may run \"tail -f $LOG\" to see the progress of the installation."
+    echo "\nDeployment started. This process can take a few minutes to complete. Do not close this terminal session while it's running."
+    echo "You may run \"tail -f $LOG\" to see the progress of the deployment."
     # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
     # shellcheck disable=SC2024  
-    sudo docker-compose up --build --detach --remove-orphans &>> $LOG 
-    
+    sudo docker-compose up --build --detach --remove-orphans &>> $LOG
+
     if status; then
-        echo "OK: all containers appear to be running. Moving on to performing unit testing..."  | tee -a $LOG
+        echo "OK: all containers appear to be running. Performing a couple of validation steps..."  | tee -a $LOG
         sleep 5
         if python3 -m pytest -q -W ignore::DeprecationWarning tests/* &>> $LOG; then
             echo "OK: lab appears to be up." | tee -a $LOG
