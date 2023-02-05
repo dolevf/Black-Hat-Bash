@@ -16,6 +16,11 @@ if [[ "$(id -u)" -ne 0 ]]; then
     fi
 fi
 
+if ! docker info > /dev/null 2>&1; then
+    echo "Docker is not running. Make sure to start the docker service."
+    exit 1
+fi
+
 function status(){
     local total_expected_containers
     local actual_running_containers
