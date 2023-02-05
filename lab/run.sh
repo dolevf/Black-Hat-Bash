@@ -2,7 +2,7 @@
 
 set -o pipefail
 
-declare -r LOG=log.txt
+declare -r LOG="log.txt"
 
 truncate -s 0 $LOG
 
@@ -31,7 +31,10 @@ function status(){
 }
 
 function deploy(){
-    echo "\nDeployment started. This process can take a few minutes to complete. Do not close this terminal session while it's running."
+    echo 
+    echo "==== Deployment started ===="
+    echo "Deploying the Black Hat Bash environment."
+    echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
     echo "You may run \"tail -f $LOG\" to see the progress of the deployment."
     # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
@@ -55,18 +58,22 @@ function deploy(){
 }
 
 function teardown(){
+    echo
+    echo "==== Shutdown Started ====" | tee -a $LOG
     sudo docker-compose down --volumes
-    echo "OK: lab has shut down."
+    echo "OK: lab has shut down." 
 }
 
-function destroy(){
-    echo "Destroying the lab environment, this may take a few moments..."
+function cleanup(){
+    echo
+    echo "==== Cleanup Started ====" 
+    echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
     sudo docker-compose down --volumes --rmi all &> /dev/null
     echo "OK: lab environment has been destroyed."
 }
 
 function rebuild(){
-    destroy
+    cleanup
     deploy
 }
 
@@ -77,8 +84,8 @@ case "$1" in
     teardown)
         teardown
     ;;
-    destroy)
-        destroy
+    cleanup)
+        cleanup
     ;;
     rebuild)
         rebuild
@@ -92,12 +99,12 @@ case "$1" in
         exit 0
     ;;
     *)
-        echo "Usage: ./$(basename "$0") deploy|teardown|status|rebuild|destroy"
+        echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | cleanup | status"
         echo
         echo "deploy   | build images and start containers"
         echo "teardown | stop containers"
-        echo "destroy  | stop containers and delete containers and images"
         echo "rebuild  | rebuilds the lab from scratch"
+        echo "cleanup  | stop containers and delete containers and images"
         echo "status   | check the status of the lab"
         exit 1
     ;;
