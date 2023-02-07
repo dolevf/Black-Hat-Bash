@@ -44,7 +44,7 @@ function deploy(){
     # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
     # shellcheck disable=SC2024  
-    sudo docker-compose up --build --detach --remove-orphans &>> $LOG
+    sudo docker-compose up --build --parallel --detach --remove-orphans &>> $LOG
 
     if status; then
         echo "OK: all containers appear to be running. Performing a couple of validation steps..."  | tee -a $LOG

@@ -78,7 +78,17 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.17
-
+  c-db-01:
+    container_name: c-db-01
+    hostname: c-db-01.acme-infinity-servers.com
+    build: 
+      context: machines/c-db-01
+      dockerfile: Dockerfile
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.17  
 
 volumes:
   appdata:
