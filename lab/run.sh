@@ -47,13 +47,14 @@ function deploy(){
     echo "Deploying the Black Hat Bash environment."
     echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
     echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
-    # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
-    # shellcheck disable=SC2024  
-    sudo docker-compose up --build --detach --remove-orphans &>> $LOG
+    
+    sudo docker-compose build --parallel &>> $LOG
+    sudo docker-compose up --detach &>> $LOG
+    
     if status; then
         echo "OK: all containers appear to be running. Performing a couple of validation steps..."  | tee -a $LOG
-        sleep 10
+        sleep 3
         if python3 -m pytest -q -W ignore::DeprecationWarning tests/* &>> $LOG; then
             echo "OK: lab appears to be up." | tee -a $LOG
         else
@@ -63,7 +64,6 @@ function deploy(){
         echo "Error: not all containers are running. check the log file: $LOG"
     fi
 
-    # shellcheck disable=SC2129
     echo "End Time: $(date "+%T")" >> $LOG 
 }
 
