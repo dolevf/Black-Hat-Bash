@@ -1,5 +1,9 @@
 FROM mariadb:10.6.4-focal
 
+# Metadata
+LABEL name="c-web-02-db"
+LABEL company="ACME Infinity Servers"
+
 ENV MYSQL_ROOT_PASSWORD="root"
 ENV MYSQL_DATABASE="wordpress"
 ENV MYSQL_USER="wordpress"

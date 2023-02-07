@@ -40,7 +40,7 @@ services:
       corporate:
         ipv4_address: 10.1.0.12
     volumes:
-      - appdata:/mnt/scripts
+      - shared_vol:/mnt/scripts
   p-web-01:
     container_name: p-web-01
     hostname: p-web-01.acme-infinity-servers.com
@@ -51,7 +51,7 @@ services:
       public:
         ipv4_address: 172.16.10.10
     volumes:
-      - appdata:/mnt/scripts/
+      - shared_vol:/mnt/scripts/
   p-web-02:
     container_name: p-web-02
     hostname: p-web-02.acme-infinity-servers.com
@@ -59,7 +59,7 @@ services:
       context: machines/p-web-02
       dockerfile: Dockerfile
     volumes:
-      - wpdata:/var/www/html    
+      - p_web_02_vol:/var/www/html    
     networks:
       public:
         ipv4_address: 172.16.10.11
@@ -71,13 +71,13 @@ services:
     container_name: c-web-02-db
     hostname: c-web-02-db.acme-infinity-servers.com
     build: 
-      context: machines/p-web-02-db
+      context: machines/c-web-02-db
       dockerfile: Dockerfile
     volumes:
-      - dbdata:/var/lib/mysql
+      - c_web_02_db_vol:/var/lib/mysql
     networks:
       corporate:
-        ipv4_address: 10.1.0.17
+        ipv4_address: 10.1.0.16
   c-db-01:
     container_name: c-db-01
     hostname: c-db-01.acme-infinity-servers.com
@@ -85,15 +85,16 @@ services:
       context: machines/c-db-01
       dockerfile: Dockerfile
     volumes:
-      - dbdata:/var/lib/mysql
+      - c_db_01_vol:/var/lib/mysql
     networks:
       corporate:
         ipv4_address: 10.1.0.17  
 
 volumes:
-  appdata:
-  dbdata:
-  wpdata: 
+  shared_vol:
+  c_db_01_vol:
+  c_web_02_db_vol:
+  p_web_02_vol: 
 
 networks:
   public:

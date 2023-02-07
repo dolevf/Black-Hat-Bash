@@ -7,9 +7,10 @@ containers = [
     'c-jumpbox-01',
     'p-ftp-01',
     'p-web-01',
-    # 'p-web-02'
+    'p-web-02',
+    'c-web-02-db',
     'c-backup-01',
-    # 'c-db-01',
+    'c-db-01',
     'c-redis-01'
 ]
 

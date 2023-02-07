@@ -1,5 +1,11 @@
 #!/bin/bash
 
+################################
+#          Maintainers:        # 
+#     dolev@blackhatbash.com   #
+#     nick@blackhatbash.com    #
+################################
+
 set -o pipefail
 
 declare -r LOG="log.txt"
@@ -40,12 +46,11 @@ function deploy(){
     echo "==== Deployment started ===="
     echo "Deploying the Black Hat Bash environment."
     echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
-    echo "You may run \"tail -f $LOG\" to see the progress of the deployment."
+    echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
     # shellcheck disable=SC2129
     echo "Start Time: $(date "+%T")" >> $LOG
     # shellcheck disable=SC2024  
-    sudo docker-compose up --build --parallel --detach --remove-orphans &>> $LOG
-
+    sudo docker-compose up --build --detach --remove-orphans &>> $LOG
     if status; then
         echo "OK: all containers appear to be running. Performing a couple of validation steps..."  | tee -a $LOG
         sleep 5
