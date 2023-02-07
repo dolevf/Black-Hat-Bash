@@ -30,11 +30,12 @@ RUN mkdir -p /var/www/html/backup/acme-impact-alliance
 COPY p-ftp-01/files/vsftpd.conf /etc/vsftpd.conf
 COPY p-web-01/files/site/app.py /var/www/html/backup/acme-hyper-branding
 COPY p-ftp-01/files/execute.sh /mnt/scripts/
+COPY p-web-02/files/site/* /var/www/html/backup/acme-impact-alliance/
 
 # Post Actions
 RUN git config --global init.defaultBranch master
 RUN git init /var/www/html/backup/acme-hyper-branding
-# RUN git init var/www/html/backup/acme-impact-alliance
+RUN git init var/www/html/backup/acme-impact-alliance
 RUN chmod u+x /mnt/scripts/execute.sh
 
 RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab

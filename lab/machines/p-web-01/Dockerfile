@@ -25,7 +25,7 @@ RUN echo "arodriguez:asucj783E@#" | chpasswd
 
 # Copy Files to Lab
 WORKDIR /app
-#COPY files/site/* ./
+
 COPY files/site/static static
 COPY files/site/app.py .
 COPY files/site/index.html .
