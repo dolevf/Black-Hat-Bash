@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script will ping any IP addresses provided as an argument.
+# This script will ping any address provided as an argument.
 
 script_name="$0"
 target="$1"
