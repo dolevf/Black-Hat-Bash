@@ -2,9 +2,9 @@
 
 # This script will ping any address provided as an argument.
 
-script_name="${0}"
-target="${1}"
+SCRIPT_NAME="${0}"
+TARGET="${1}"
 
-echo "Running the script ${script_name}..."
-echo "Pinging the target: ${target}..."
-ping "${target}"
+echo "Running the script ${SCRIPT_NAME}..."
+echo "Pinging the target: ${TARGET}..."
+ping "${TARGET}"

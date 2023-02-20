@@ -1,11 +1,11 @@
 #!/bin/bash
 
-publisher="No Starch Press"
+PUBLISHER="No Starch Press"
 
 print_name(){
   local name
   name="Black Hat Bash"
-  echo "${name} by ${publisher}" 
+  echo "${name} by ${PUBLISHER}" 
 }
 
 print_name
