@@ -7,9 +7,9 @@
 ################################
 
 set -o pipefail
+source provision.sh
 
-declare -r LOG="log.txt"
-
+LOG="log.txt"
 truncate -s 0 $LOG
 
 if [[ "$(id -u)" -ne 0 ]]; then
@@ -53,12 +53,12 @@ function deploy(){
     sudo docker-compose up --detach &>> $LOG
     
     if status; then
-        echo "OK: all containers appear to be running. Performing a couple of validation steps..."  | tee -a $LOG
+        echo "OK: all containers appear to be running. Performing a couple of post prvosioning steps..."  | tee -a $LOG
         sleep 10
-        if python3 -m pytest -q -W ignore::DeprecationWarning tests/* &>> $LOG; then
-            echo "OK: lab appears to be up." | tee -a $LOG
+        if check_post_actions &>> $LOG; then
+            echo "OK: lab is up and provisioned." | tee -a $LOG
         else
-            echo "Error: some unit tests have failed."
+            echo "Error: some went wrong during provisioning." | tee -a $LOG
         fi
     else
         echo "Error: not all containers are running. check the log file: $LOG"
