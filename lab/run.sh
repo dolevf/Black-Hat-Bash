@@ -53,7 +53,7 @@ function deploy(){
     sudo docker-compose up --detach &>> $LOG
     
     if status; then
-        echo "OK: all containers appear to be running. Performing a couple of post provsioning steps..."  | tee -a $LOG
+        echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
         sleep 10
         if check_post_actions &>> $LOG; then
             echo "OK: lab is up and provisioned." | tee -a $LOG
