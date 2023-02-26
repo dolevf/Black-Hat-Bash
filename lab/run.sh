@@ -32,7 +32,7 @@ function status(){
     local actual_running_containers
 
     total_expected_containers="$(grep -c container_name docker-compose.yml)"
-    actual_running_containers="$(docker ps | grep -c lab_)"
+    actual_running_containers="$(docker ps | grep -c lab-)"
 
     if [[ "$actual_running_containers" -ne "$total_expected_containers" ]]; then
         return 1
@@ -49,8 +49,8 @@ function deploy(){
     echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
     echo "Start Time: $(date "+%T")" >> $LOG
     
-    sudo docker-compose build --parallel &>> $LOG
-    sudo docker-compose up --detach &>> $LOG
+    sudo docker compose build --parallel &>> $LOG
+    sudo docker compose up --detach &>> $LOG
     
     if status; then
         echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
@@ -70,7 +70,7 @@ function deploy(){
 function teardown(){
     echo
     echo "==== Shutdown Started ====" | tee -a $LOG
-    sudo docker-compose down --volumes
+    sudo docker compose down --volumes
     echo "OK: lab has shut down." 
 }
 
@@ -78,7 +78,7 @@ function cleanup(){
     echo
     echo "==== Cleanup Started ====" 
     echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
-    sudo docker-compose down --volumes --rmi all &> /dev/null
+    sudo docker compose down --volumes --rmi all &> /dev/null
     echo "OK: lab environment has been destroyed."
 }
 
