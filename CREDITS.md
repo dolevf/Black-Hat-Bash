@@ -1,4 +1,4 @@
 # Credits
 
 ## Files
-[subdomains-1000.txt](rbsec/dnscan (https://github.com/rbsec/dnscan/))
+* [subdomains-1000.txt](https://github.com/rbsec/dnscan/) by bsec/dnscan
