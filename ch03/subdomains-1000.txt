@@ -1,4 +1,3 @@
-# Credits to rbsec/dnscan (https://github.com/rbsec/dnscan/)
 www
 mail
 ftp
