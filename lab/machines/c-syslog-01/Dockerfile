@@ -8,7 +8,6 @@ LABEL company="ACME Infinity Servers"
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y openssh-server
 RUN apt-get install cron -y
-RUN apt-get golang-go
 RUN apt-get install net-tools
 
 
