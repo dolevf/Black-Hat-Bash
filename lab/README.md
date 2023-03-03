@@ -1,6 +1,6 @@
 # Lab Diagram
 <p align="center">
-  <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/ch03/lab-diagram.png?raw=true" width="600px" alt="BHB"/>
+  <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/lab/lab-network-diagram.png?raw=true" width="600px" alt="BHB"/>
 </p>
 
 
@@ -31,6 +31,9 @@ Go into the lab folder in this repository and run:
 
 ## Stop the Lab
 `./run.sh teardown`
+
+## Rebuild the Lab
+`./run.sh rebuild`
 
 ## Destroy the Lab
 `./run.sh cleanup`
