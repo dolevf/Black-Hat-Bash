@@ -1,6 +1,6 @@
 # Lab Diagram
 <p align="center">
-  <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/ch03/lab-diagram.png?raw=true" width="300px" alt="BHB"/>
+  <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/ch03/lab-diagram.png?raw=true" width="600px" alt="BHB"/>
 </p>
 
 
