@@ -88,7 +88,16 @@ services:
       - c_db_01_vol:/var/lib/mysql
     networks:
       corporate:
-        ipv4_address: 10.1.0.17  
+        ipv4_address: 10.1.0.17 
+  c-syslog-01:
+    container_name: c-syslog-01
+    hostname: c-syslog-01.acme-infinity-servers.com
+    build: 
+      context: machines/c-syslog-01
+      dockerfile: Dockerfile
+    networks:
+      corporate:
+        ipv4_address: 10.1.0.18
 
 volumes:
   shared_vol:
