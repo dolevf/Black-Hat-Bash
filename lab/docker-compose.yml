@@ -43,7 +43,7 @@ services:
       - shared_vol:/mnt/scripts
   p-web-01:
     container_name: p-web-01
-    hostname: p-web-01.acme-infinity-servers.com
+    hostname: p-web-01.acme-hyper-branding.com
     build: 
       context: machines/p-web-01
       dockerfile: Dockerfile
@@ -54,7 +54,7 @@ services:
       - shared_vol:/mnt/scripts/
   p-web-02:
     container_name: p-web-02
-    hostname: p-web-02.acme-infinity-servers.com
+    hostname: p-web-02.acme-impact-alliance.com
     build: 
       context: machines/p-web-02
       dockerfile: Dockerfile
@@ -68,13 +68,13 @@ services:
     depends_on:
       - c-web-db-02
   c-web-db-02:
-    container_name: c-web-db-02
-    hostname: c-web-db-02.acme-infinity-servers.com
+    container_name: c-db-02
+    hostname: c-db-02.acme-infinity-servers.com
     build: 
-      context: machines/c-web-db-02
+      context: machines/c-db-02
       dockerfile: Dockerfile
     volumes:
-      - c_web_db_02_vol:/var/lib/mysql
+      - c_db_02_vol:/var/lib/mysql
     networks:
       corporate:
         ipv4_address: 10.1.0.16
