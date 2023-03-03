@@ -9,7 +9,7 @@ services:
       public:
         ipv4_address: 172.16.10.13
       corporate:
-        ipv4_address: 10.1.0.13
+        ipv4_address: 10.1.0.12
   c-backup-01:
     container_name: c-backup-01
     hostname: c-backup-01.acme-infinity-servers.com
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     networks:
       corporate:
-        ipv4_address: 10.1.0.14
+        ipv4_address: 10.1.0.13
   c-redis-01:
     container_name: c-redis-01
     hostname: c-redis-01.acme-infinity-servers.com
@@ -27,7 +27,7 @@ services:
       dockerfile: Dockerfile
     networks:
       corporate:
-        ipv4_address: 10.1.0.15
+        ipv4_address: 10.1.0.14
   p-ftp-01:
     container_name: p-ftp-01
     hostname: p-ftp-01.acme-infinity-servers.com
@@ -36,9 +36,7 @@ services:
       dockerfile: p-ftp-01/Dockerfile
     networks:
       public:
-        ipv4_address: 172.16.10.12
-      corporate:
-        ipv4_address: 10.1.0.12
+        ipv4_address: 172.16.10.11
     volumes:
       - shared_vol:/mnt/scripts
   p-web-01:
@@ -62,7 +60,7 @@ services:
       - p_web_02_vol:/var/www/html    
     networks:
       public:
-        ipv4_address: 172.16.10.11
+        ipv4_address: 172.16.10.12
       corporate:
         ipv4_address: 10.1.0.11
     depends_on:
@@ -88,7 +86,7 @@ services:
       - c_db_01_vol:/var/lib/mysql
     networks:
       corporate:
-        ipv4_address: 10.1.0.17 
+        ipv4_address: 10.1.0.15
   c-syslog-01:
     container_name: c-syslog-01
     hostname: c-syslog-01.acme-infinity-servers.com
@@ -97,7 +95,7 @@ services:
       dockerfile: Dockerfile
     networks:
       corporate:
-        ipv4_address: 10.1.0.18
+        ipv4_address: 10.1.0.17
 
 volumes:
   shared_vol:
