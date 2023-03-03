@@ -58,7 +58,7 @@ function deploy(){
         if check_post_actions &>> $LOG; then
             echo "OK: lab is up and provisioned." | tee -a $LOG
         else
-            echo "Error: some went wrong during provisioning." | tee -a $LOG
+            echo "Error: something went wrong during provisioning." | tee -a $LOG
         fi
     else
         echo "Error: not all containers are running. check the log file: $LOG"
