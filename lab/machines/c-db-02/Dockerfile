@@ -1,7 +1,7 @@
 FROM mariadb:10.6.4-focal
 
 # Metadata
-LABEL name="c-web-db-02"
+LABEL name="c-db-02"
 LABEL company="ACME Infinity Servers"
 
 ENV MYSQL_ROOT_PASSWORD="root"
