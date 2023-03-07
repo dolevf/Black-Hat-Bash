@@ -23,7 +23,14 @@ if [[ "$(id -u)" -ne 0 ]]; then
 fi
 
 if ! docker info > /dev/null 2>&1; then
-    echo "Docker is not running. Make sure to start the docker service."
+    echo "Docker service appears to not be running. Use the service command to start it manually."
+    echo "$ sudo service docker start"
+    exit 1
+fi
+
+if ! docker compose version 2> /dev/null 2>&1; then
+    echo "Docker Compose is not installed. Did you follow the Docker Compose setup instructions?"
+    echo "https://github.com/dolevf/Black-Hat-Bash/tree/master/lab#install-docker"
     exit 1
 fi
 
