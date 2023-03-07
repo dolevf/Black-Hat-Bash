@@ -6,6 +6,8 @@
 
 # Lab Installation
 
+**Note**: These lab instructions were tested on Kali Linux only.
+
 ## Install Docker
 
 **Add the docker apt source**
@@ -23,6 +25,10 @@
 **Install Docker and Docker Compose** 
 
 `sudo apt install docker-ce docker-ce-cli containerd.io -y`
+
+**Start the Docker Service** 
+
+`sudo service docker start`
 
 ## Start the Lab
 Go into the lab folder in this repository and run:
