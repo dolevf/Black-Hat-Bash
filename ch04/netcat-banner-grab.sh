@@ -12,7 +12,7 @@ if [[ ! -f "${FILE}" ]]; then
   exit 1
 fi
 
-if [[ ! "${PORT}" -eq "${PORT}" ]]; then
+if [[ ! "${PORT}" =~ ^[0-9]+$ ]]; then 
   echo "${PORT} must be a number."
   exit 1
 fi
