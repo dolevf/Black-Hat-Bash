@@ -89,7 +89,16 @@ deploy_containers(){
 }
 
 install_wappalyzer(){
-  echo ""
+  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash –
+  sudo apt update
+  sudo apt install nodejs npm -y
+  sudo npm install –global yarn
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/wappalyzer/wappalyzer.git
+  cd wappalyzer
+  yarn install
+  yarn run link
+  echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> ~/.bashrc
 }
 
 install_rustscan(){
@@ -137,5 +146,9 @@ install_docker
 clone_repo
 
 deploy_containers
+
+mkdir /home/${SUDO_USER}/tools
+
+install_wappalyzer
 
 
