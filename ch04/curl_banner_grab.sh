@@ -18,4 +18,4 @@ echo "Attempting to grab the Server header of ${ip_address}..."
 
 result=$(curl -s --head "${ip_address}:${port}" | grep Server | awk -F':' '{print $2}') 
 
-echo "Server header for ${ip_address} is: ${result}"
+echo "Server header for ${ip_address} on port ${port} is: ${result}"
