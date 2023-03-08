@@ -99,7 +99,9 @@ install_wappalyzer(){
   cd wappalyzer
   yarn install
   yarn run link
-  echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> /home/${SUDO_USER}/.bashrc
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q wappalyzer ]; then
+    echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_rustscan(){
@@ -108,7 +110,9 @@ install_rustscan(){
   git clone https://github.com/RustScan/RustScan.git
   cd RustScan
   cargo build –release
-  echo "alias rustscan='/home/${SUDO_USER}/tools/RustScan/target/release/rustscan'" >> ~/home/${SUDO_USER}/.bashrc 
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q rustscan ]; then
+    echo "alias rustscan='/home/${SUDO_USER}/tools/RustScan/target/release/rustscan'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_nuclei(){
@@ -124,26 +128,34 @@ install_xsstrike(){
   cd /home/${SUDO_USER}/tools
   git clone https://github.com/s0md3v/XSStrike.git
   sudo apt install python3-fuzzwuzzy
-  echo "alias xsstrike='python /home/${SUDO_USER}/tools/XSStrike/xsstrike.py'" >> /home/${SUDO_USER}/.bashrc
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q xsstrike ]; then
+    echo "alias xsstrike='python /home/${SUDO_USER}/tools/XSStrike/xsstrike.py'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_linux_exploit_suggester_2(){
   cd /home/${SUDO_USER}/tools
-  git clone https://github.com/jondonas/linux-exploit-suggester-2.git	
-  echo "alias linux-exploiter-suggester2='perl /home/${SUDO_USER}/tools/linux-exploit-suggester-2/linux-exploit-suggester-2.pl'" >> /home/${SUDO_USER}/.bashrc
+  git clone https://github.com/jondonas/linux-exploit-suggester-2.git
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q linux-exploiter-suggester2 ]; then
+    echo "alias linux-exploiter-suggester2='perl /home/${SUDO_USER}/tools/linux-exploit-suggester-2/linux-exploit-suggester-2.pl'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_gitjacker(){
   sudo apt install jq -y
   curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
-  echo "alias gitjacker='/home/${SUDO_USER}/bin/gitjacker'" >> /home/${SUDO_USER}/.bashrc
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q gitjacker ]; then
+    echo "alias gitjacker='/home/${SUDO_USER}/bin/gitjacker'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_linenum(){
   cd /home/${SUDO_USER}/tools
   wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
   chmod u+x LinEnum.sh
-  echo "alias linenum='/home/${SUDO_USER}/tools/LinEnum.sh'" >> /home/${SUDO_USER}/.bashrc
+  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q LinEnum ]; then
+    echo "alias linenum='/home/${SUDO_USER}/tools/LinEnum.sh'" >> /home/${SUDO_USER}/.bashrc
+  fi
 }
 
 install_mimipenguin(){
