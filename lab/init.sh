@@ -83,13 +83,14 @@ clone_repo(){
 }
 
 deploy_containers(){
-	/home/${SUDO_USER}/Black-Hat-Bash/lab/run.sh cleanup
-	/home/${SUDO_USER}/Black-Hat-Bash/lab/run.sh deploy
-	/home/${SUDO_USER}/Black-Hat-Bash/lab/run.sh status
+	cd /home/${SUDO_USER}/Black-Hat-Bash/lab
+	./run.sh cleanup
+	./run.sh deploy
+	./run.sh status
 }
 
 install_wappalyzer(){
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash –
+  curl -sL https://deb.nodesource.com/setup_14.x | bash
   sudo apt update
   sudo apt install nodejs npm -y
   sudo npm install –global yarn
@@ -98,43 +99,61 @@ install_wappalyzer(){
   cd wappalyzer
   yarn install
   yarn run link
-  echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> ~/.bashrc
+  echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> /home/${SUDO_USER}/.bashrc
 }
 
 install_rustscan(){
-  echo ""
+  sudo apt install cargo -y
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/RustScan/RustScan.git
+  cd RustScan
+  cargo build –release
+  echo "alias rustscan='/home/${SUDO_USER}/tools/RustScan/target/release/rustscan'" >> ~/home/${SUDO_USER}/.bashrc 
 }
 
 install_nuclei(){
-  echo ""
+  sudo apt install nuclei -y
+  cd /home/${SUDO_USER}/tools
 }
 
 install_gobuster(){
-  echo ""
+  sudo apt install gobuster -y
 }
 
 install_xsstrike(){
-  echo ""
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/s0md3v/XSStrike.git
+  sudo apt install python3-fuzzwuzzy
+  echo "alias xsstrike='python /home/${SUDO_USER}/tools/XSStrike/xsstrike.py'" >> /home/${SUDO_USER}/.bashrc
 }
 
 install_linux_exploit_suggester_2(){
-  echo ""	
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/jondonas/linux-exploit-suggester-2.git	
+  echo "alias linux-exploiter-suggester2='perl /home/${SUDO_USER}/tools/linux-exploit-suggester-2/linux-exploit-suggester-2.pl'" >> /home/${SUDO_USER}/.bashrc
 }
 
 install_gitjacker(){
-  echo ""
+  sudo apt install jq -y
+  curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
+  echo "alias gitjacker='/home/${SUDO_USER}/bin/gitjacker'" >> /home/${SUDO_USER}/.bashrc
 }
 
 install_linenum(){
-  echo ""
+  cd /home/${SUDO_USER}/tools
+  wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+  chmod u+x LinEnum.sh
+  echo "alias linenum='/home/${SUDO_USER}/tools/LinEnum.sh'" >> /home/${SUDO_USER}/.bashrc
 }
 
 install_mimipenguin(){
-  echo ""
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/huntergregal/mimipenguin.git
 }
 
 install_linuxprivchecker(){
-  echo ""
+  cd /home/${SUDO_USER}/tools
+  git clone https://github.com/sleventyeleven/linuxprivchecker.git
 }
 
 echo "Initializing Black Hat Bash Automated Lab Build Script..."
@@ -147,8 +166,18 @@ clone_repo
 
 deploy_containers
 
-mkdir /home/${SUDO_USER}/tools
+if [ ! -d /home/${SUDO_USER}/tools ]; then
+	mkdir /home/${SUDO_USER}/tools
+fi
 
 install_wappalyzer
+install_rustscan
+install_nuclei
+install_xsstrike
+install_linux_exploit_suggester_2
+install_gitjacker
+install_linenum
+install_mimipenguin
+install_linuxprivchecker
 
-
+source ~/.bashrc
