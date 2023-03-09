@@ -28,7 +28,7 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
-if ! docker compose version 2> /dev/null 2>&1; then
+if ! docker compose version &> /dev/null; then
     echo "Docker Compose is not installed. Did you follow the Docker Compose setup instructions?"
     echo "https://github.com/dolevf/Black-Hat-Bash/tree/master/lab#install-docker"
     exit 1
