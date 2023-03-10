@@ -109,7 +109,7 @@ install_rustscan(){
   cd /home/${SUDO_USER}/tools
   git clone https://github.com/RustScan/RustScan.git
   cd RustScan
-  cargo build –release
+  cargo build –-release
   if [[ ! grep -q rustscan /home/${SUDO_USER}/.bashrc |  ]]; then
     echo "alias rustscan='/home/${SUDO_USER}/tools/RustScan/target/release/rustscan'" >> /home/${SUDO_USER}/.bashrc
   fi
@@ -124,21 +124,9 @@ install_gobuster(){
   sudo apt install gobuster -y
 }
 
-install_xsstrike(){
-  cd /home/${SUDO_USER}/tools
-  git clone https://github.com/s0md3v/XSStrike.git
-  sudo apt install python3-fuzzwuzzy
-  if [[ ! grep -q xsstrike /home/${SUDO_USER}/.bashrc ]]; then
-    echo "alias xsstrike='python /home/${SUDO_USER}/tools/XSStrike/xsstrike.py'" >> /home/${SUDO_USER}/.bashrc
-  fi
-}
-
 install_linux_exploit_suggester_2(){
   cd /home/${SUDO_USER}/tools
   git clone https://github.com/jondonas/linux-exploit-suggester-2.git
-  if [[ ! grep -q linux-exploiter-suggester2 /home/${SUDO_USER}/.bashrc ]]; then
-    echo "alias linux-exploiter-suggester2='perl /home/${SUDO_USER}/tools/linux-exploit-suggester-2/linux-exploit-suggester-2.pl'" >> /home/${SUDO_USER}/.bashrc
-  fi
 }
 
 install_gitjacker(){
@@ -153,9 +141,6 @@ install_linenum(){
   cd /home/${SUDO_USER}/tools
   wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
   chmod u+x LinEnum.sh
-  if [[ ! grep -q LinEnum /home/${SUDO_USER}/.bashrc ]]; then
-    echo "alias linenum='/home/${SUDO_USER}/tools/LinEnum.sh'" >> /home/${SUDO_USER}/.bashrc
-  fi
 }
 
 install_mimipenguin(){
@@ -185,7 +170,6 @@ fi
 install_wappalyzer
 install_rustscan
 install_nuclei
-install_xsstrike
 install_linux_exploit_suggester_2
 install_gitjacker
 install_linenum
