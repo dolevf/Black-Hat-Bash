@@ -36,7 +36,7 @@ check_prerequisite(){
 
   # Check if RAM +8 GB
   total_ram=$(awk '/^MemTotal:/{print $2}' /proc/meminfo);
-  if [ $total_ram -lt 8000000 ]; then
+  if [ $total_ram -lt 2500000 ]; then
   	echo "Warning: System does not meet 8 GB RAM requirement."
   	echo "This may impact the performance of the lab"
   	read -p "Do you want to continue? [Y/N] " -n 1 -r
@@ -49,7 +49,7 @@ check_prerequisite(){
 
   # Check disk space
   FREE=`df -k --output=avail "$PWD" | tail -n1`   # df -k not df -h
-  if [[ $FREE -lt 50000000 ]]; then               # 10G = 10*1024*1024k
+  if [[ $FREE -lt 30000000 ]]; then               # 10G = 10*1024*1024k
     echo "Warning: System does not meet 50 GB disk space requirement."
   	echo "This may impact the performance of the lab"
   	read -p "Do you want to continue? [Y/N] " -n 1 -r
