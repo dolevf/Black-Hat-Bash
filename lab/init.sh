@@ -12,32 +12,32 @@
 # Script Checks system requirements
   # - Running Script as root
   # - Running Kali
-  # - 8 GB of RAM
-  # - 50 GB of Storage available
+  # - 4 GB of RAM
+  # - 30 GB of Storage available
   # - Internet connectivity
 
 check_prerequisite(){
   # Checks if script is running as root
-  if [ "$EUID" -ne 0 ]; then
+  if [[ "$EUID" -ne 0 ]]; then
   	echo "Error: Please run as root."
     exit
   fi
 
-  # Check if kali OS 
+  # Check if Kali OS 
   if uname -a | grep -v -q kali; then
   	echo "Error: Operating system does not appear to be Kali."
   fi
 
   # Check internet connectivity (against Google)
   wget -q --spider http://google.com
-  if [ $? -ne 0 ]; then
+  if [[ $? -ne 0 ]]; then
     echo "Error: No internet connectivity."
   fi
 
-  # Check if RAM +8 GB
+  # Check if RAM +4 GB
   total_ram=$(awk '/^MemTotal:/{print $2}' /proc/meminfo);
-  if [ $total_ram -lt 2500000 ]; then
-  	echo "Warning: System does not meet 8 GB RAM requirement."
+  if [ $total_ram -lt 4194304 ]; then
+  	echo "Warning: System does not meet 4 GB RAM requirement."
   	echo "This may impact the performance of the lab"
   	read -p "Do you want to continue? [Y/N] " -n 1 -r
     echo
@@ -48,9 +48,9 @@ check_prerequisite(){
   fi
 
   # Check disk space
-  FREE=`df -k --output=avail "$PWD" | tail -n1`   # df -k not df -h
-  if [[ $FREE -lt 30000000 ]]; then               # 10G = 10*1024*1024k
-    echo "Warning: System does not meet 50 GB disk space requirement."
+  FREE=`df -k --output=size "$PWD" | tail -n1`
+  if [[ $FREE -lt 31457280 ]]; then
+    echo "Warning: System does not meet 30 GB disk space requirement."
   	echo "This may impact the performance of the lab"
   	read -p "Do you want to continue? [Y/N] " -n 1 -r
     echo
@@ -77,7 +77,7 @@ install_docker(){
 
 clone_repo(){
 	# Clones the Black Hat Bash git repository locally in the home directory
-	if [ ! -d "/home/${SUDO_USER}/Black-Hat-Bash" ]; then
+	if [[ ! -d "/home/${SUDO_USER}/Black-Hat-Bash" ]]; then
 		git clone git@github.com:dolevf/Black-Hat-Bash.git /home/${SUDO_USER}/Black-Hat-Bash
 	fi
 }
@@ -99,7 +99,7 @@ install_wappalyzer(){
   cd wappalyzer
   yarn install
   yarn run link
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q wappalyzer ]; then
+  if [[ ! grep -q wappalyzer /home/${SUDO_USER}/.bashrc ]]; then
     echo "alias wappalyzer='node /home/${SUDO_USER}/tools/wappalyzer/src/drivers/npm/cli.js'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
@@ -110,7 +110,7 @@ install_rustscan(){
   git clone https://github.com/RustScan/RustScan.git
   cd RustScan
   cargo build –release
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q rustscan ]; then
+  if [[ ! grep -q rustscan /home/${SUDO_USER}/.bashrc |  ]]; then
     echo "alias rustscan='/home/${SUDO_USER}/tools/RustScan/target/release/rustscan'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
@@ -128,7 +128,7 @@ install_xsstrike(){
   cd /home/${SUDO_USER}/tools
   git clone https://github.com/s0md3v/XSStrike.git
   sudo apt install python3-fuzzwuzzy
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q xsstrike ]; then
+  if [[ ! grep -q xsstrike /home/${SUDO_USER}/.bashrc ]]; then
     echo "alias xsstrike='python /home/${SUDO_USER}/tools/XSStrike/xsstrike.py'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
@@ -136,7 +136,7 @@ install_xsstrike(){
 install_linux_exploit_suggester_2(){
   cd /home/${SUDO_USER}/tools
   git clone https://github.com/jondonas/linux-exploit-suggester-2.git
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q linux-exploiter-suggester2 ]; then
+  if [[ ! grep -q linux-exploiter-suggester2 /home/${SUDO_USER}/.bashrc ]]; then
     echo "alias linux-exploiter-suggester2='perl /home/${SUDO_USER}/tools/linux-exploit-suggester-2/linux-exploit-suggester-2.pl'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
@@ -144,7 +144,7 @@ install_linux_exploit_suggester_2(){
 install_gitjacker(){
   sudo apt install jq -y
   curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q gitjacker ]; then
+  if [[ ! grep -q gitjacker /home/${SUDO_USER}/.bashrc ]]; then
     echo "alias gitjacker='/home/${SUDO_USER}/bin/gitjacker'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
@@ -153,7 +153,7 @@ install_linenum(){
   cd /home/${SUDO_USER}/tools
   wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
   chmod u+x LinEnum.sh
-  if [ ! cat /home/${SUDO_USER}/.bashrc | grep -q LinEnum ]; then
+  if [[ ! grep -q LinEnum /home/${SUDO_USER}/.bashrc ]]; then
     echo "alias linenum='/home/${SUDO_USER}/tools/LinEnum.sh'" >> /home/${SUDO_USER}/.bashrc
   fi
 }
