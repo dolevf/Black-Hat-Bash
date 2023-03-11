@@ -81,6 +81,10 @@ check_prerequisites(){
       sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" "${nr_config}"
     fi
   fi
+
+  if ! grep kali /etc/passwd | grep -q /bin/bash; then
+    usermod --shell /bin/bash kali
+  fi
 }
 
 install_docker(){
@@ -91,15 +95,15 @@ install_docker(){
       printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
     fi
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
-    sudo apt update -y
-    sudo apt install docker-ce docker-ce-cli containerd.io -y
+    sudo apt update -qq -y
+    sudo apt install -qq docker-ce docker-ce-cli containerd.io -y
     sudo systemctl enable docker --now
     sudo usermod -aG docker "${USER}"
   fi
 }
 
 clone_repo(){  
-  git clone git@github.com:dolevf/Black-Hat-Bash.git "${BHB_BASE_FOLDER}"
+  git clone --quiet git@github.com:dolevf/Black-Hat-Bash.git
 }
 
 deploy_containers(){
@@ -123,59 +127,61 @@ install_tools(){
 
 install_wappalyzer(){
   curl -sL https://deb.nodesource.com/setup_14.x | bash
-  sudo apt update -y
-  sudo apt install nodejs npm -y
-  sudo npm install --global yarn
-  git clone https://github.com/wappalyzer/wappalyzer.git
+  sudo apt update -qq -y
+  sudo apt install -qq nodejs npm -y
+  sudo npm install -qq --global yarn
+  git clone --quiet https://github.com/wappalyzer/wappalyzer.git
   cd wappalyzer
   yarn install
   yarn run link
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
-    echo "alias wappalyzer='node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js'" >> "${USER_HOME_BASE}/.bashrc"
+    echo "alias wappalyzer=\"node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
+  cd -
 }
 
 install_rustscan(){
-  sudo apt install cargo -y
-  git clone https://github.com/RustScan/RustScan.git
+  sudo apt install -qq cargo -y
+  git clone --quiet https://github.com/RustScan/RustScan.git
   cd RustScan
   cargo build --release
   if ! grep -q rustscan "${USER_HOME_BASE}/.bashrc" ; then
-    echo "alias rustscan='${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan'" >> "${USER_HOME_BASE}/.bashrc"
+    echo "alias rustscan=\"${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
+  cd - 
 }
 
 install_nuclei(){
-  sudo apt install nuclei -y
+  sudo apt install -qq nuclei -y
 }
 
 install_gobuster(){
-  sudo apt install gobuster -y
+  sudo apt install -qq gobuster -y
 }
 
 install_linux_exploit_suggester_2(){
-  git clone https://github.com/jondonas/linux-exploit-suggester-2.git
+  git clone --quiet https://github.com/jondonas/linux-exploit-suggester-2.git
 }
 
 install_gitjacker(){
-  sudo apt install jq -y
+  sudo apt install -qq jq -y
   curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
   if ! grep -q gitjacker "${USER_HOME_BASE}/.bashrc"; then
-    echo "alias gitjacker='${USER_HOME_BASE}/bin/gitjacker'" >> "${USER_HOME_BASE}/.bashrc"
+    echo "alias gitjacker=\"/usr/local/bin/gitjacker\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
 }
 
 install_linenum(){
-  wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+  wget -q https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
   chmod u+x LinEnum.sh
 }
 
 install_mimipenguin(){
-  git clone https://github.com/huntergregal/mimipenguin.git
+  git clone --quiet https://github.com/huntergregal/mimipenguin.git
 }
 
 install_linuxprivchecker(){
-  git clone https://github.com/sleventyeleven/linuxprivchecker.git
+  git clone --quiet https://github.com/sleventyeleven/linuxprivchecker.git
 }
 
 echo -e "Initializing Black Hat Bash Automated Lab Build Script...\n"
@@ -183,7 +189,7 @@ echo -e "Initializing Black Hat Bash Automated Lab Build Script...\n"
 # Run steps
 check_prerequisites
 install_docker
-clone_repo
+clone_repo  
 deploy_containers
 install_tools
 
