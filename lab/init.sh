@@ -195,7 +195,7 @@ echo "This process may take a while, stay tuned..."
 echo "Checking prerequisities..."
 check_prerequisites 
 
-echo "To see the progress of the installation, run 'tail -f log.txt' from another terminal.\n"
+echo "To see the progress of the installation, run 'tail -f log.txt' from another terminal."
 
 sleep 2
 
@@ -213,4 +213,4 @@ install_tools &>> "${LOG}"
 
 echo "Lab build completed." | tee -a "${LOG}"
 
-source ~/.bashrc
+source "${USER_HOME_BASE}/.bashrc"
