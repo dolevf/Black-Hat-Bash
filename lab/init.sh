@@ -4,10 +4,10 @@
 
 # This script is intended to be executed within a Kali machine.
 # What will this script do:
-# - Installs & Configures Docker & Docker Compose
-# - Clones the Black Hat Bash Repository
-# - Builds, Tests and Runs all Lab Containers
-# - Installs & Tests all Hacking Tools used in the Black Hat Bash book
+  # - Installs & Configures Docker & Docker Compose
+  # - Clones the Black Hat Bash Repository
+  # - Builds, Tests and Runs all Lab Containers
+  # - Installs & Tests all Hacking Tools used in the Black Hat Bash book
 
 # Script Checks system requirements
   # - Running Script as root
@@ -20,6 +20,7 @@ USER_HOME_BASE="/home/${SUDO_USER}"
 BHB_BASE_FOLDER="${USER_HOME_BASE}/Black-Hat-Bash"
 BHB_LAB_FOLDER="${BHB_BASE_FOLDER}/lab"
 BHB_TOOLS_FOLDER="${USER_HOME_BASE}/tools"
+LOG="log.txt"
 
 check_prerequisites(){
   # Checks if script is running as root
@@ -43,7 +44,7 @@ check_prerequisites(){
   total_ram=$(awk '/^MemTotal:/{print $2}' /proc/meminfo);
   if [ "${total_ram}" -lt 4194304 ]; then
     echo "Warning: System does not meet 4 GB RAM requirement."
-    echo "This may impact the performance of the lab"
+    echo "This may impact the performance of the lab."
     read -p "Do you want to continue? [y/n] " -n 1 -r
     echo
     if [[ ! "${REPLY}" =~ ^[Yy]$ ]]; then
@@ -57,7 +58,7 @@ check_prerequisites(){
   free=$(df -k --output=size "$PWD" | tail -n1)
   if [[ "${free}" -lt 31457280 ]]; then
     echo "Warning: System does not meet 30 GB disk space requirement."
-    echo "This may impact the performance of the lab"
+    echo "This may impact the performance of the lab."
     read -p "Do you want to continue? [y/n] " -n 1 -r
     echo
     if [[ ! "${REPLY}" =~ ^[Yy]$ ]]; then
@@ -88,29 +89,36 @@ check_prerequisites(){
 }
 
 install_docker(){
-  # Check if Docker and Docker Compose are installed.
+  local docker_apt_src
+  local docker_keyring
+
+  docker_apt_src="/etc/apt/sources.list.d/docker-ce.list"
+  docker_keyring="/etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg"
+
   if ! docker compose version &> /dev/null; then 
-    echo "Installing docker..."
-    if [[ ! -f "/etc/apt/sources.list.d/docker-ce.list" ]]; then
-      printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+    if [[ ! -f "${docker_apt_src}" ]]; then
+      printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | sudo tee "${docker_apt_src}"
     fi
-    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
-    sudo apt update -qq -y
-    sudo apt install -qq docker-ce docker-ce-cli containerd.io -y
+    
+    if [[ ! -f "${docker_keyring}" ]]; then
+      curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o "${docker_keyring}"
+    fi
+    sudo apt update -y 
+    sudo apt install docker-ce docker-ce-cli containerd.io -y
     sudo systemctl enable docker --now
     sudo usermod -aG docker "${USER}"
   fi
 }
 
 clone_repo(){  
-  git clone --quiet git@github.com:dolevf/Black-Hat-Bash.git
+  git clone https://github.com/dolevf/Black-Hat-Bash.git
 }
 
 deploy_containers(){
   cd "${BHB_LAB_FOLDER}"
   ./run.sh cleanup
   ./run.sh deploy
-  ./run.sh status
+  echo
 }
 
 install_tools(){
@@ -126,12 +134,11 @@ install_tools(){
 }
 
 install_wappalyzer(){
-  curl -sL https://deb.nodesource.com/setup_14.x | bash
-  sudo apt update -qq -y
-  sudo apt install -qq nodejs npm -y
-  sudo npm install -qq --global yarn
-  git clone --quiet https://github.com/wappalyzer/wappalyzer.git
-  cd wappalyzer
+  curl -L https://deb.nodesource.com/setup_14.x | bash
+  sudo apt update -y
+  sudo apt install nodejs npm -y
+  sudo npm install --global yarn 
+  git clone https://github.com/wappalyzer/wappalyzer.git && cd wappalyzer
   yarn install
   yarn run link
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
@@ -141,9 +148,8 @@ install_wappalyzer(){
 }
 
 install_rustscan(){
-  sudo apt install -qq cargo -y
-  git clone --quiet https://github.com/RustScan/RustScan.git
-  cd RustScan
+  sudo apt install cargo -y
+  git clone https://github.com/RustScan/RustScan.git && cd RustScan
   cargo build --release
   if ! grep -q rustscan "${USER_HOME_BASE}/.bashrc" ; then
     echo "alias rustscan=\"${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan\"" >> "${USER_HOME_BASE}/.bashrc"
@@ -152,7 +158,7 @@ install_rustscan(){
 }
 
 install_nuclei(){
-  sudo apt install -qq nuclei -y
+  sudo apt install -qq nuclei -y 
 }
 
 install_gobuster(){
@@ -160,12 +166,12 @@ install_gobuster(){
 }
 
 install_linux_exploit_suggester_2(){
-  git clone --quiet https://github.com/jondonas/linux-exploit-suggester-2.git
+  git clone https://github.com/jondonas/linux-exploit-suggester-2.git
 }
 
 install_gitjacker(){
-  sudo apt install -qq jq -y
-  curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
+  sudo apt install jq -y
+  curl "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
   if ! grep -q gitjacker "${USER_HOME_BASE}/.bashrc"; then
     echo "alias gitjacker=\"/usr/local/bin/gitjacker\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
@@ -177,20 +183,34 @@ install_linenum(){
 }
 
 install_mimipenguin(){
-  git clone --quiet https://github.com/huntergregal/mimipenguin.git
+  git clone https://github.com/huntergregal/mimipenguin.git
 }
 
 install_linuxprivchecker(){
-  git clone --quiet https://github.com/sleventyeleven/linuxprivchecker.git
+  git clone https://github.com/sleventyeleven/linuxprivchecker.git
 }
 
-echo -e "Initializing Black Hat Bash Automated Lab Build Script...\n"
+echo "This process may take a while, stay tuned..."
 
-# Run steps
-check_prerequisites
-install_docker
-clone_repo  
+echo "Checking prerequisities..."
+check_prerequisites 
+
+echo "To see the progress of the installation, run 'tail -f log.txt' from another terminal.\n"
+
+sleep 2
+
+echo "[1/4] Installing Docker..."
+install_docker &>> "${LOG}"
+
+echo "[2/4] Cloning the Black Hat Bash repository..."
+# clone_repo ## TODO: uncomment when the repository goes public
+
+echo "[3/4] Deploying containers..."
 deploy_containers
-install_tools
+
+echo "[4/4] Installing third party tools..."
+install_tools &>> "${LOG}"
+
+echo "Lab build completed." | tee -a "${LOG}"
 
 source ~/.bashrc
