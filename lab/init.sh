@@ -111,7 +111,12 @@ install_docker(){
 }
 
 clone_repo(){  
-  git clone https://github.com/dolevf/Black-Hat-Bash.git
+  # Use http-based git cloning when we go public.
+  # git clone https://github.com/dolevf/Black-Hat-Bash.git
+
+  # Use ssh-based git cloning prior to going public
+  # This will be removed after going public
+  git clone git@github.com:dolevf/Black-Hat-Bash.git
 }
 
 deploy_containers(){
@@ -213,4 +218,4 @@ install_tools &>> "${LOG}"
 
 echo "Lab build completed." | tee -a "${LOG}"
 
-source "${USER_HOME_BASE}/.bashrc"
+echo "NOTE: Start a new terminal session for shell changes to take effect."
