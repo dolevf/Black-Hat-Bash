@@ -34,7 +34,7 @@ check_prerequisites(){
   fi
 
   # Check internet connectivity (against Google)
-  if ! wget -q --spider http://google.com; then
+  if ! ping -c 1 -W 1 -w 1 8.8.8.8 &> /dev/null; then
     echo "Error: No internet connectivity."
   fi
 
@@ -73,6 +73,14 @@ check_prerequisites(){
   if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
     mkdir "${BHB_BASE_FOLDER}"
   fi
+
+  local nr_config
+  nr_config="/etc/needrestart/needrestart.conf"
+  if [[ -f "${nr_config}" ]]; then
+    if ! grep -q "#\$nrconf{restart}" "${nr_config}"; then
+      sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" "${nr_config}"
+    fi
+  fi
 }
 
 install_docker(){
@@ -90,27 +98,19 @@ install_docker(){
   fi
 }
 
-clone_repo(){
-  # Clones the Black Hat Bash git repository locally in the home directory
-  if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
-    git clone git@github.com:dolevf/Black-Hat-Bash.git "${BHB_BASE_FOLDER}"
-  fi
+clone_repo(){  
+  git clone git@github.com:dolevf/Black-Hat-Bash.git "${BHB_BASE_FOLDER}"
 }
 
 deploy_containers(){
-  if [[ -d "${BHB_LAB_FOLDER}" ]]; then
-    cd "${BHB_LAB_FOLDER}" 
-  else
-    echo "Could not find the lab folder at ${BHB_LAB_FOLDER}"
-    exit 1
-  fi
-
+  cd "${BHB_LAB_FOLDER}"
   ./run.sh cleanup
   ./run.sh deploy
   ./run.sh status
 }
 
 install_tools(){
+  cd "${BHB_TOOLS_FOLDER}"
   install_wappalyzer
   install_rustscan
   install_nuclei
@@ -126,30 +126,27 @@ install_wappalyzer(){
   sudo apt update -y
   sudo apt install nodejs npm -y
   sudo npm install --global yarn
-  cd "${BHB_TOOLS_FOLDER}"
   git clone https://github.com/wappalyzer/wappalyzer.git
   cd wappalyzer
   yarn install
   yarn run link
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
-    echo "alias wappalyzer='node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js'" >> "${USER_HOME_BASE}.bashrc"
+    echo "alias wappalyzer='node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js'" >> "${USER_HOME_BASE}/.bashrc"
   fi
 }
 
 install_rustscan(){
   sudo apt install cargo -y
-  cd "${BHB_TOOLS_FOLDER}"
   git clone https://github.com/RustScan/RustScan.git
   cd RustScan
   cargo build --release
   if ! grep -q rustscan "${USER_HOME_BASE}/.bashrc" ; then
-    echo "alias rustscan='${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan'" >> "${USER_HOME_BASE}.bashrc"
+    echo "alias rustscan='${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan'" >> "${USER_HOME_BASE}/.bashrc"
   fi
 }
 
 install_nuclei(){
   sudo apt install nuclei -y
-  cd "${BHB_TOOLS_FOLDER}"
 }
 
 install_gobuster(){
@@ -157,31 +154,27 @@ install_gobuster(){
 }
 
 install_linux_exploit_suggester_2(){
-  cd "${BHB_TOOLS_FOLDER}"
   git clone https://github.com/jondonas/linux-exploit-suggester-2.git
 }
 
 install_gitjacker(){
   sudo apt install jq -y
   curl -s "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
-  if ! grep -q gitjacker "${USER_HOME_BASE}.bashrc"; then
-    echo "alias gitjacker='${USER_HOME_BASE}/bin/gitjacker'" >> "${USER_HOME_BASE}.bashrc"
+  if ! grep -q gitjacker "${USER_HOME_BASE}/.bashrc"; then
+    echo "alias gitjacker='${USER_HOME_BASE}/bin/gitjacker'" >> "${USER_HOME_BASE}/.bashrc"
   fi
 }
 
 install_linenum(){
-  cd "${BHB_TOOLS_FOLDER}"
   wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
   chmod u+x LinEnum.sh
 }
 
 install_mimipenguin(){
-  cd "${BHB_TOOLS_FOLDER}"
   git clone https://github.com/huntergregal/mimipenguin.git
 }
 
 install_linuxprivchecker(){
-  cd "${BHB_TOOLS_FOLDER}"
   git clone https://github.com/sleventyeleven/linuxprivchecker.git
 }
 
