@@ -208,7 +208,7 @@ echo "[1/4] Installing Docker..."
 install_docker &>> "${LOG}"
 
 echo "[2/4] Cloning the Black Hat Bash repository..."
-# clone_repo ## TODO: uncomment when the repository goes public
+clone_repo
 
 echo "[3/4] Deploying containers..."
 deploy_containers
