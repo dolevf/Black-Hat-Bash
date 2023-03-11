@@ -24,7 +24,7 @@ BHB_TOOLS_FOLDER="${USER_HOME_BASE}/tools"
 check_prerequisites(){
   # Checks if script is running as root
   if [[ "$EUID" -ne 0 ]]; then
-    echo "Error: Please run as root."
+    echo "Error: Please run with sudo permissions."
     exit
   fi
 
@@ -66,8 +66,12 @@ check_prerequisites(){
     fi
   fi
 
-  if [ ! -d "${BHB_TOOLS_FOLDER}" ]; then
+  if [[ ! -d "${BHB_TOOLS_FOLDER}" ]]; then
     mkdir "${BHB_TOOLS_FOLDER}"
+  fi
+
+  if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
+    mkdir "${BHB_BASE_FOLDER}"
   fi
 }
 
