@@ -77,7 +77,7 @@ check_prerequisites(){
   local nr_config
   nr_config="/etc/needrestart/needrestart.conf"
   if [[ -f "${nr_config}" ]]; then
-    if ! grep -q "#\$nrconf{restart}" "${nr_config}"; then
+    if grep -q "#\$nrconf{restart}" "${nr_config}"; then
       sed -i "s/#\$nrconf{restart} = 'i';/\$nrconf{restart} = 'a';/g" "${nr_config}"
     fi
   fi
