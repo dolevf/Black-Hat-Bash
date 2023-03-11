@@ -29,7 +29,7 @@ check_prerequisites(){
   fi
 
   # Check if Kali OS 
-  if ! grep "ID=kali" /etc/os-release; then
+  if ! grep -q "ID=kali" /etc/os-release; then
     echo "Error: Operating system does not appear to be Kali."
   fi
 
@@ -178,10 +178,7 @@ install_linuxprivchecker(){
   git clone https://github.com/sleventyeleven/linuxprivchecker.git
 }
 
-export DEBIAN_FRONTEND=noninteractive # don't prompt user with TUI consoles
-
-echo "Initializing Black Hat Bash Automated Lab Build Script..."
-echo
+echo -e "Initializing Black Hat Bash Automated Lab Build Script...\n"
 
 # Run steps
 check_prerequisites
