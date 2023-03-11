@@ -29,7 +29,7 @@ check_prerequisites(){
   fi
 
   # Check if Kali OS 
-  if uname -a | grep -v -q kali; then
+  if ! grep "ID=kali" /etc/os-release; then
     echo "Error: Operating system does not appear to be Kali."
   fi
 
