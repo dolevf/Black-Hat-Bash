@@ -9,6 +9,7 @@
 set -o pipefail
 source provision.sh
 
+CHOICE="${1}"
 LOG="log.txt"
 truncate -s 0 $LOG
 
@@ -94,7 +95,7 @@ function rebuild(){
     deploy
 }
 
-case "$1" in
+case "${CHOICE}" in
     deploy)
         deploy
     ;;
@@ -113,7 +114,6 @@ case "$1" in
         else
             echo "Lab is down."
         fi
-        exit 0
     ;;
     *)
         echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | cleanup | status"
@@ -123,6 +123,5 @@ case "$1" in
         echo "rebuild  | rebuilds the lab from scratch"
         echo "cleanup  | stop containers and delete containers and images"
         echo "status   | check the status of the lab"
-        exit 1
     ;;
 esac

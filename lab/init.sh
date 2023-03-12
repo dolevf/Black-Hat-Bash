@@ -163,11 +163,11 @@ install_rustscan(){
 }
 
 install_nuclei(){
-  sudo apt install -qq nuclei -y 
+  sudo apt install nuclei -y 
 }
 
 install_gobuster(){
-  sudo apt install -qq gobuster -y
+  sudo apt install gobuster -y
 }
 
 install_linux_exploit_suggester_2(){
