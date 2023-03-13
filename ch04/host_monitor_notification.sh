@@ -17,7 +17,7 @@ while true; do
       sendemail -f "${FROM_ADDR}" \
         -t "${TO_ADDR}" \
 		-u "ARP Scan Notification" \
-		-m "A new host found: ${host}"
+		-m "A new host was found: ${host}"
     fi
   done 
   sleep 10
