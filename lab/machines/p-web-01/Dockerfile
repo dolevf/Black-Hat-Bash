@@ -33,7 +33,7 @@ COPY files/site/upload.html .
 
 RUN mkdir files 
 RUN mkdir uploads
-COPY files/acme-hyper-branding-05.csv files/acme-hyper-branding-05.csv
+COPY files/acme-hyper-branding-5.csv files/acme-hyper-branding-5.csv
 
 
 ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8081"]
