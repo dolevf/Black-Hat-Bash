@@ -136,6 +136,7 @@ install_tools(){
   install_linenum
   install_mimipenguin
   install_linuxprivchecker
+  install_dirsearch
 }
 
 install_wappalyzer(){
@@ -193,6 +194,10 @@ install_mimipenguin(){
 
 install_linuxprivchecker(){
   git clone https://github.com/sleventyeleven/linuxprivchecker.git
+}
+
+install_dirsearch(){
+  sudo apt install dirsearch -y
 }
 
 echo "This process may take a while, stay tuned..."
