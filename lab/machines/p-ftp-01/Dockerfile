@@ -34,8 +34,16 @@ COPY p-web-02/files/site/* /var/www/html/backup/acme-impact-alliance/
 
 # Post Actions
 RUN git config --global init.defaultBranch master
-RUN git init /var/www/html/backup/acme-hyper-branding
-RUN git init var/www/html/backup/acme-impact-alliance
+RUN git init /var/www/html/backup/acme-hyper-branding \
+    && cd /var/www/html/backup/acme-hyper-branding \
+    && git add -A \
+    && git commit -m 'commit code'
+
+RUN git init var/www/html/backup/acme-impact-alliance  \
+    && cd /var/www/html/backup/acme-impact-alliance \
+    && git add -A \
+    && git commit -m 'commit code'
+
 RUN chmod u+x /mnt/scripts/execute.sh
 
 RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab
