@@ -37,14 +37,14 @@ RUN git config --global init.defaultBranch master
 RUN git init /var/www/html/backup/acme-hyper-branding \
     && cd /var/www/html/backup/acme-hyper-branding \
     && git config --global user.email "jmartinez@acme-infinity-servers.com" \
-    && git config --global user.name "jmartinez" \
+    && git config --global user.name "Joshua Martinez" \
     && git add -A \
     && git commit -m 'commit code'
 
 RUN git init var/www/html/backup/acme-impact-alliance  \
     && cd /var/www/html/backup/acme-impact-alliance \
     && git config --global user.email "jmartinez@acme-infinity-servers.com" \
-    && git config --global user.name "jmartinez" \
+    && git config --global user.name "Joshua Martinez" \
     && git add -A \
     && git commit -m 'commit code'
 
