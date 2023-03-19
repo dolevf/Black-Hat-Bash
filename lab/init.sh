@@ -137,6 +137,7 @@ install_tools(){
   install_mimipenguin
   install_linuxprivchecker
   install_dirsearch
+  install_sysutilities
 }
 
 install_wappalyzer(){
@@ -198,6 +199,10 @@ install_linuxprivchecker(){
 
 install_dirsearch(){
   sudo apt install dirsearch -y
+}
+
+install_sysutilities(){
+  sudo apt install jq -y
 }
 
 echo "This process may take a while, stay tuned..."
