@@ -1,0 +1,18 @@
+id: detect-git-repository
+
+info:
+  name: Git Repository Finder
+  author: Dolev Farhi and Nick Aleks
+  severity: info
+  tags: git
+
+requests:
+  - method: GET
+    path:
+      - '{{BaseURL}}/backup/acme-hyper-branding/.git/HEAD'
+      - '{{BaseURL}}/backup/acme-impact-alliance/.git/HEAD'
+    matchers:
+      - type: word
+        words:
+          - "ref: refs/heads/master"
+        part: body
