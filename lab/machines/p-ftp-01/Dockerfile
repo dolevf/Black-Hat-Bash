@@ -36,15 +36,15 @@ COPY p-web-02/files/site/* /var/www/html/backup/acme-impact-alliance/
 RUN git config --global init.defaultBranch master
 RUN git init /var/www/html/backup/acme-hyper-branding \
     && cd /var/www/html/backup/acme-hyper-branding \
-    && git config --global user.email "ogarcia@acme-infinity-servers.com" \
-    && git config --global user.name "Olivia Garcia" \
+    && git config --global user.email "mrogers@acme-hyper-branding.com" \
+    && git config --global user.name "Melissa Rogers" \
     && git add -A \
     && git commit -m 'commit code'
 
 RUN git init var/www/html/backup/acme-impact-alliance  \
     && cd /var/www/html/backup/acme-impact-alliance \
-    && git config --global user.email "jmartinez@acme-infinity-servers.com" \
-    && git config --global user.name "Joshua Martinez" \
+    && git config --global user.email "kpeterson@acme-impact-alliance.com" \
+    && git config --global user.name "Kevin Peterson" \
     && git add -A \
     && git commit -m 'commit code'
 
