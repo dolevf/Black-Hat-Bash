@@ -10,7 +10,7 @@ service_discovery(){
   host="${1}"
   port="${2}"
 
-  nmap -sV -p "${port}" "${host}" >> ${LOG_FILE}
+  nmap -sV -p "${port}" "${host}" >> "${LOG_FILE}"
 }
 
 port_check=$("${RUST_SCAN_BIN}" -a "${IP_ADDRESS}" -g -p "${WATCHED_PORT}" && sleep 10)
