@@ -13,7 +13,7 @@ service_discovery(){
   nmap -sV -p "${port}" "${host}" >> ${LOG_FILE}
 }
 
-port_check=$("${RUST_SCAN_BIN}" -a "${IP_ADDRESS}" -g -p "${WATCHED_PORT}")
+port_check=$("${RUST_SCAN_BIN}" -a "${IP_ADDRESS}" -g -p "${WATCHED_PORT}" && sleep 10)
 
 until [[ -z "${port_check}" ]]; do
   echo "${IP_ADDRESS} has started responding on port ${WATCHED_PORT}!"
