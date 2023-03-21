@@ -2,7 +2,7 @@
 HOSTS="$*"
 
 if [[ "${EUID}" -ne 0 ]]; then
-  echo "The Nmap Scan Type -O requires root privileges."
+  echo "The Nmap OS detection type (-O) requires root privileges."
   exit 1
 fi
 
