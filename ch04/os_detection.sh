@@ -13,12 +13,12 @@ fi
 
 echo "Running an OS Detection Scan against ${HOSTS}..."
 
-nmap_scan=$(nmap -O ${HOSTS} -oG -)
+nmap_scan=$(sudo nmap -O ${HOSTS} -oG -)
 while read -r line; do
   ip=$(echo "${line}" | awk '{print $2}')
   os=$(echo "${line}" | grep OS | awk -F'OS: ' '{print $2}' | sed 's/Seq.*//g')
 
   if [[ -n "${ip}" ]] && [[ -n "${os}" ]]; then
-    echo "IP: $ip OS: $os"
+    echo "IP: ${ip} OS: ${os}"
   fi
-done <<< "${nmap_scan}
+done <<< "${nmap_scan}"
