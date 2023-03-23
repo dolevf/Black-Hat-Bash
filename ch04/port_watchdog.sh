@@ -23,7 +23,7 @@ while true; do
       break
     fi
   else
-    echo "Port not yet open or was closed, sleeping for 5 seconds..."
+    echo "Port is not yet open, sleeping for 5 seconds..."
     sleep 5
   fi
 done
