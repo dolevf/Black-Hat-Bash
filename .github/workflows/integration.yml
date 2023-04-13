@@ -27,15 +27,17 @@ jobs:
         id: deploy
         run: |
           sudo ./run.sh deploy
+        with:
+          DEBUG: "true"
         working-directory: ./lab
       
       - name: Test Lab
         id: test
         run: | 
           sudo ./run.sh status
-          docker ps -a
-          docker images
           sudo tail -n 500 log.txt
+        with:
+          DEBUG: "true"
         working-directory: ./lab
       
       - name: Slack Notification Failure
@@ -43,7 +45,7 @@ jobs:
         
         if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})" }' ${{secrets.SLACK_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}}) <!here>" }' ${{secrets.SLACK_WEBHOOK}}
 
       - name: Slack Notification Success
         id: notify_success

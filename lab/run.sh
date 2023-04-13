@@ -13,6 +13,10 @@ CHOICE="${1}"
 LOG="log.txt"
 truncate -s 0 $LOG
 
+if [[ ! -z "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
+  LOG=/dev/stderr
+fi
+
 if [[ "$(id -u)" -ne 0 ]]; then
     if ! groups | grep -q docker; then
         echo "It looks like you are not part of the 'docker' group or aren't using sudo."
