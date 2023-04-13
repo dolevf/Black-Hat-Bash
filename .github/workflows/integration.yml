@@ -1,0 +1,26 @@
+on:
+  schedule:
+    - cron:  '1 * * * *'
+
+jobs:
+  install_with_run-sh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploys Lab with run.sh
+        run: |
+          sudo ./lab/run.sh deploy
+      - name: Test Lab
+        run: | 
+          sudo ./lab/run.sh status
+  install_with_init_sh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploys Lab with init.sh
+        run: |
+          sudo ./lab/init.sh
+      - name: Test Lab
+        run: | 
+          sudo ./lab/run.sh status
+  
