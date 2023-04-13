@@ -62,7 +62,7 @@ function deploy(){
     
     if status; then
         echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
-        sleep 10
+        sleep 25
         if check_post_actions &>> $LOG; then
             echo "OK: lab is up and provisioned." | tee -a $LOG
         else
