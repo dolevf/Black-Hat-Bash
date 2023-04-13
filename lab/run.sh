@@ -58,8 +58,10 @@ function deploy(){
     echo "==== Deployment Started ===="
     echo "Deploying the Black Hat Bash environment."
     echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
-    echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
     echo "Start Time: $(date "+%T")" >> $LOG
+    if [[ -z "${DEBUG}" ]]; then
+        echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
+    fi
     
     sudo docker compose build --parallel &>> $LOG
     sudo docker compose up --detach &>> $LOG

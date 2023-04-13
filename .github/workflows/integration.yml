@@ -7,8 +7,6 @@ on:
 jobs:
   install_with_run_sh:
     runs-on: ubuntu-latest
-    env:
-        DEBUG: "true"
     steps:
       - name: Install Docker
         run: |
@@ -28,13 +26,13 @@ jobs:
       - name: Deploy Lab
         id: deploy
         run: |
-          sudo ./run.sh deploy
+          sudo DEBUG=true ./run.sh deploy
         working-directory: ./lab
       
       - name: Test Lab
         id: test
         run: | 
-          sudo ./run.sh status
+          sudo DEBUG=true ./run.sh status
           sudo tail -n 500 log.txt 
         working-directory: ./lab
       
@@ -43,7 +41,7 @@ jobs:
         
         if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}}) <!here>" }' ${{secrets.SLACK_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})" }' ${{secrets.SLACK_WEBHOOK}}
 
       - name: Slack Notification Success
         id: notify_success
