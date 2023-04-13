@@ -8,8 +8,15 @@ jobs:
   install_with_run_sh:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Install Docker
+        run: |
+          printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | sudo tee "${docker_apt_src}"
+          curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o "${docker_keyring}"
+          apt update -y 
+          apt install docker-ce docker-ce-cli containerd.io -y
+          systemctl enable docker --now
       
+      - uses: actions/checkout@v3
       - name: Deploys Lab with run.sh
         id: deploy
         run: |
