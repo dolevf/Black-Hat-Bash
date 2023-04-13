@@ -47,4 +47,4 @@ jobs:
         
         if: steps.deploy.outcome != 'success' || steps.test.outcome != 'success'
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})" }' ${{secrets.SLACK_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}}) <!here>" }' ${{secrets.SLACK_WEBHOOK}}
