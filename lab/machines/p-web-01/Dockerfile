@@ -11,7 +11,7 @@ RUN add-apt-repository universe
 RUN apt-get update -y
 RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
-RUN pip3 install flask
+RUN pip3 install flask --break-system-packages
 
 # Provision Users
 RUN useradd -m -s /bin/bash jmartinez
