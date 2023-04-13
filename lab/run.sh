@@ -13,7 +13,7 @@ CHOICE="${1}"
 LOG="log.txt"
 truncate -s 0 $LOG
 
-if [[ ! -z "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
+if [[ -n "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
   LOG=/dev/stderr
 fi
 
