@@ -2,44 +2,38 @@ name: Integration Testing
 on:
   workflow_dispatch:
   schedule:
-  - cron:  '*/5 * * * *'
+  - cron:  '0 0 * * *'
 
 jobs:
-  install_with_run-sh:
+  install_with_run_sh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Deploys Lab with run.sh
         id: deploy
         run: |
           sudo ./run.sh deploy
         working-directory: ./lab
+      
       - name: Test Lab
         id: test
         run: | 
           sudo ./run.sh status
         working-directory: ./lab
-      - name: Slack Notification
-        id: notify
-        if: steps.deploy.outcome != 'success' || steps.test.outcome != 'success'
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Integration Test for run.sh failed!"}' ${{ secrets.SLACK_WEBHOOK }}
-  install_with_init_sh:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploys Lab with init.sh
-        id: init
-        run: |
-          sudo ./init.sh
-        working-directory: ./lab
-      - name: Test Lab
-        id: test
-        run: | 
-          sudo ./lab/run.sh status
-        working-directory: ./lab
-      - name: Slack Notification
-        id: notify
+      
+      - name: Slack Notification Success
+        id: notify_success
+        
         if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Integration Test for init.sh failed!"}' ${{ secrets.SLACK_WEBHOOK }}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration Test for run.sh failed!"}' ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Slack Notification Failure
+        id: notify_fail
+        
+        if: steps.init.outcome == 'success' && steps.test.outcome == 'success'
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[SUCCESS] Integration Test for run.sh is OK."}' ${{ secrets.SLACK_WEBHOOK }}
+          head -100 log.txt
+      
