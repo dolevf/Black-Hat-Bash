@@ -33,8 +33,9 @@ jobs:
         id: test
         run: | 
           sudo ./run.sh status
-          ls -l
-          tail -n 500 log.txt
+          docker ps -a
+          docker images
+          sudo tail -n 500 log.txt
         working-directory: ./lab
       
       - name: Slack Notification Failure
