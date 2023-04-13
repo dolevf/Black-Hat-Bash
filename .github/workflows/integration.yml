@@ -20,6 +20,7 @@ jobs:
         id: test
         run: | 
           sudo ./run.sh status
+          head -500 log.txt
         working-directory: ./lab
       
       - name: Slack Notification Failure
@@ -27,8 +28,7 @@ jobs:
         
         if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
         run: |
-          ${{ github.run_id }}"
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})"}' ${{secrets.SLACK_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})" }' ${{secrets.SLACK_WEBHOOK}}
 
       - name: Slack Notification Success
         id: notify_success
@@ -36,5 +36,4 @@ jobs:
         if: steps.init.outcome == 'success' && steps.test.outcome == 'success'
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"[SUCCESS] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})"}' ${{ secrets.SLACK_WEBHOOK }}
-          head -100 log.txt
       
