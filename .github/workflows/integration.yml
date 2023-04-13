@@ -1,6 +1,7 @@
+name: Integration Testing
 on:
   schedule:
-    - cron:  '*/5 * * * *'
+  - cron:  '*/5 * * * *'
 
 jobs:
   install_with_run-sh:
@@ -8,19 +9,32 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Deploys Lab with run.sh
+        id: deploy
         run: |
           sudo ./lab/run.sh deploy
       - name: Test Lab
+        id: test
         run: | 
           sudo ./lab/run.sh status
+      - name: Slack Notification
+        id: notify
+        if: steps.deploy.outcome != 'success' || steps.test.outcome != 'success'
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Integration Test for run.sh failed!"}' ${{ secrets.SLACK_WEBHOOK }}
   install_with_init_sh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Deploys Lab with init.sh
+        id: init
         run: |
           sudo ./lab/init.sh
       - name: Test Lab
+        id: test
         run: | 
           sudo ./lab/run.sh status
-  
+      - name: Slack Notification
+        id: notify
+        if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Integration Test for init.sh failed!"}' ${{ secrets.SLACK_WEBHOOK }}
