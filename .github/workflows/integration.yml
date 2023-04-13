@@ -12,11 +12,13 @@ jobs:
       - name: Deploys Lab with run.sh
         id: deploy
         run: |
-          sudo ./lab/run.sh deploy
+          sudo ./run.sh deploy
+        working-directory: ./lab
       - name: Test Lab
         id: test
         run: | 
-          sudo ./lab/run.sh status
+          sudo ./run.sh status
+        working-directory: ./lab
       - name: Slack Notification
         id: notify
         if: steps.deploy.outcome != 'success' || steps.test.outcome != 'success'
@@ -29,11 +31,13 @@ jobs:
       - name: Deploys Lab with init.sh
         id: init
         run: |
-          sudo ./lab/init.sh
+          sudo ./init.sh
+        working-directory: ./lab
       - name: Test Lab
         id: test
         run: | 
           sudo ./lab/run.sh status
+        working-directory: ./lab
       - name: Slack Notification
         id: notify
         if: steps.init.outcome != 'success' || steps.test.outcome != 'success'
