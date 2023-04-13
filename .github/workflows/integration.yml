@@ -7,6 +7,8 @@ on:
 jobs:
   install_with_run_sh:
     runs-on: ubuntu-latest
+    env:
+        DEBUG: "true"
     steps:
       - name: Install Docker
         run: |
@@ -27,17 +29,13 @@ jobs:
         id: deploy
         run: |
           sudo ./run.sh deploy
-        with:
-          DEBUG: "true"
         working-directory: ./lab
       
       - name: Test Lab
         id: test
         run: | 
           sudo ./run.sh status
-          sudo tail -n 500 log.txt
-        with:
-          DEBUG: "true"
+          sudo tail -n 500 log.txt 
         working-directory: ./lab
       
       - name: Slack Notification Failure
