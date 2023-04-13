@@ -1,4 +1,5 @@
-#!/bin/bash 
+#!/bin/bash
+# shellcheck disable=SC2086 
 HOSTS="$*"
 
 if [[ "${EUID}" -ne 0 ]]; then
