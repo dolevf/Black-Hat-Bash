@@ -11,7 +11,6 @@ source provision.sh
 
 CHOICE="${1}"
 LOG="log.txt"
-truncate -s 0 $LOG
 
 if [[ -n "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
   LOG=/dev/stderr
