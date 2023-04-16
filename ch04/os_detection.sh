@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=SC2086 
 HOSTS="$*"
 
 if [[ "${EUID}" -ne 0 ]]; then
@@ -14,7 +13,9 @@ fi
 
 echo "Running an OS Detection Scan against ${HOSTS}..."
 
+# shellcheck disable=SC2086
 nmap_scan=$(sudo nmap -O ${HOSTS} -oG -)
+
 while read -r line; do
   ip=$(echo "${line}" | awk '{print $2}')
   os=$(echo "${line}" | grep OS | awk -F'OS: ' '{print $2}' | sed 's/Seq.*//g')

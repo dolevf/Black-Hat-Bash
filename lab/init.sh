@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# shellcheck disable=SC2164
+
 # Black Hat Bash - Automated Lab Build Script
 
 # This script is intended to be executed within a Kali machine.
@@ -225,6 +227,8 @@ deploy_containers
 
 echo "[4/4] Installing third party tools..."
 install_tools &>> "${LOG}"
+
+cd "${BHB_LAB_FOLDER}"
 
 echo "Lab build completed." | tee -a "${LOG}"
 
