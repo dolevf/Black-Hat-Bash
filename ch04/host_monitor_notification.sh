@@ -16,8 +16,8 @@ while true; do
       echo "${host}" >> "${KNOWN_HOSTS}"
       sendemail -f "${FROM_ADDR}" \
         -t "${TO_ADDR}" \
-		-u "ARP Scan Notification" \
-		-m "A new host was found: ${host}"
+        -u "ARP Scan Notification" \
+        -m "A new host was found: ${host}"
     fi
   done 
   sleep 10
