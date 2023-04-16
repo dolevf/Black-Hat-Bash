@@ -2,7 +2,7 @@
 FILE="${1}"
 OUTPUT_FOLDER="${2}"
 
-if [[ ! -f "${FILE}" ]] || [[ ! -s "${FILE}" ]]; then
+if [[ ! -s "${FILE}" ]]; then
   echo "You must provide a non-empty hosts file as an argument."
   exit 1
 fi
