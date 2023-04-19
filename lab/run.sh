@@ -118,6 +118,7 @@ case "${CHOICE}" in
             echo "Lab is up."
         else
             echo "Lab is down."
+            exit 1
         fi
     ;;
     *)
