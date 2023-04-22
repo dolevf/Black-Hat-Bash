@@ -19,9 +19,8 @@ fi
 if [[ "$(id -u)" -ne 0 ]]; then
     if ! groups | grep -q docker; then
         echo "It looks like you are not part of the 'docker' group or aren't using sudo."
-        echo "Docker requires sudo privileges. To add your user \"$USER\" to the docker group, please run:"
-        echo "usermod -aG $USER docker"
-        echo "then, rerun the command: su - $USER"
+        echo "Docker requires sudo privileges. To add your user \"${USER}\" to the docker group, please run:"
+        echo "usermod -aG docker ${USER} && su - ${USER}"
         exit 1
     fi
 fi
