@@ -11,7 +11,7 @@ for ip_address in "$@"; do
       url=$(echo "${line}" | awk '{print $4}')
       echo "Sending an email with the findings ${template} ${url}"
       sendemail -f "${EMAIL_FROM}" \
-      		-t "${EMAIL_TO}" \
+      		      -t "${EMAIL_TO}" \
                 -u "[Nuclei] Vulnerability Found!" \
                 -m "${template} - ${url}"
                 
