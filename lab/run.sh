@@ -37,7 +37,7 @@ if ! docker compose version &> /dev/null; then
     exit 1
 fi
 
-function status(){
+status(){
     local total_expected_containers
     local actual_running_containers
 
@@ -51,7 +51,7 @@ function status(){
     fi
 }
 
-function deploy(){
+deploy(){
     echo 
     echo "==== Deployment Started ===="
     echo "Deploying the Black Hat Bash environment."
@@ -79,14 +79,14 @@ function deploy(){
     echo "End Time: $(date "+%T")" >> $LOG 
 }
 
-function teardown(){
+teardown(){
     echo
     echo "==== Shutdown Started ====" | tee -a $LOG
     sudo docker compose down --volumes
     echo "OK: lab has shut down." 
 }
 
-function cleanup(){
+cleanup(){
     echo
     echo "==== Cleanup Started ====" 
     echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
@@ -94,7 +94,7 @@ function cleanup(){
     echo "OK: lab environment has been destroyed."
 }
 
-function rebuild(){
+rebuild(){
     cleanup
     deploy
 }
