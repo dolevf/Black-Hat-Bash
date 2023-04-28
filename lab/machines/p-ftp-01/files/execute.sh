@@ -2,7 +2,7 @@
 
 # This script is executed every minute on p-ftp-01 to do maintenance work.
 
-declare -r LOG="/tmp/job.log"
+LOG="/tmp/job.log"
 
 echo "$(date) - Starting cleanup script..." >> "$LOG"
 if find /tmp -type f ! -name 'job.log' -exec rm -rf {} +; then
