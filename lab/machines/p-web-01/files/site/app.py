@@ -42,5 +42,5 @@ def uploads(file_name=None):
         return '<h1>Missing file name in URL parameter.</h1>'
     else:
         if not os.path.exists('uploads/' + file_name):
-            return '<h1>File not found.</h1>'
+            return '<h1>File not found.</h1>', 404
     return render_template('uploads/' + file_name)
