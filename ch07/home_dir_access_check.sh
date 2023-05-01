@@ -10,7 +10,7 @@ while read -r line; do
   home_dir=$(echo "${line}" | awk -F':' '{print $6}')
   
   # Only target home directories under /home
-  if echo "${home_dir}" | grep -q "/home"; then
+  if echo "${home_dir}" | grep -q "^/home"; then
     if [[ -r "${home_dir}" ]]; then
         echo "Home directory ${home_dir} of user account ${account} is accessible!"
     else
