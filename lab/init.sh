@@ -232,4 +232,4 @@ cd "${BHB_LAB_FOLDER}"
 
 echo "Lab build completed." | tee -a "${LOG}"
 
-echo "NOTE: Start a new terminal session for shell changes to take effect or run the command \"source ~/.bashrc\""
+echo "NOTE: Start a new terminal session for shell changes to take effect."
