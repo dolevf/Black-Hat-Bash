@@ -61,6 +61,7 @@ deploy(){
         echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
     fi
     
+    sudo docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
     sudo docker compose build --parallel &>> $LOG
     sudo docker compose up --detach &>> $LOG
     
