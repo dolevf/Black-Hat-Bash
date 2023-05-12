@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM lab_base
 
 # Metadata
 LABEL name="c-web-01"
@@ -13,16 +13,6 @@ RUN apt-get install python3 -y
 RUN apt-get install python3-pip -y
 RUN apt-get install net-tools
 RUN pip3 install flask --break-system-packages
-
-# Provision Users
-RUN useradd -m -s /bin/bash jmartinez
-RUN useradd -m -s /bin/bash dbrown
-RUN useradd -m -s /bin/bash ogarcia
-RUN useradd -m -s /bin/bash arodriguez
-RUN echo "jmartinez:password123" | chpasswd
-RUN echo "dbrown:wAWSD@ASw2" | chpasswd
-RUN echo "ogarcia:#T9aujf8h33" | chpasswd
-RUN echo "arodriguez:asucj783E@#" | chpasswd
 
 # Copy Files to Lab
 WORKDIR /app
