@@ -6,9 +6,9 @@ LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install -y openssh-server
-RUN apt-get install cron -y
-RUN apt-get install net-tools
+RUN apt-get install -y \
+    cron \
+    openssh-server
 
 # Copy Files to Lab
 COPY --chown=jmartinez:jmartinez files/bash_history /home/jmartinez/.bash_history

@@ -6,13 +6,11 @@ LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install vsftpd -y
-RUN apt-get install apache2 -y
-RUN apt-get install net-tools -y
-RUN apt-get install iputils-ping -y
-RUN apt-get install cron -y
-RUN apt-get install git -y
-
+RUN apt-get install -y \
+        vsftpd \ 
+        apache2 \ 
+        cron \
+        git
 
 # Copy Files to Lab
 RUN mkdir -p /var/www/html/backup/acme-hyper-branding

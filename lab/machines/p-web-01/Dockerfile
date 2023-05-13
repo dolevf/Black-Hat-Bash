@@ -9,9 +9,9 @@ RUN apt-get update -y --fix-missing
 RUN apt-get install software-properties-common -y
 RUN add-apt-repository universe
 RUN apt-get update -y
-RUN apt-get install python3 -y
-RUN apt-get install python3-pip -y
-RUN apt-get install net-tools
+RUN apt-get install -y \
+        python3 \
+        python3-pip 
 RUN pip3 install flask --break-system-packages
 
 # Copy Files to Lab

@@ -92,6 +92,7 @@ cleanup(){
     echo "==== Cleanup Started ====" 
     echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
     sudo docker compose down --volumes --rmi all &> /dev/null
+    sudo docker system prune -a --volumes -f &> /dev/null
     echo "OK: lab environment has been destroyed."
 }
 

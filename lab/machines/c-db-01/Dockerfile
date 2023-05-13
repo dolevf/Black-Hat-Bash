@@ -9,12 +9,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install cron -y
-RUN apt-get install net-tools -y
-RUN apt-get install mariadb-server -y
-RUN apt-get install apache2 -y
-RUN apt-get install php -y
-RUN apt-get install php-mysql -y
+RUN apt-get install -y \
+    cron \
+    mariadb-server \
+    apache2 \
+    php \
+    php-mysql 
 
 # Post Actions
 COPY files/adminer-4.8.1.php /var/www/html/adminer.php
