@@ -7,8 +7,8 @@ LABEL company="ACME Infinity Servers"
 # Install Required Packages
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y \
-    cron \
-    openssh-server
+                    cron \
+                    openssh-server
 
 # Copy Files to Lab
 COPY --chown=jmartinez:jmartinez files/bash_history /home/jmartinez/.bash_history

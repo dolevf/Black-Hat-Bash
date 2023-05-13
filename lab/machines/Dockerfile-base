@@ -13,6 +13,6 @@ RUN echo "arodriguez:asucj783E@#" | chpasswd
 # Add Packages
 RUN apt-get update -y
 RUN apt-get install -y \ 
-    net-tools \
-    iputils-ping \
-    iproute2
+                    net-tools \
+                    iputils-ping \
+                    iproute2

@@ -10,8 +10,8 @@ RUN apt-get install software-properties-common -y
 RUN add-apt-repository universe
 RUN apt-get update -y
 RUN apt-get install -y \
-        python3 \
-        python3-pip 
+                    python3 \
+                    python3-pip 
 RUN pip3 install flask --break-system-packages
 
 # Copy Files to Lab

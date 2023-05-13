@@ -7,7 +7,7 @@ LABEL company="ACME Infinity Servers"
 # Install Required Packages
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y \
-    cron \
-    python3 
+                    cron \
+                    python3 
 
 CMD echo "Starting backup service..." && python3 -m http.server --directory /etc 8080

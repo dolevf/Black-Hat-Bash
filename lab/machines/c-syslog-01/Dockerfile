@@ -7,8 +7,8 @@ LABEL company="ACME Infinity Servers"
 # Install Required Packages
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y \
-            openssh-server \
-            cron 
+                    openssh-server \
+                    cron 
 
 # Entry
 ENTRYPOINT \
