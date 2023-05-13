@@ -25,13 +25,8 @@ p_web_02() {
 }
 
 check_post_actions(){
-  if ! p_web_01; then
-    return 1
-  fi
-  
-  if ! p_web_02; then
-    return 1
-  fi
-
+  p_web_01 || return 1
+  p_web_02 || return 1
+    
   return 0
 }
