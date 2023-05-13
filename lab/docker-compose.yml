@@ -42,6 +42,7 @@ services:
   p-web-01:
     container_name: p-web-01
     hostname: p-web-01.acme-hyper-branding.com
+    privileged: true
     build: 
       context: machines/p-web-01
       dockerfile: Dockerfile

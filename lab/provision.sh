@@ -1,5 +1,14 @@
 #!/bin/bash
 
+
+p_web_01() {
+  if ! sudo docker exec -it p-web-01 bash -c "iptables -I INPUT -s 10.0.1.0/24 -m comment --comment \"Block Network\" -j DROP"; then
+    return 1
+  fi
+
+  return 0
+}
+
 p_web_02() {
   local result
 
@@ -16,6 +25,10 @@ p_web_02() {
 }
 
 check_post_actions(){
+  if ! p_web_01; then
+    return 1
+  fi
+  
   if ! p_web_02; then
     return 1
   fi
