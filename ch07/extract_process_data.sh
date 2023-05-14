@@ -1,7 +1,8 @@
 #!/bin/bash
+# shellcheck disable=SC2010
 
 for pid in $(ls -1 /proc/ | grep -E '^[0-9]+$'); do
-  cmdline=$(cat "/proc/${pid}/cmdline" | tr '\000' ' ')
+  cmdline=$(tr '\000' ' ' < "/proc/${pid}/cmdline")
   state=$(grep State "/proc/${pid}/status" | awk -F'State:' '{print $2}'| xargs)
   name=$(grep Name "/proc/${pid}/status"  | awk -F'Name:'  '{print $2}' | xargs)
 
