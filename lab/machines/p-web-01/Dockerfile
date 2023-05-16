@@ -23,9 +23,11 @@ COPY files/site/app.py .
 COPY files/site/index.html .
 COPY files/site/upload.html . 
 
+ENV FLASK_ENV=development
+
 RUN mkdir files 
 RUN mkdir uploads
 COPY files/acme-hyper-branding-5.csv files/acme-hyper-branding-5.csv
 
 
-ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8081"]
+ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8081", "--debug"]

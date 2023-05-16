@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 
 from flask import (
     Flask, 
@@ -11,6 +11,7 @@ def execute(cmd):
     return os.popen(cmd).read()
 
 app = Flask(__name__, template_folder=".", static_folder='static',)
+app.debug = True
 app.config['UPLOAD_FOLDER'] = "uploads/"    
 app.jinja_env.globals.update(execute=execute)
 
@@ -25,14 +26,15 @@ def files(path):
 @app.route('/upload', methods = ['GET', 'POST'])
 def upload():
     msg = ''
-    allowed_extensions = ['.jpg', '.png', '.jpeg', '.gif']
+    allowed_content_types = ['image/jpeg', 'image/png', 'image/gif']
     if request.method == 'POST':
         f = request.files['file']
-        if not any(ext in f.filename for ext in allowed_extensions):
-            msg='File extension is not allowed!'
+        if f.content_type not in allowed_content_types:
+            msg = 'File type is not allowed!'
         else:
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
-            msg='File upload was successful!'
+            msg = 'File upload was successful!'
+
     return render_template('upload.html', msg=msg)
 
 @app.route('/uploads', methods=['GET'])
