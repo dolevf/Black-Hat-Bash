@@ -13,4 +13,5 @@ RUN apt-get update -y
 RUN apt-get install -y \ 
                     net-tools \
                     iputils-ping \
-                    iproute2
+                    iproute2 \ 
+                    cron

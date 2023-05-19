@@ -6,9 +6,7 @@ LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install -y \
-                    cron \
-                    redis-server 
+RUN apt-get install -y redis-server 
 
 # Copy Files to Lab
 COPY --chown=root:root files/redis.conf /etc/redis/redis.conf
