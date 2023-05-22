@@ -16,4 +16,6 @@ RUN apt-get install -y \
                     net-tools \
                     iputils-ping \
                     iproute2 \
-                    dnsutils
+                    dnsutils \ 
+                    cron \
+                    vim-tiny
