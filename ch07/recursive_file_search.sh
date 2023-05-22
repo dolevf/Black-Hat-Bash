@@ -1,17 +1,17 @@
 #!/bin/bash
 DIR_SEARCH="${1}"
 DIR_BACKUP="${HOME}/backup"
+DIR_SEARCH_DEFAULT="/var/log"
 COMPRESSED_FILE="${HOME}/files.tar.gz"
 
 if [[ -z "${DIR_SEARCH}" ]]; then
-    echo "You must specify an argument in the form of a file path."
-    echo "For example: ./recursive_file_search.sh \"/var/log\""
+    echo "Warning: you did not argument in the form of a file path. Defaulting to /var/log."
+    DIR_SEARCH="${DIR_SEARCH_DEFAULT}"
+fi
+
+if [[ ! -d "${DIR_SEARCH}" ]]; then
+    echo "${DIR_SEARCH} is not a directory."
     exit 1
-else
-    if [[ ! -d "${DIR_SEARCH}" ]]; then
-        echo "${DIR_SEARCH} is not a directory."
-        exit 1
-    fi
 fi
 
 if [[ ! -d "${DIR_BACKUP}" ]]; then
@@ -22,6 +22,8 @@ while read -r file; do
     echo "Copying ${file} into ${DIR_BACKUP}"
     cp -f "${file}" "${DIR_BACKUP}"
 done < <(find "${DIR_SEARCH}" -type f -readable 2> /dev/null)
+
+sleep 3
 
 if [[ -n $(ls -A "${DIR_BACKUP}") ]]; then
     echo -e "\nCompressing collections into a tarball..."
