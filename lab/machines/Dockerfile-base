@@ -19,4 +19,5 @@ RUN apt-get install -y \
                     dnsutils \ 
                     cron \
                     vim-tiny \
-                    at
+                    at \ 
+                    curl 
