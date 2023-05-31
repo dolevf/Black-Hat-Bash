@@ -1,9 +1,9 @@
 services:
-  c-jumpbox-01:
-    container_name: c-jumpbox-01
-    hostname: c-jumpbox-01.acme-infinity-servers.com
+  p-jumpbox-01:
+    container_name: p-jumpbox-01
+    hostname: p-jumpbox-01.acme-infinity-servers.com
     build: 
-      context: machines/c-jumpbox-01
+      context: machines/p-jumpbox-01
       dockerfile: Dockerfile
     networks:
       public:

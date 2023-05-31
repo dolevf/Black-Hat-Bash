@@ -1,7 +1,7 @@
 FROM lab_base
 
 # Metadata
-LABEL name="c-jumpbox-01"
+LABEL name="p-jumpbox-01"
 LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
