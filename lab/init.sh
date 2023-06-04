@@ -71,6 +71,8 @@ check_prerequisites(){
 
   if [[ ! -d "${BHB_TOOLS_FOLDER}" ]]; then
     mkdir "${BHB_TOOLS_FOLDER}"
+  else
+    rm -rf "${BHB_TOOLS_FOLDER}/*"
   fi
 
   if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
@@ -187,7 +189,7 @@ install_gitjacker(){
 }
 
 install_linenum(){
-  wget -q https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+  wget -q https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -O LinEnum.sh
   chmod u+x LinEnum.sh
 }
 

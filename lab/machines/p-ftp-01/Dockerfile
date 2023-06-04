@@ -8,8 +8,7 @@ LABEL company="ACME Infinity Servers"
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y \
                     vsftpd \ 
-                    apache2 \ 
-                    cron \
+                    apache2 \
                     git
 
 # Copy Files to Lab
