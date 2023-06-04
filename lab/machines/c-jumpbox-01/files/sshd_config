@@ -1,0 +1,12 @@
+# Global settings
+Port 22
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no
+
+# Match User configuration
+Match User backup
+    PasswordAuthentication yes
+    PermitEmptyPasswords yes
+    AuthorizedKeysFile /var/backup/.ssh/authorized_keys
