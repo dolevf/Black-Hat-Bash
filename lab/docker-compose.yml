@@ -53,6 +53,7 @@ services:
       - shared_vol:/mnt/scripts/
   p-web-02:
     container_name: p-web-02
+    privileged: true
     hostname: p-web-02.acme-impact-alliance.com
     build: 
       context: machines/p-web-02

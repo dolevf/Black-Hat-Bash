@@ -1,0 +1,6 @@
+root
+admin
+guest
+backup
+ubuntu
+centos

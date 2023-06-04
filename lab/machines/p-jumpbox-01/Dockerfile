@@ -16,6 +16,14 @@ COPY --chown=dbrown:dbrown files/profile /home/dbrown/.profile
 # Post Actions
 RUN chmod u+sx /home/jmartinez/read_program 
 
+# Enable backup user login
+RUN echo 'backup:backup' | chpasswd
+RUN chsh -s /bin/bash backup
+
+# Configure SSH
+COPY files/sshd_config /etc/ssh/sshd_config
+RUN chown backup:backup /var/backups
+
 # Entry
 ENTRYPOINT \
     service ssh restart \
