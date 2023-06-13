@@ -8,13 +8,9 @@ from flask import (
     request
 )
 
-def execute(cmd):
-    return os.popen(cmd).read()
-
 app = Flask(__name__, template_folder=".", static_folder='static',)
 app.debug = True
-app.config['UPLOAD_FOLDER'] = "uploads/"    
-app.jinja_env.globals.update(execute=execute)
+app.config['UPLOAD_FOLDER'] = "uploads/"
 
 @app.route('/')
 def hello_world():
