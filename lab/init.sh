@@ -172,10 +172,6 @@ install_nuclei(){
   sudo apt install nuclei -y 
 }
 
-install_gobuster(){
-  sudo apt install gobuster -y
-}
-
 install_linux_exploit_suggester_2(){
   git clone https://github.com/jondonas/linux-exploit-suggester-2.git
 }
