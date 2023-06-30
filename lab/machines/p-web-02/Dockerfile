@@ -13,4 +13,9 @@ RUN apt-get install -y \
                     net-tools \
                     iputils-ping \
                     iproute2 \ 
-                    cron
+                    cron \
+                    gnupg
+
+# Generate PGP key
+RUN gpg --batch --quick-generate-key --passphrase '' arodriguez@acme-infinity-servers.com
+
