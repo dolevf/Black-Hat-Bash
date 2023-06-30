@@ -1,1 +1,1 @@
-# Network Probing and Lateral Movement
+# Privilege Escalation and Persistence

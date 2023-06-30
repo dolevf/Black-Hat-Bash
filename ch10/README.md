@@ -1,1 +1,1 @@
-# Credential Access
+# Network Probing and Lateral Movement

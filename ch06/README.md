@@ -1,1 +1,1 @@
-# Obtaining and Maintaining Basic Access
+# Basic Initial Access
