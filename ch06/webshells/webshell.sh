@@ -18,7 +18,8 @@ while true; do
     else
       echo "Error: HTTP status code $http_code"
     fi
-done
   else
     echo "Error: Invalid HTTP status code received"
   fi
+done
+  
