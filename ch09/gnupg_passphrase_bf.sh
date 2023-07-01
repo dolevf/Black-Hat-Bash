@@ -11,7 +11,7 @@ while read -r passphrase; do
                              --armor \
                              --export-secret-key "${KEY_ID}"
 
-  if [[ $? -eq 0 ]]; then
+  if gpg_exit_code=$?; [ "$gpg_exit_code" -eq 0 ]; then
     echo "Passphrase is: ${passphrase}"
     echo "Private key is located at private.pgp"
     exit 0
