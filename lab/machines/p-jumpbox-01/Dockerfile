@@ -24,6 +24,9 @@ RUN chown backup:backup /var/backups
 # Set elinks with SetUID
 RUN chmod u+s /usr/bin/elinks
 
+# Grant sudo access to backup user
+COPY files/backup-user-sudo-config /etc/sudoers.d/backup-user-sudo-config
+
 # Entry
 ENTRYPOINT \
     service ssh restart \

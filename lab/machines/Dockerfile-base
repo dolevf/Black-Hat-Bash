@@ -20,4 +20,5 @@ RUN apt-get install -y \
                     cron \
                     vim-tiny \
                     at \ 
-                    curl 
+                    curl \
+                    sudo
