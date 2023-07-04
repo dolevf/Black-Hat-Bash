@@ -3,10 +3,11 @@
 
 int main( void )
 {
-    printf("This will get hijacked \n");
+    // This has the potential to get hijacked 
     system("whoami");
 
-    printf("This won't get hijacked \n");
+    // This should not be possible to hijack
     system("/usr/bin/whoami");
+    
     return 0;
 }
