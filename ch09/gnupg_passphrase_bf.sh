@@ -19,5 +19,4 @@ while read -r passphrase; do
       echo "Private key is located at private.pgp"
       exit 0
   fi
-
 done < passphrases.txt
