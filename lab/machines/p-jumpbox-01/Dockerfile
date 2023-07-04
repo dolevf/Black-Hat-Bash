@@ -9,10 +9,6 @@ RUN apt-get update -y --fix-missing
 RUN apt-get install -y openssh-server
 RUN apt-get install -y elinks
 
-# Copy Files to Lab
-COPY --chown=jmartinez:jmartinez files/bash_history /home/jmartinez/.bash_history
-COPY --chown=dbrown:dbrown files/profile /home/dbrown/.profile
-
 # Enable backup user login
 RUN echo 'backup:backup' | chpasswd
 RUN chsh -s /bin/bash backup
@@ -27,9 +23,23 @@ RUN chmod u+s /usr/bin/elinks
 # Grant sudo access to backup user
 COPY files/backup-user-sudo-config /etc/sudoers.d/backup-user-sudo-config
 
+# Create the data and scripts directory
+RUN mkdir scripts
+RUN mkdir -p /data/backup
+RUN chmod 757 /data
+
+# Copy scripts
+COPY files/backup_data.sh /scripts/backup_data.sh
+RUN chmod u+x /scripts/backup_data.sh
+
+# Install crontab script
+RUN echo '*/5 * * * * root bash /scripts/backup_data.sh' >> /etc/crontab
+
 # Entry
 ENTRYPOINT \
     service ssh restart \
     && \    
+    service cron restart \
+    && \
     tail -f /dev/null
 
