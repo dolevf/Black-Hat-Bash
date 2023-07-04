@@ -7,6 +7,6 @@ int main( void )
     system("whoami");
 
     printf("This won't get hijacked \n");
-    system("/usr/bin/whoami")
+    system("/usr/bin/whoami");
     return 0;
 }
