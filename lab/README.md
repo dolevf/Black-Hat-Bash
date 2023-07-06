@@ -3,6 +3,19 @@
   <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/lab/lab-network-diagram.png?raw=true" width="600px" alt="BHB"/>
 </p>
 
+# Lab Machine IP Addreses
+| Machine  | Public IP | Private IP |
+| -------- | ------- | ------- |
+| p-web-01  | 172.16.10.10    |
+| p-web-02  | 172.16.10.12  | 10.1.0.11 |
+| p-ftp-01  | 172.16.10.11  | |
+| p-jumpbox-01 | 172.16.10.13 | 10.1.0.12 |
+| c-backup-01 | | 10.1.0.13 |
+| c-redis-01 | | 10.1.0.14 |
+| c-db-01 | | 10.1.0.15 |
+| c-db-02 | | 10.1.0.16 |
+| c-syslog-01 | | 10.1.0.17 |
+
 
 # Lab Installation
 

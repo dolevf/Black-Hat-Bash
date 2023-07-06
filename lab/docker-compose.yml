@@ -41,7 +41,7 @@ services:
       - shared_vol:/mnt/scripts
   p-web-01:
     container_name: p-web-01
-    hostname: p-web-01.acme-hyper-branding.com
+    hostname: p-web-01.acme-infinity-servers.com
     privileged: true
     build: 
       context: machines/p-web-01
@@ -54,7 +54,7 @@ services:
   p-web-02:
     container_name: p-web-02
     privileged: true
-    hostname: p-web-02.acme-impact-alliance.com
+    hostname: p-web-02.acme-infinity-servers.com
     build: 
       context: machines/p-web-02
       dockerfile: Dockerfile
