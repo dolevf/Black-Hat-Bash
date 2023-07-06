@@ -1,5 +1,5 @@
 # Lab Diagram
-<p align="center">
+<p>
   <img src="https://github.com/dolevf/Black-Hat-Bash/blob/master/lab/lab-network-diagram.png?raw=true" width="600px" alt="BHB"/>
 </p>
 
