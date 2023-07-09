@@ -20,3 +20,9 @@ case $OS in
 esac
 
 echo "The detected operating system is ${OS}"
+
+if [[ "${OS}" == "Unknown" ]]; then
+  exit 1
+fi
+
+exit 0
