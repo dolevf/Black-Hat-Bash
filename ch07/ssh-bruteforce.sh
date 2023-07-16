@@ -2,10 +2,10 @@
 
 # Define the target SSH server and port
 TARGET="172.16.10.13"
-PORT=22
+PORT="22"
 
 # Define the username and password lists
-usernames=("root" "admin" "guest" "backup" "ubuntu" "centos")
+usernames=("root" "guest" "backup" "ubuntu" "centos")
 password_file="passwords.txt"
 
 echo "Starting SSH credential testing..."
