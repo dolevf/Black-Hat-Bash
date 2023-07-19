@@ -155,7 +155,6 @@ install_wappalyzer(){
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
     echo "alias wappalyzer=\"node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
-  cd -
 }
 
 install_rustscan(){

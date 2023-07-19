@@ -23,6 +23,9 @@ RUN chmod u+s /usr/bin/elinks
 # Grant sudo access to backup user
 COPY files/backup-user-sudo-config /etc/sudoers.d/backup-user-sudo-config
 
+# Grant sudo access to jmartinez user
+COPY files/jmartinez-user-sudo-config /etc/sudoers.d/jmartinez-user-sudo-config
+
 # Create the data and scripts directory
 RUN mkdir scripts
 RUN mkdir -p /data/backup
