@@ -155,6 +155,7 @@ install_wappalyzer(){
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
     echo "alias wappalyzer=\"node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
+  cd -
 }
 
 install_rustscan(){
@@ -172,7 +173,7 @@ install_nuclei(){
 }
 
 install_linux_exploit_suggester_2(){
-  git clone https://github.com/jondonas/linux-exploit-suggester-2.git
+  git clone https://github.com/jondonas/linux-exploit-suggester-2.git "${BHB_TOOLS_FOLDER}/linux-exploit-suggester-2"
 }
 
 install_gitjacker(){
@@ -184,16 +185,16 @@ install_gitjacker(){
 }
 
 install_linenum(){
-  wget -q https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -O LinEnum.sh
-  chmod u+x LinEnum.sh
+  wget -q https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -O "${BHB_TOOLS_FOLDER}/LinEnum.sh"
+  chmod u+x "${BHB_TOOLS_FOLDER}/LinEnum.sh"
 }
 
 install_mimipenguin(){
-  git clone https://github.com/huntergregal/mimipenguin.git
+  git clone https://github.com/huntergregal/mimipenguin.git "${BHB_TOOLS_FOLDER}/mimipenguin"
 }
 
 install_linuxprivchecker(){
-  git clone https://github.com/sleventyeleven/linuxprivchecker.git
+  git clone https://github.com/sleventyeleven/linuxprivchecker.git "${BHB_TOOLS_FOLDER}/linuxprivchecker"
 }
 
 install_dirsearch(){
