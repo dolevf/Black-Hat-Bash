@@ -22,4 +22,5 @@ RUN apt-get install -y \
                     at \ 
                     curl \
                     lshw \
-                    sudo
+                    sudo \
+                    file 

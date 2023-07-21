@@ -57,7 +57,7 @@ check_prerequisites(){
 
   # Check disk space
   local free
-  free=$(df -k --output=size "$PWD" | tail -n1)
+  free=$(df -k --output=size "${PWD}" | tail -n1)
   if [[ "${free}" -lt 31457280 ]]; then
     echo "Warning: System does not meet 30 GB disk space requirement."
     echo "This may impact the performance of the lab."
@@ -72,7 +72,7 @@ check_prerequisites(){
   if [[ ! -d "${BHB_TOOLS_FOLDER}" ]]; then
     mkdir "${BHB_TOOLS_FOLDER}"
   else
-    rm -rf "${BHB_TOOLS_FOLDER}/*"
+    rm -rf "${BHB_TOOLS_FOLDER:?}/"*
   fi
 
   if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
@@ -138,10 +138,9 @@ install_tools(){
   install_linux_exploit_suggester_2
   install_gitjacker
   install_linenum
-  install_mimipenguin
-  install_linuxprivchecker
   install_dirsearch
   install_sysutilities
+  install_unixprivesccheck
 }
 
 install_wappalyzer(){
@@ -189,20 +188,20 @@ install_linenum(){
   chmod u+x "${BHB_TOOLS_FOLDER}/LinEnum.sh"
 }
 
-install_mimipenguin(){
-  git clone https://github.com/huntergregal/mimipenguin.git "${BHB_TOOLS_FOLDER}/mimipenguin"
-}
-
-install_linuxprivchecker(){
-  git clone https://github.com/sleventyeleven/linuxprivchecker.git "${BHB_TOOLS_FOLDER}/linuxprivchecker"
-}
-
 install_dirsearch(){
   sudo apt install dirsearch -y
 }
 
 install_sysutilities(){
   sudo apt install jq -y
+}
+
+install_unixprivesccheck(){
+  if [[ ! -f "/usr/bin/unix-privesc-check" ]]; then
+    apt install unix-privesc-check -y
+  fi
+  
+  cp "/usr/bin/unix-privesc-check" "${BHB_TOOLS_FOLDER}/unix-privesc-check"
 }
 
 echo "This process may take a while, stay tuned..."
