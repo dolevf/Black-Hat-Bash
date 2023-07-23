@@ -1,7 +1,7 @@
 FROM lab_base
 
 # Metadata
-LABEL name="c-web-01"
+LABEL name="p-web-01"
 LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
@@ -12,7 +12,8 @@ RUN apt-get update -y
 RUN apt-get install -y \
                     python3 \
                     python3-pip \
-                    iptables
+                    iptables \
+                    gnupg
 RUN pip3 install flask --break-system-packages
 
 # Copy Files to Lab
@@ -29,5 +30,7 @@ RUN mkdir files
 RUN mkdir uploads
 COPY files/acme-hyper-branding-5.csv files/acme-hyper-branding-5.csv
 
+# Generate PGP key
+RUN gpg --batch --quick-generate-key --passphrase '' arodriguez@acme-infinity-servers.com
 
 ENTRYPOINT [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=8081", "--debug"]

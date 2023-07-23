@@ -1,4 +1,7 @@
 FROM wordpress:latest
+# Metadata
+LABEL name="p-web-02"
+LABEL company="ACME Infinity Servers"
 
 ENV WORDPRESS_DB_HOST="c-db-02"
 ENV WORDPRESS_DB_USER="wordpress"
@@ -13,9 +16,5 @@ RUN apt-get install -y \
                     net-tools \
                     iputils-ping \
                     iproute2 \ 
-                    cron \
-                    gnupg
-
-# Generate PGP key
-RUN gpg --batch --quick-generate-key --passphrase '' arodriguez@acme-infinity-servers.com
-
+                    cron
+                    
