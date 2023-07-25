@@ -8,7 +8,7 @@ case ${IP_ADDRESS} in
     echo "Network is 192.168.x.x"
   ;;
   10.0.*)
-    echo "Network is 10.10.x.x"
+    echo "Network is 10.0.x.x"
   ;;
   *)
     echo "Could not identify the network."
