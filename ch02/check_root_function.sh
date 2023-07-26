@@ -2,7 +2,7 @@
 
 # This function checks if the current user ID equals to zero
 check_if_root(){
-  if [[ "${UID}" -eq "0" ]]; then
+  if [[ "${EUID}" -eq "0" ]]; then
     return 0
   else
     return 1
