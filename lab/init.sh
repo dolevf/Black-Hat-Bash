@@ -15,7 +15,7 @@
   # - Running Script as root
   # - Running Kali
   # - 4 GB of RAM
-  # - 30 GB of Storage available
+  # - 40 GB of Storage available
   # - Internet connectivity
 
 USER_HOME_BASE="/home/${SUDO_USER}"
@@ -58,8 +58,8 @@ check_prerequisites(){
   # Check disk space
   local free
   free=$(df -k --output=size "${PWD}" | tail -n1)
-  if [[ "${free}" -lt 31457280 ]]; then
-    echo "Warning: System does not meet 30 GB disk space requirement."
+  if [[ "${free}" -lt 41943040 ]]; then
+    echo "Warning: System does not meet 40 GB disk space requirement."
     echo "This may impact the performance of the lab."
     read -p "Do you want to continue? [y/n] " -n 1 -r
     echo
