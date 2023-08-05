@@ -17,7 +17,7 @@ while true; do
   new_response=$(curl -s "http://${host}:${port}/amount_to_donate.txt")
   
   # Extract only the difference between the two command outputs
-  delta=$(diff <(echo "${previous_response}") <(echo "${new_response}"))
+  delta=$(diff <(echo "${previous_response}") <(echo "${new_response}") --line-format=%L)
 
   # Output the command result
   echo "${delta}"
