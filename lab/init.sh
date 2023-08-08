@@ -115,12 +115,7 @@ install_docker(){
 }
 
 clone_repo(){  
-  # Use http-based git cloning when we go public.
-  # git clone https://github.com/dolevf/Black-Hat-Bash.git
-
-  # Use ssh-based git cloning prior to going public
-  # This will be removed after going public
-  git clone git@github.com:dolevf/Black-Hat-Bash.git
+  git clone https://github.com/dolevf/Black-Hat-Bash.git
 }
 
 deploy_containers(){
