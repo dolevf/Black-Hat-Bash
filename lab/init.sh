@@ -143,7 +143,7 @@ install_wappalyzer(){
   sudo apt update -y
   sudo apt install nodejs npm -y
   sudo npm install --global yarn 
-  git clone https://github.com/Lissy93/wapalyzer.git && cd wappalyzer
+  git clone https://github.com/Lissy93/wapalyzer.git && cd wapalyzer
   yarn install
   yarn run link
   if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
