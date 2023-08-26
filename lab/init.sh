@@ -139,7 +139,7 @@ install_tools(){
 }
 
 install_whatweb(){
-  sudo apt install whatweb -y 
+  sudo apt install whatweb -y
   cd -
 }
 
