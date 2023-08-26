@@ -115,7 +115,7 @@ install_docker(){
 }
 
 clone_repo(){  
-  git clone https://github.com/dolevf/Black-Hat-Bash.git
+  git clone --quiet https://github.com/dolevf/Black-Hat-Bash.git
 }
 
 deploy_containers(){
@@ -194,8 +194,6 @@ echo "This process may take a while, stay tuned..."
 
 echo "Checking prerequisities..."
 check_prerequisites 
-
-echo "To see the progress of the installation, run 'tail -f log.txt' from another terminal."
 
 sleep 2
 
