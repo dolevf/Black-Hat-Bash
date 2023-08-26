@@ -139,7 +139,7 @@ install_tools(){
 }
 
 install_whatweb(){
-  sudo apt install whatweb -y
+  sudo apt install whatweb -y 
   cd -
 }
 
@@ -154,7 +154,7 @@ install_rustscan(){
 }
 
 install_nuclei(){
-  sudo apt install nuclei -y 
+  sudo apt install nuclei -y
 }
 
 install_linux_exploit_suggester_2(){
