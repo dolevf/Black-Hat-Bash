@@ -127,7 +127,7 @@ deploy_containers(){
 
 install_tools(){
   cd "${BHB_TOOLS_FOLDER}"
-  install_wappalyzer
+  install_whatweb
   install_rustscan
   install_nuclei
   install_linux_exploit_suggester_2
@@ -138,17 +138,8 @@ install_tools(){
   install_unixprivesccheck
 }
 
-install_wappalyzer(){
-  curl -L https://deb.nodesource.com/setup_14.x | bash
-  sudo apt update -y
-  sudo apt install nodejs npm -y
-  sudo npm install --global yarn 
-  git clone https://github.com/Lissy93/wapalyzer.git && cd wapalyzer
-  yarn install
-  yarn run link
-  if ! grep -q wappalyzer "${USER_HOME_BASE}/.bashrc"; then
-    echo "alias wappalyzer=\"node ${BHB_TOOLS_FOLDER}/wappalyzer/src/drivers/npm/cli.js\"" >> "${USER_HOME_BASE}/.bashrc"
-  fi
+install_whatweb(){
+  sudo apt install whatweb -y
   cd -
 }
 
