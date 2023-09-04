@@ -180,6 +180,7 @@ install_dirsearch(){
 
 install_sysutilities(){
   sudo apt install jq -y
+  sudo pip3 install pwncat-cs -y
 }
 
 install_unixprivesccheck(){
