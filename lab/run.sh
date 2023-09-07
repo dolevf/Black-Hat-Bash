@@ -37,6 +37,21 @@ if ! docker compose version &> /dev/null; then
     exit 1
 fi
 
+images_built(){
+    local total_expected_containers
+    local total_built_images
+
+    total_expected_containers="$(grep -c container_name docker-compose.yml)"
+    total_built_images="$(docker images | grep -c lab-)"
+    
+    if [[ "${total_built_images}" -eq "${total_expected_containers}" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+
 status(){
     local total_expected_containers
     local actual_running_containers
@@ -44,7 +59,7 @@ status(){
     total_expected_containers="$(grep -c container_name docker-compose.yml)"
     actual_running_containers="$(docker ps | grep -c lab-)"
 
-    if [[ "$actual_running_containers" -ne "$total_expected_containers" ]]; then
+    if [[ "${actual_running_containers}" -ne "${total_expected_containers}" ]]; then
         return 1
     else
         return 0
@@ -55,29 +70,39 @@ deploy(){
     echo 
     echo "==== Deployment Started ===="
     echo "Deploying the Black Hat Bash environment."
-    echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
-    echo "Start Time: $(date "+%T")" >> $LOG
-    if [[ -z "${DEBUG}" ]]; then
-        echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
-    fi
     
-    sudo docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
-    sudo docker compose build --parallel &>> $LOG
-    sudo docker compose up --detach &>> $LOG
+    if ! images_built; then
+        echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
+        echo "Start Time: $(date "+%T")" >> $LOG
+        
+        if [[ -z "${DEBUG}" ]]; then
+            echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
+        fi
+        
+        sudo docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
+        sudo docker compose build --parallel &>> $LOG
+        sudo docker compose up --detach &>> $LOG
     
-    if status; then
-        echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
-        sleep 25
-        if check_post_actions &>> $LOG; then
-            echo "OK: lab is up and provisioned." | tee -a $LOG
+        if status; then
+            echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
+            sleep 25
+            if check_post_actions &>> $LOG; then
+                echo "OK: lab is up and provisioned." | tee -a $LOG
+            else
+                echo "Error: something went wrong during provisioning." | tee -a $LOG
+            fi
         else
-            echo "Error: something went wrong during provisioning." | tee -a $LOG
+            echo "Error: not all containers are running. check the log file: $LOG"
         fi
     else
-        echo "Error: not all containers are running. check the log file: $LOG"
+        sudo docker compose up --detach &>> $LOG
+        if status; then
+            echo "Lab is up."
+        else
+            echo "Lab is down. Try rebuilding the lab again."
+        fi
     fi
-
-    echo "End Time: $(date "+%T")" >> $LOG 
+    echo "End Time: $(date "+%T")" >> $LOG
 }
 
 teardown(){
