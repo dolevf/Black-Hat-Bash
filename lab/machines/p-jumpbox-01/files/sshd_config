@@ -9,4 +9,4 @@ UsePAM no
 Match User backup
     PasswordAuthentication yes
     PermitEmptyPasswords yes
-    AuthorizedKeysFile /var/backup/.ssh/authorized_keys
+    AuthorizedKeysFile /var/backups/.ssh/authorized_keys
