@@ -47,7 +47,6 @@ wait() {
         sleep 0.5
     done
     echo
-    
 }
 
 images_built(){
@@ -128,8 +127,10 @@ cleanup(){
     echo
     echo "==== Cleanup Started ====" 
     echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
-    sudo docker compose down --volumes --rmi all &> /dev/null
-    sudo docker system prune -a --volumes -f &> /dev/null
+    sudo docker compose down --volumes --rmi all &> /dev/null &
+    wait "$!" "Shutting down the lab..."
+    sudo docker system prune -a --volumes -f &> /dev/null &
+    wait "$!" "Cleaning up..."
     echo "OK: lab environment has been destroyed."
 }
 
