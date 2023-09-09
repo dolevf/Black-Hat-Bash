@@ -1,11 +1,5 @@
 #!/bin/bash
 
-################################
-#          Maintainers:        # 
-#     dolev@blackhatbash.com   #
-#     nick@blackhatbash.com    #
-################################
-
 set -o pipefail
 source provision.sh
 
@@ -37,6 +31,25 @@ if ! docker compose version &> /dev/null; then
     exit 1
 fi
 
+wait() {
+    local pid
+    local counter
+    local spinner
+
+    pid=$1    
+    counter=1
+    spinner="/-\|"
+    
+    echo -n "$2"
+    echo -n " "
+    while ps -p "${pid}" &> /dev/null; do 
+        printf "\b${spinner:counter++%${#spinner}:1}"
+        sleep 0.5
+    done
+    echo
+    
+}
+
 images_built(){
     local total_expected_containers
     local total_built_images
@@ -50,7 +63,6 @@ images_built(){
         return 1
     fi
 }
-
 
 status(){
     local total_expected_containers
@@ -69,10 +81,9 @@ status(){
 deploy(){
     echo 
     echo "==== Deployment Started ===="
-    echo "Deploying the Black Hat Bash environment."
-    
+
     if ! images_built; then
-        echo "This process can take a few minutes to complete. Do not close this terminal session while it's running."
+        echo "This process can take a few minutes to complete."
         echo "Start Time: $(date "+%T")" >> $LOG
         
         if [[ -z "${DEBUG}" ]]; then
@@ -80,14 +91,15 @@ deploy(){
         fi
         
         sudo docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
-        sudo docker compose build --parallel &>> $LOG
+        sudo docker compose build --parallel &>> $LOG &
+        wait "$!" "Deploying the lab..."
         sudo docker compose up --detach &>> $LOG
-    
+        
         if status; then
             echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
             sleep 25
             if check_post_actions &>> $LOG; then
-                echo "OK: lab is up and provisioned." | tee -a $LOG
+                echo "OK: Lab is up and provisioned." | tee -a $LOG
             else
                 echo "Error: something went wrong during provisioning." | tee -a $LOG
             fi
