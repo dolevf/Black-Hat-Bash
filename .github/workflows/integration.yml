@@ -32,7 +32,7 @@ jobs:
       - name: Test Lab
         id: test
         run: | 
-          sudo make status
+          sudo make test
         working-directory: ./lab
 
       - name: Slack Notification Success
