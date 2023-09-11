@@ -26,13 +26,13 @@ jobs:
       - name: Deploy Lab
         id: deploy
         run: |
-          sudo DEBUG=true ./run.sh deploy
+          sudo DEBUG=true make deploy
         working-directory: ./lab
       
       - name: Test Lab
         id: test
         run: | 
-          sudo ./run.sh status
+          sudo make status
         working-directory: ./lab
 
       - name: Slack Notification Success
