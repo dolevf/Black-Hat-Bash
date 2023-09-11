@@ -140,7 +140,7 @@ install_whatweb(){
 install_rustscan(){
   docker pull --quiet rustscan/rustscan:2.1.1
   if ! grep -q rustscan "${USER_HOME_BASE}/.bashrc" ; then
-    echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" "${USER_HOME_BASE}/.bashrc"
+    echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "${USER_HOME_BASE}/.bashrc"
   fi
 } 
 
@@ -171,7 +171,6 @@ install_dirsearch(){
 install_sysutilities(){
   apt install jq -y
   apt install ncat -y
-  
   pip3 install pwncat-cs
   
 }

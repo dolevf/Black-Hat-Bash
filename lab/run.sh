@@ -125,7 +125,7 @@ teardown(){
     echo "OK: lab has shut down." 
 }
 
-cleanup(){
+clean(){
     echo
     echo "==== Cleanup Started ====" 
     docker compose down --volumes --rmi all &> /dev/null &
@@ -136,7 +136,7 @@ cleanup(){
 }
 
 rebuild(){
-    cleanup
+    clean
     deploy
 }
 
@@ -147,8 +147,8 @@ case "${CHOICE}" in
     teardown)
         teardown
     ;;
-    cleanup)
-        cleanup
+    clean)
+        clean
     ;;
     rebuild)
         rebuild
@@ -162,6 +162,6 @@ case "${CHOICE}" in
         fi
     ;;
     *)
-        echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | cleanup | status"
+        echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | clean | status"
     ;;
 esac
