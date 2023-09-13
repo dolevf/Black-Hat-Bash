@@ -25,7 +25,7 @@ init:
 	@./init.sh
 
 help:
-	@echo "Usage: make deploy | teardown | cleanup | rebuild | status | init"
+	@echo "Usage: make deploy | teardown | cleanup | rebuild | status | init | help"
 	@echo 
 	@echo "deploy   | build images and start containers"
 	@echo "teardown | stop containers (shutdown lab)"
@@ -33,3 +33,5 @@ help:
 	@echo "cleanup  | stop and delete containers and images"
 	@echo "status   | check the status of the lab"
 	@echo "init     | build everything (containers and hacking tools)"
+	@echo "help     | show this help message"
+	
