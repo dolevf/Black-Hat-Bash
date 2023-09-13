@@ -11,12 +11,8 @@ if [[ -n "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
 fi
 
 if [[ "$(id -u)" -ne 0 ]]; then
-    if ! groups | grep -q docker; then
-        echo "It looks like you are not part of the 'docker' group or aren't using sudo."
-        echo "Docker requires sudo privileges. To add your user \"${USER}\" to the docker group, please run:"
-        echo "usermod -aG docker ${USER} && su - ${USER}"
-        exit 1
-    fi
+    echo "Error: Please run using sudo permissions."
+    exit 1
 fi
 
 if ! docker info > /dev/null 2>&1; then
@@ -29,6 +25,12 @@ if ! docker compose version &> /dev/null; then
     echo "Docker Compose is not installed. Did you follow the Docker Compose setup instructions?"
     echo "https://github.com/dolevf/Black-Hat-Bash/tree/master/lab#install-docker"
     exit 1
+fi
+
+
+if [[ ! -f "${LOG}" ]]; then
+    touch "${LOG}"
+    chown "${SUDO_USER}:${SUDO_USER}" "${LOG}"
 fi
 
 wait() {
@@ -89,10 +91,10 @@ deploy(){
             echo "You may run \"tail -f $LOG\" from another terminal session to see the progress of the deployment."
         fi
         
-        sudo docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
-        sudo docker compose build --parallel &>> $LOG &
+        docker build -f machines/Dockerfile-base -t lab_base . &>> $LOG
+        docker compose build --parallel &>> $LOG &
         wait "$!" "Deploying the lab..."
-        sudo docker compose up --detach &>> $LOG
+        docker compose up --detach &>> $LOG
         
         if status; then
             echo "OK: all containers appear to be running. Performing a couple of post provisioning steps..."  | tee -a $LOG
@@ -106,7 +108,7 @@ deploy(){
             echo "Error: not all containers are running. check the log file: $LOG"
         fi
     else
-        sudo docker compose up --detach &>> $LOG
+        docker compose up --detach &>> $LOG
         if status; then
             echo "Lab is up."
         else
@@ -119,23 +121,22 @@ deploy(){
 teardown(){
     echo
     echo "==== Shutdown Started ====" | tee -a $LOG
-    sudo docker compose down --volumes
+    docker compose down --volumes
     echo "OK: lab has shut down." 
 }
 
-cleanup(){
+clean(){
     echo
     echo "==== Cleanup Started ====" 
-    echo "Cleaning up the Black Hat Bash environment, this may take a few moments..."
-    sudo docker compose down --volumes --rmi all &> /dev/null &
+    docker compose down --volumes --rmi all &> /dev/null &
     wait "$!" "Shutting down the lab..."
-    sudo docker system prune -a --volumes -f &> /dev/null &
+    docker system prune -a --volumes -f &> /dev/null &
     wait "$!" "Cleaning up..."
     echo "OK: lab environment has been destroyed."
 }
 
 rebuild(){
-    cleanup
+    clean
     deploy
 }
 
@@ -146,8 +147,8 @@ case "${CHOICE}" in
     teardown)
         teardown
     ;;
-    cleanup)
-        cleanup
+    clean)
+        clean
     ;;
     rebuild)
         rebuild
@@ -161,12 +162,6 @@ case "${CHOICE}" in
         fi
     ;;
     *)
-        echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | cleanup | status"
-        echo
-        echo "deploy   | build images and start containers"
-        echo "teardown | stop containers"
-        echo "rebuild  | rebuilds the lab from scratch"
-        echo "cleanup  | stop containers and delete containers and images"
-        echo "status   | check the status of the lab"
+        echo "Usage: ./$(basename "$0") deploy | teardown | rebuild | clean | status"
     ;;
 esac

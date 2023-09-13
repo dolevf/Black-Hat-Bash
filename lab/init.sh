@@ -4,31 +4,28 @@
 
 # Black Hat Bash - Automated Lab Build Script
 
-# This script is intended to be executed within a Kali machine.
-# What will this script do:
-  # - Installs & Configures Docker & Docker Compose
-  # - Clones the Black Hat Bash Repository
-  # - Builds, Tests and Runs all Lab Containers
-  # - Installs & Tests all Hacking Tools used in the Black Hat Bash book
-
 # Script Checks system requirements
-  # - Running Script as root
   # - Running Kali
-  # - 4 GB of RAM
-  # - 40 GB of Storage available
+  # - Minimum of 4 GB of RAM
+  # - Minimum of 40 GB disk space available
   # - Internet connectivity
 
 USER_HOME_BASE="/home/${SUDO_USER}"
 BHB_BASE_FOLDER="${USER_HOME_BASE}/Black-Hat-Bash"
 BHB_LAB_FOLDER="${BHB_BASE_FOLDER}/lab"
 BHB_TOOLS_FOLDER="${USER_HOME_BASE}/tools"
-LOG="log.txt"
+BHB_INSTALL_LOG="${BHB_LAB_FOLDER}/log.txt"
 
 check_prerequisites(){
   # Checks if script is running as root
   if [[ "$EUID" -ne 0 ]]; then
     echo "Error: Please run with sudo permissions."
-    exit
+    exit 1
+  fi
+
+  if [[ ! -f "${BHB_INSTALL_LOG}" ]]; then
+    touch "${BHB_INSTALL_LOG}"
+    chown "${SUDO_USER}:${SUDO_USER}" "${BHB_INSTALL_LOG}"
   fi
 
   # Check if Kali OS 
@@ -101,32 +98,30 @@ install_docker(){
 
   if ! docker compose version &> /dev/null; then 
     if [[ ! -f "${docker_apt_src}" ]]; then
-      printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | sudo tee "${docker_apt_src}"
+      printf '%s\n' "deb https://download.docker.com/linux/debian bullseye stable" | tee "${docker_apt_src}"
     fi
     
     if [[ ! -f "${docker_keyring}" ]]; then
-      curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o "${docker_keyring}"
+      curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o "${docker_keyring}"
     fi
-    sudo apt update -y 
-    sudo apt install docker-ce docker-ce-cli containerd.io -y
-    sudo systemctl enable docker --now
-    sudo usermod -aG docker "${USER}"
+    apt update -y 
+    apt install docker-ce docker-ce-cli containerd.io -y
+    systemctl enable docker --now
+    usermod -aG docker "${USER}"
   fi
 }
 
-clone_repo(){  
-  git clone --quiet https://github.com/dolevf/Black-Hat-Bash.git
+clone_repo(){
+  if [[ ! -d "${BHB_BASE_FOLDER}/lab" ]]; then
+    git clone --quiet https://github.com/dolevf/Black-Hat-Bash.git "${BHB_BASE_FOLDER}"
+  fi
 }
 
 deploy_containers(){
-  cd "${BHB_LAB_FOLDER}"
-  ./run.sh cleanup
-  ./run.sh deploy
-  echo
+  make deploy
 }
 
 install_tools(){
-  cd "${BHB_TOOLS_FOLDER}"
   install_whatweb
   install_rustscan
   install_nuclei
@@ -139,22 +134,18 @@ install_tools(){
 }
 
 install_whatweb(){
-  sudo apt install whatweb -y
-  cd -
+  apt install whatweb -y
 }
 
 install_rustscan(){
-  sudo apt install cargo -y
-  git clone https://github.com/RustScan/RustScan.git && cd RustScan
-  cargo build --release
+  docker pull --quiet rustscan/rustscan:2.1.1
   if ! grep -q rustscan "${USER_HOME_BASE}/.bashrc" ; then
-    echo "alias rustscan=\"${BHB_TOOLS_FOLDER}/RustScan/target/release/rustscan\"" >> "${USER_HOME_BASE}/.bashrc"
+    echo "alias rustscan='docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1'" >> "${USER_HOME_BASE}/.bashrc"
   fi
-  cd - 
-}
+} 
 
 install_nuclei(){
-  sudo apt install nuclei -y 
+  apt install nuclei -y 
 }
 
 install_linux_exploit_suggester_2(){
@@ -162,7 +153,6 @@ install_linux_exploit_suggester_2(){
 }
 
 install_gitjacker(){
-  sudo apt install jq -y
   curl "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
   if ! grep -q gitjacker "${USER_HOME_BASE}/.bashrc"; then
     echo "alias gitjacker=\"/usr/local/bin/gitjacker\"" >> "${USER_HOME_BASE}/.bashrc"
@@ -175,14 +165,13 @@ install_linenum(){
 }
 
 install_dirsearch(){
-  sudo apt install dirsearch -y
+  apt install dirsearch -y
 }
 
 install_sysutilities(){
-  sudo apt install jq -y
-  sudo apt install ncat -y
-  
-  sudo pip3 install pwncat-cs -y
+  apt install jq -y
+  apt install ncat -y
+  pip3 install pwncat-cs
   
 }
 
@@ -202,7 +191,7 @@ check_prerequisites
 sleep 2
 
 echo "[1/4] Installing Docker..."
-install_docker &>> "${LOG}"
+install_docker &>> "${BHB_INSTALL_LOG}"
 
 echo "[2/4] Cloning the Black Hat Bash repository..."
 clone_repo
@@ -211,10 +200,11 @@ echo "[3/4] Deploying containers..."
 deploy_containers
 
 echo "[4/4] Installing third party tools..."
-install_tools &>> "${LOG}"
+install_tools &>> "${BHB_INSTALL_LOG}"
 
-cd "${BHB_LAB_FOLDER}"
+chown -R "${SUDO_USER}:${SUDO_USER}" "${BHB_TOOLS_FOLDER}"
 
-echo "Lab build completed." | tee -a "${LOG}"
+echo "Lab build completed." | tee -a "${BHB_INSTALL_LOG}"
 
 echo "NOTE: Start a new terminal session for shell changes to take effect."
+
