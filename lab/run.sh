@@ -4,7 +4,7 @@ set -o pipefail
 source provision.sh
 
 CHOICE="${1}"
-LOG="log.txt"
+LOG="/var/log/lab-install.log"
 
 if [[ -n "${DEBUG}" ]] && [[ "${DEBUG}" = "true" ]]; then
   LOG=/dev/stderr

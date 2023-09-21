@@ -11,10 +11,11 @@
   # - Internet connectivity
 
 USER_HOME_BASE="/home/${SUDO_USER}"
-BHB_BASE_FOLDER="${USER_HOME_BASE}/Black-Hat-Bash"
+BHB_TOOLS_FOLDER="/home/${SUDO_USER}/tools"
+
+BHB_BASE_FOLDER="$(pwd)"
 BHB_LAB_FOLDER="${BHB_BASE_FOLDER}/lab"
-BHB_TOOLS_FOLDER="${USER_HOME_BASE}/tools"
-BHB_INSTALL_LOG="${BHB_LAB_FOLDER}/log.txt"
+BHB_INSTALL_LOG="/var/log/lab-install.log"
 
 check_prerequisites(){
   # Checks if script is running as root
@@ -72,10 +73,6 @@ check_prerequisites(){
     rm -rf "${BHB_TOOLS_FOLDER:?}/"*
   fi
 
-  if [[ ! -d "${BHB_BASE_FOLDER}" ]]; then
-    mkdir "${BHB_BASE_FOLDER}"
-  fi
-
   local nr_config
   nr_config="/etc/needrestart/needrestart.conf"
   if [[ -f "${nr_config}" ]]; then
@@ -108,12 +105,6 @@ install_docker(){
     apt install docker-ce docker-ce-cli containerd.io -y
     systemctl enable docker --now
     usermod -aG docker "${USER}"
-  fi
-}
-
-clone_repo(){
-  if [[ ! -d "${BHB_BASE_FOLDER}/lab" ]]; then
-    git clone --quiet https://github.com/dolevf/Black-Hat-Bash.git "${BHB_BASE_FOLDER}"
   fi
 }
 
@@ -190,16 +181,13 @@ check_prerequisites
 
 sleep 2
 
-echo "[1/4] Installing Docker..."
+echo "[1/3] Installing Docker..."
 install_docker &>> "${BHB_INSTALL_LOG}"
 
-echo "[2/4] Cloning the Black Hat Bash repository..."
-clone_repo
-
-echo "[3/4] Deploying containers..."
+echo "[2/3] Deploying containers..."
 deploy_containers
 
-echo "[4/4] Installing third party tools..."
+echo "[3/3] Installing third party tools..."
 install_tools &>> "${BHB_INSTALL_LOG}"
 
 chown -R "${SUDO_USER}:${SUDO_USER}" "${BHB_TOOLS_FOLDER}"
@@ -207,4 +195,3 @@ chown -R "${SUDO_USER}:${SUDO_USER}" "${BHB_TOOLS_FOLDER}"
 echo "Lab build completed." | tee -a "${BHB_INSTALL_LOG}"
 
 echo "NOTE: Start a new terminal session for shell changes to take effect."
-
