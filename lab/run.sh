@@ -130,8 +130,11 @@ clean(){
     echo "==== Cleanup Started ====" 
     docker compose down --volumes --rmi all &> /dev/null &
     wait "$!" "Shutting down the lab..."
+    
     docker system prune -a --volumes -f &> /dev/null &
     wait "$!" "Cleaning up..."
+    
+    [[ -f "${LOG}" ]] && > "${LOG}"
     echo "OK: lab environment has been destroyed."
 }
 

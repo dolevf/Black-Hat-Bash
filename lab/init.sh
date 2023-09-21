@@ -35,7 +35,7 @@ check_prerequisites(){
   fi
 
   # Check internet connectivity (against Google)
-  if ! ping -c 1 -W 1 -w 1 8.8.8.8 &> /dev/null; then
+  if ! ping -c 1 -W 5 -w 5 "8.8.8.8" &> /dev/null; then
     echo "Error: No internet connectivity."
   fi
 
@@ -145,8 +145,13 @@ install_linux_exploit_suggester_2(){
 
 install_gitjacker(){
   curl "https://raw.githubusercontent.com/liamg/gitjacker/master/scripts/install.sh" | bash
+  if [[ -f "/usr/local/bin/gitjacker" ]]; then
+    mv "/usr/local/bin/gitjacker" "${BHB_TOOLS_FOLDER}/gitjacker"
+    rmdir bin
+  fi 
+
   if ! grep -q gitjacker "${USER_HOME_BASE}/.bashrc"; then
-    echo "alias gitjacker=\"/usr/local/bin/gitjacker\"" >> "${USER_HOME_BASE}/.bashrc"
+    echo "alias gitjacker=\"${BHB_TOOLS_FOLDER}/gitjacker\"" >> "${USER_HOME_BASE}/.bashrc"
   fi
 }
 
