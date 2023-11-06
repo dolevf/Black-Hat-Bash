@@ -45,14 +45,17 @@
 ## Start the Lab
 Go into the lab folder in this repository and run:
 
-`chmod u+x run.sh && ./run.sh deploy`
+`sudo make deploy`
+
+## Test the Lab
+`sudo make test`
 
 ## Stop the Lab
-`./run.sh teardown`
+`sudo make teardown`
 
 ## Rebuild the Lab
-`./run.sh rebuild`
+`sudo make rebuild`
 
 ## Destroy the Lab
-`./run.sh cleanup`
+`sudo make clean`
 

@@ -23,6 +23,9 @@ COPY files/adminer-4.8.1.php /var/www/html/adminer.php
 COPY files/database.sql /var/www/html/database.sql
 COPY files/customers.sql /var/tmp/customers.sql
 
+RUN mkdir /var/www/html/uploads 
+RUN chmod 777 /var/www/html/uploads
+
 # Entry
 ENTRYPOINT service mariadb restart \
     && \
