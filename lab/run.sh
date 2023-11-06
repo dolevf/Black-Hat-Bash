@@ -109,6 +109,7 @@ deploy(){
         fi
     else
         docker compose up --detach &>> $LOG
+        sleep 5
         if status; then
             echo "Lab is up."
         else

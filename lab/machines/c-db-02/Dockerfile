@@ -9,4 +9,5 @@ ENV MYSQL_DATABASE="wordpress"
 ENV MYSQL_USER="wordpress"
 ENV MYSQL_PASSWORD="wordpress"
 
+# Entry
 CMD ["--default-authentication-plugin=mysql_native_password"]

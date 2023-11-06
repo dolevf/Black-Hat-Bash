@@ -14,7 +14,6 @@
 | c-redis-01 | | 10.1.0.14 | c-redis-01.acme-infinity-servers.com |
 | c-db-01 | | 10.1.0.15 | c-db-01.acme-infinity-servers.com |
 | c-db-02 | | 10.1.0.16 | c-db-02.acme-infinity-servers.com |
-| c-syslog-01 | | 10.1.0.17 | c-syslog-01.acme-infinity-servers.com |
 
 
 # Lab Installation

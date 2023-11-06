@@ -4,6 +4,9 @@ FROM lab_base
 LABEL name="p-web-01"
 LABEL company="ACME Infinity Servers"
 
+# Variables
+ENV FLASK_ENV=development
+
 # Install Required Packages
 RUN apt-get update -y --fix-missing
 RUN apt-get install software-properties-common -y
@@ -24,8 +27,7 @@ COPY files/site/app.py .
 COPY files/site/index.html .
 COPY files/site/upload.html . 
 
-ENV FLASK_ENV=development
-
+# Post Actions
 RUN mkdir files 
 RUN mkdir uploads
 COPY files/acme-hyper-branding-5.csv files/acme-hyper-branding-5.csv

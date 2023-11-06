@@ -16,7 +16,6 @@ RUN mkdir -p /var/www/html/backup/acme-hyper-branding
 RUN mkdir -p /var/www/html/backup/acme-impact-alliance
 COPY p-ftp-01/files/vsftpd.conf /etc/vsftpd.conf
 COPY p-web-01/files/site/app.py /var/www/html/backup/acme-hyper-branding
-COPY p-ftp-01/files/execute.sh /mnt/scripts/
 COPY p-web-02/files/site/* /var/www/html/backup/acme-impact-alliance/
 
 # Post Actions
@@ -35,16 +34,9 @@ RUN git init var/www/html/backup/acme-impact-alliance  \
     && git add -A \
     && git commit -m 'commit code'
 
-RUN chmod u+x /mnt/scripts/execute.sh
-
-RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab
-RUN crontab /tmp/root-crontab
-RUN rm /tmp/root-crontab
-
-
+  
 # Entry
-ENTRYPOINT \
-    service vsftpd restart \
+ENTRYPOINT service vsftpd restart \
     && \
     service cron restart \
     && \

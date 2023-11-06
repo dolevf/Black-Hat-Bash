@@ -6,8 +6,16 @@ LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install -y \
-                    cron \
-                    python3 
+RUN apt-get install -y python3 
 
-CMD echo "Starting backup service..." && python3 -m http.server --directory /etc 8080
+# Post Actions
+COPY files/execute.sh /mnt/scripts/
+
+RUN chmod u+x /mnt/scripts/execute.sh
+RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab
+RUN crontab /tmp/root-crontab && rm /tmp/root-crontab
+RUN mkdir -p /var/www/site
+RUN service cron restart
+
+ENTRYPOINT python3 -m http.server --directory /var/www/site 8080
+

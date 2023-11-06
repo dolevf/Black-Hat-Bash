@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is executed every minute on p-ftp-01 to do maintenance work.
+# This script is executed every minute on c-backup-01 to do maintenance work.
 
 LOG="/tmp/job.log"
 

@@ -10,6 +10,7 @@ services:
         ipv4_address: 172.16.10.13
       corporate:
         ipv4_address: 10.1.0.12
+  
   c-backup-01:
     container_name: c-backup-01
     hostname: c-backup-01.acme-infinity-servers.com
@@ -19,6 +20,9 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.13
+    volumes:
+      - shared_vol:/mnt/scripts
+  
   c-redis-01:
     container_name: c-redis-01
     hostname: c-redis-01.acme-infinity-servers.com
@@ -28,6 +32,7 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.14
+  
   p-ftp-01:
     container_name: p-ftp-01
     hostname: p-ftp-01.acme-infinity-servers.com
@@ -37,8 +42,7 @@ services:
     networks:
       public:
         ipv4_address: 172.16.10.11
-    volumes:
-      - shared_vol:/mnt/scripts
+  
   p-web-01:
     container_name: p-web-01
     hostname: p-web-01.acme-infinity-servers.com
@@ -51,6 +55,7 @@ services:
         ipv4_address: 172.16.10.10
     volumes:
       - shared_vol:/mnt/scripts/
+  
   p-web-02:
     container_name: p-web-02
     privileged: true
@@ -67,6 +72,7 @@ services:
         ipv4_address: 10.1.0.11
     depends_on:
       - c-db-02
+  
   c-db-02:
     container_name: c-db-02
     hostname: c-db-02.acme-infinity-servers.com
@@ -78,6 +84,7 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.16
+  
   c-db-01:
     container_name: c-db-01
     hostname: c-db-01.acme-infinity-servers.com
@@ -89,16 +96,7 @@ services:
     networks:
       corporate:
         ipv4_address: 10.1.0.15
-  c-syslog-01:
-    container_name: c-syslog-01
-    hostname: c-syslog-01.acme-infinity-servers.com
-    build: 
-      context: machines/c-syslog-01
-      dockerfile: Dockerfile
-    networks:
-      corporate:
-        ipv4_address: 10.1.0.17
-
+  
 volumes:
   shared_vol:
   c_db_01_vol:

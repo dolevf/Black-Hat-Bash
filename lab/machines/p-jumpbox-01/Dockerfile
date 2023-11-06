@@ -39,9 +39,8 @@ RUN chmod u+x /scripts/backup_data.sh
 RUN echo '*/5 * * * * root bash /scripts/backup_data.sh' >> /etc/crontab
 
 # Entry
-ENTRYPOINT \
-    service ssh restart \
-    && \    
+ENTRYPOINT service ssh restart \
+    && \
     service cron restart \
     && \
     tail -f /dev/null
