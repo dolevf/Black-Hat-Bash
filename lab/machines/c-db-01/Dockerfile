@@ -6,6 +6,8 @@ LABEL company="ACME Infinity Servers"
 
 # Variables
 ENV DEBIAN_FRONTEND=noninteractive
+ENV DB_ADMINER_FILE="/var/www/html/database.sql"
+ENV DB_CUSTOMERS_FILE="/var/tmp/customers.sql"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
@@ -29,10 +31,8 @@ RUN chmod 777 /var/www/html/uploads
 # Entry
 ENTRYPOINT service mariadb restart \
     && \
-    cat /var/www/html/database.sql | mysql -u root \
+    if [[ -f "${DB_ADMINER_FILE}" ]]; then cat "${DB_ADMINER_FILE}" | mysql -u root; fi \
     && \
-    cat /var/tmp/customers.sql | mysql -u root \
-    && \ 
-    rm /var/tmp/customers.sql \
+    if [[ -f "${DB_CUSTOMERS_FILE}" ]]; then cat "${DB_CUSTOMERS_FILE}" | mysql -u root; rm "${DB_CUSTOMERS_FILE}"; fi \
     && \
     /usr/sbin/apache2ctl -D FOREGROUND
