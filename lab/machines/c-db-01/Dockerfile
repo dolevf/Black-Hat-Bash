@@ -28,11 +28,13 @@ COPY files/customers.sql $DB_CUSTOMERS_FILE
 RUN mkdir /var/www/html/uploads 
 RUN chmod 777 /var/www/html/uploads
 
+RUN service mariadb restart \
+    && \
+    cat "$DB_ADMINER_FILE" | mysql -u root \
+    && \
+    cat "$DB_CUSTOMERS_FILE" | mysql -u root && rm "$DB_CUSTOMERS_FILE"
+    
 # Entry
 ENTRYPOINT service mariadb restart \
-    && \
-    if [[ -f "$DB_ADMINER_FILE" ]]; then cat "$DB_ADMINER_FILE" | mysql -u root; fi \
-    && \
-    if [[ -f "$DB_CUSTOMERS_FILE" ]]; then cat "$DB_CUSTOMERS_FILE" | mysql -u root; rm "$DB_CUSTOMERS_FILE"; fi \
     && \
     /usr/sbin/apache2ctl -D FOREGROUND
