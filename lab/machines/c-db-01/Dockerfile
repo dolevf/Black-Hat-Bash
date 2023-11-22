@@ -6,8 +6,8 @@ LABEL company="ACME Infinity Servers"
 
 # Variables
 ENV DEBIAN_FRONTEND=noninteractive
-ENV DB_ADMINER_FILE="/var/www/html/database.sql"
-ENV DB_CUSTOMERS_FILE="/var/tmp/customers.sql"
+ARG DB_ADMINER_FILE="/var/www/html/database.sql"
+ARG DB_CUSTOMERS_FILE="/var/tmp/customers.sql"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
@@ -22,8 +22,8 @@ RUN apt-get install -y \
 
 # Post Actions
 COPY files/adminer-4.8.1.php /var/www/html/adminer.php
-COPY files/database.sql /var/www/html/database.sql
-COPY files/customers.sql /var/tmp/customers.sql
+COPY files/database.sql $DB_ADMINER_FILE
+COPY files/customers.sql $DB_CUSTOMERS_FILE
 
 RUN mkdir /var/www/html/uploads 
 RUN chmod 777 /var/www/html/uploads
@@ -31,8 +31,8 @@ RUN chmod 777 /var/www/html/uploads
 # Entry
 ENTRYPOINT service mariadb restart \
     && \
-    if [[ -f "${DB_ADMINER_FILE}" ]]; then cat "${DB_ADMINER_FILE}" | mysql -u root; fi \
+    if [[ -f "$DB_ADMINER_FILE" ]]; then cat "$DB_ADMINER_FILE" | mysql -u root; fi \
     && \
-    if [[ -f "${DB_CUSTOMERS_FILE}" ]]; then cat "${DB_CUSTOMERS_FILE}" | mysql -u root; rm "${DB_CUSTOMERS_FILE}"; fi \
+    if [[ -f "$DB_CUSTOMERS_FILE" ]]; then cat "$DB_CUSTOMERS_FILE" | mysql -u root; rm "$DB_CUSTOMERS_FILE"; fi \
     && \
     /usr/sbin/apache2ctl -D FOREGROUND
