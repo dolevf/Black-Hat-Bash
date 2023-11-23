@@ -1,5 +1,4 @@
 #!/bin/bash
-
 VARIABLE_ONE="10"
 VARIABLE_TWO="20"
 
