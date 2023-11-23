@@ -1,5 +1,4 @@
 #!/bin/bash
-
 USER_INPUT="${1}"
 
 # Check if the user provided an argument
