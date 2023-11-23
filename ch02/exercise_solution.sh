@@ -1,5 +1,4 @@
 #!/bin/bash
-
 NAME="${1}"
 DOMAIN="${2}"
 OUTPUT_FILE="results.csv"
