@@ -1,5 +1,4 @@
 #!/bin/bash 
-RUST_SCAN_BIN="/home/kali/tools/RustScan/target/release/rustscan"
 LOG_FILE="watchdog.log"
 IP_ADDRESS="$1"
 WATCHED_PORT="$2"
@@ -14,7 +13,7 @@ service_discovery(){
 }
 
 while true; do 
-  port_scan=$("${RUST_SCAN_BIN}" -a "${IP_ADDRESS}" -g -p "${WATCHED_PORT}")
+  port_scan=$(docker run --network=host -it --rm --name rustscan rustscan/rustscan:2.1.1 -a "${IP_ADDRESS}" -g -p "${WATCHED_PORT}")
   if [[ -n "${port_scan}" ]]; then
     echo "${IP_ADDRESS} has started responding on port ${WATCHED_PORT}!"
     echo "Performing a service discovery..."
