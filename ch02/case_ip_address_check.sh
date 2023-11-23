@@ -1,5 +1,4 @@
 #!/bin/bash
-
 IP_ADDRESS="${1}"
 
 # Check if the argument is in a specific private network
