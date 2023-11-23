@@ -1,5 +1,4 @@
 #!/bin/bash
-
 VARIABLE_ONE="nostarch"
 VARIABLE_TWO="nostarch"
 
