@@ -1,5 +1,4 @@
 #!/bin/bash
-
 SIGNAL_TO_STOP_FILE="stoploop"
 
 # This loop will run until the file "stoploop" is available.
