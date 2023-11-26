@@ -6,8 +6,7 @@ LABEL company="ACME Infinity Servers"
 
 # Install Required Packages
 RUN apt-get update -y --fix-missing
-RUN apt-get install -y openssh-server
-RUN apt-get install -y elinks
+RUN apt-get install -y openssh-server elinks chkrootkit
 
 # Enable backup user login
 RUN echo 'backup:backup' | chpasswd
