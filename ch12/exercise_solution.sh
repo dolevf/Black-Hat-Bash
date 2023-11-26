@@ -55,6 +55,10 @@ check_file_or_directory(){
     return 1
 }
 
+download_eicar_file(){
+    wget -q "https://secure.eicar.org/eicar.com.txt"
+}
+
 generate_report(){
     if [[ ! -f "${REPORT_NAME}" ]]; then
         echo "tool, check_type, indicator" > "${REPORT_NAME}"
@@ -78,3 +82,7 @@ check aide directory /etc/aide
 check apparmor directory /etc/apparmor.d
 check fluentbit directory /etc/fluent-bit
 check rkhunter file /etc/rkhunter
+
+if [[ -f "${REPORT_NAME}" ]]; then
+    download_eicar_file
+fi
