@@ -13,12 +13,7 @@ check(){
     result="false"
 
     case "${check_type}" in
-        file)
-            if check_file_or_directory "${indicator}"; then
-                result="true"
-            fi
-        ;;
-        directory)
+        file|directory)
             if check_file_or_directory "${indicator}"; then
                 result="true"
             fi
