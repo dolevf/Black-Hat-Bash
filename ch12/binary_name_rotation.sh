@@ -5,7 +5,7 @@ RANDOMIZE=$(( (RANDOM % 7)  + 0))
 BIN_FILE="${RANDOM_BIN_NAMES[${RANDOMIZE}]}"
 FULL_BIN_PATH="${WORK_DIR}/${BIN_FILE}"
 
-self_remove(){
+self_removal(){
   shred -u -- "$(basename $0)" && rm -- "${FULL_BIN_PATH}"
 }
 
@@ -18,4 +18,4 @@ if command -v curl 1> /dev/null; then
   fi
 fi
 
-trap self_remove EXIT
+trap self_removal EXIT
