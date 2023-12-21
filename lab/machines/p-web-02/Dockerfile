@@ -1,4 +1,4 @@
-FROM wordpress:latest
+FROM wordpress:6.4
 
 # Metadata
 LABEL name="p-web-02"
