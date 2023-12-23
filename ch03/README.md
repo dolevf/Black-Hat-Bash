@@ -1,1 +1,1 @@
-# Setting up a Bash Pentesting Lab
+# Setting up a Hacking Lab
