@@ -1,1 +1,1 @@
-# Bash Fundamentals
+# Bash Basics
