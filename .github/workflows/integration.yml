@@ -2,7 +2,7 @@ name: Integration Testing
 on:
   workflow_dispatch:
   schedule:
-  - cron:  '0 0 */3 * *'
+  - cron:  '0 0 */7 * *'
 
 jobs:
   install_with_run_sh:
