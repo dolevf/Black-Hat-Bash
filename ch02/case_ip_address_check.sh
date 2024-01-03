@@ -10,6 +10,6 @@ case ${IP_ADDRESS} in
     echo "Network is 10.0.x.x"
   ;;
   *)
-    echo "Could not identify the network."
+    echo "Could not identify the network"
   ;;
 esac

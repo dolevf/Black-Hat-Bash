@@ -104,7 +104,7 @@ install_docker(){
     apt update -y 
     apt install docker-ce docker-ce-cli containerd.io -y
     systemctl enable docker --now
-    usermod -aG docker "${USER}"
+    usermod -aG docker "${SUDO_USER}"
   fi
 }
 
@@ -199,4 +199,4 @@ chown -R "${SUDO_USER}:${SUDO_USER}" "${BHB_TOOLS_FOLDER}"
 
 echo "Lab build completed." | tee -a "${BHB_INSTALL_LOG}"
 
-echo "NOTE: Start a new terminal session for shell changes to take effect."
+echo "NOTE: Log out and log back in for shell changes to take effect"

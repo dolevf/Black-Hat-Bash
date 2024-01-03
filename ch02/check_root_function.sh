@@ -11,7 +11,7 @@ check_if_root(){
 
 is_root=$(check_if_root)
 if [[ "${is_root}" -eq "0" ]]; then
-  echo "user is root!"
+  echo "User is root!"
 else
-  echo "user is not root!"
+  echo "User is not root!"
 fi

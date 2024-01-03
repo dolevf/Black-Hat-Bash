@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ ! -r "/etc/passwd" ]]; then
-    echo "/etc/passwd" must exist and be readable to be able to continue.
+    echo "/etc/passwd must exist and be readable to be able to continue."
     exit 1
 fi
 
