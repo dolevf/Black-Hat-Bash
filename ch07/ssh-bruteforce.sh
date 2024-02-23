@@ -22,7 +22,7 @@ for username in "${USERNAMES[@]}"; do
             echo "Username: ${username}"
             echo "Password: ${password}"
 
-            # You can perform additional actions here using the successful credentials
+            # Perform additional actions here using the credentials
 
             exit 0
         fi

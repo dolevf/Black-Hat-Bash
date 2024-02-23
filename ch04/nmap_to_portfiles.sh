@@ -1,6 +1,6 @@
 #!/bin/bash
 HOSTS_FILE="172-16-10-hosts.txt"
-NMAP_RESULT=$(nmap -iL ${HOSTS_FILE} --open  | grep "Nmap scan report\|tcp open")
+RESULT=$(nmap -iL ${HOSTS_FILE} --open  | grep "Nmap scan report\|tcp open")
 
 # read the nmap output line by line
 while read -r line; do
@@ -11,4 +11,4 @@ while read -r line; do
     file="port-${port}.txt"
     echo "${ip}" >> "${file}"
   fi  
-done <<< "${NMAP_RESULT}"
+done <<< "${RESULT}"

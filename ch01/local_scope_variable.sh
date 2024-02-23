@@ -10,4 +10,4 @@ print_name(){
 
 print_name
 
-echo "The variable ${name} will not be printed here because it is a local variable."
+echo "Variable ${name} will not be printed here because it is a local variable."

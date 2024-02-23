@@ -12,9 +12,9 @@ while read -r line; do
   # Only target home directories under /home
   if echo "${home_dir}" | grep -q "^/home"; then
     if [[ -r "${home_dir}" ]]; then
-        echo "Home directory ${home_dir} of user account ${account} is accessible!"
+        echo "Home directory ${home_dir} of ${account} is accessible!"
     else
-        echo "Home directory ${home_dir} of user account ${account} is NOT accessible!"
+        echo "Home directory ${home_dir} of ${account} is NOT accessible!"
     fi
   fi
 done < <(cat "/etc/passwd")

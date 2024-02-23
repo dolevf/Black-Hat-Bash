@@ -17,7 +17,7 @@ while read -r line; do
     echo "Testing ${url} for Directory indexing..."
     if curl -L -s "${url}" | grep -q -e "Index of /" -e "[PARENTDIR]"; then
       echo -e "\t -!- Found Directory Indexing page at ${url}"
-      echo -e "\t -!- Beginning a recursive download to the \"${OUTPUT_FOLDER}\" folder..."
+      echo -e "\t -!- Downloading to the \"${OUTPUT_FOLDER}\" folder..."
       mkdir -p "${OUTPUT_FOLDER}"
       wget -q -r -np -R "index.html*" "${url}" -P "${OUTPUT_FOLDER}"
     fi
