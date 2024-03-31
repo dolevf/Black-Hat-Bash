@@ -8,4 +8,4 @@ while [[ ! -f "${SIGNAL_TO_STOP_FILE}" ]]; do
   sleep 2
 done
 
-echo "File was found! exiting..."
+echo "File was found! Exiting..."
