@@ -1,7 +1,7 @@
 #!/bin/bash 
 LOG_FILE="watchdog.log"
-IP_ADDRESS="$1"
-WATCHED_PORT="$2"
+IP_ADDRESS="${1}"
+WATCHED_PORT="${2}"
 
 service_discovery(){
   local host

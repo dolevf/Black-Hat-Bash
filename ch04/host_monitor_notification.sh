@@ -10,7 +10,7 @@ TO_ADDR="security@blackhatbash.com"
 while true; do 
   echo "Performing an ARP scan against ${NETWORK}..."
   sudo arp-scan -x -I ${INTERFACE} ${NETWORK} | while read -r line; do
-    host="$(echo "${line}" | awk '{print $1}')"
+    host=$(echo "${line}" | awk '{print $1}')
     if ! grep -q "${host}" "${KNOWN_HOSTS}"; then
       echo "Found a new host: ${host}!"
       echo "${host}" >> "${KNOWN_HOSTS}"
