@@ -1,4 +1,7 @@
-Note: The lab was tested on [Kali Linux 2023.4](https://old.kali.org/kali-images/kali-2023.4/kali-linux-2023.4-installer-amd64.iso)
+# Notes
+* The lab was tested on [Kali Linux 2023.4](https://old.kali.org/kali-images/kali-2023.4/kali-linux-2023.4-installer-amd64.iso)
+* If Burpsuite is not available, run `sudo apt-get install burpsuite -y` in Kali.
+* If RustScan does not work in your lab due to architecture incompatibility with mac OS, you can install RustScan with `brew install rustscan` 
 
 # Lab Diagram
 <p>
