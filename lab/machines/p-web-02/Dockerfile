@@ -14,11 +14,12 @@ ENV WORDPRESS_DB_NAME="wordpress"
 RUN apt-get update -y
 RUN apt-get install -y \ 
                     net-tools \
+                    socat \
                     iputils-ping \
                     iproute2 \ 
                     cron \
                     lshw \
-                    at
+                    at 
 
 # Copy Files to Lab
 ADD files/site /var/www/html
