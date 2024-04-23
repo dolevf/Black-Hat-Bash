@@ -16,5 +16,5 @@ RUN echo '*/1 * * * * bash /mnt/scripts/execute.sh' >> /tmp/root-crontab
 RUN crontab /tmp/root-crontab && rm /tmp/root-crontab
 RUN mkdir -p /var/www/site
 
-ENTRYPOINT serice cron restart && python3 -m http.server --directory /var/www/site 8080
+ENTRYPOINT service cron restart && python3 -m http.server --directory /var/www/site 8080
 
