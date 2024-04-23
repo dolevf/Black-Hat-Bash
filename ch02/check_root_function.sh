@@ -9,8 +9,7 @@ check_if_root(){
   fi
 }
 
-is_root=$(check_if_root)
-if [[ "${is_root}" -eq "0" ]]; then
+if check_if_root; then
   echo "User is root!"
 else
   echo "User is not root!"
