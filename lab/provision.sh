@@ -2,7 +2,7 @@
 
 
 p_web_01() {
-  if ! sudo docker exec -it p-web-01 bash -c "iptables -I INPUT -s 10.0.1.0/24 -m comment --comment \"Block Network\" -j DROP"; then
+  if ! sudo docker exec -it p-web-01 bash -c "iptables -I INPUT -s 10.1.0.0/24 -m comment --comment \"Block Network\" -j DROP"; then
     return 1
   fi
 
