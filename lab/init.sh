@@ -167,8 +167,8 @@ install_dirsearch(){
 install_sysutilities(){
   apt install jq -y
   apt install ncat -y
+  apt install sshpass -y
   pip3 install pwncat-cs
-  
 }
 
 install_unixprivesccheck(){
