@@ -34,12 +34,11 @@ RUN git init var/www/html/backup/acme-impact-alliance  \
     && git add -A \
     && git commit -m 'commit code'
 
-  
+RUN mkdir -p /var/run/vsftpd/empty
+
 # Entry
-ENTRYPOINT service vsftpd restart \
-    && \
-    service cron restart \
+ENTRYPOINT service cron restart \
     && \
     service apache2 restart \
     && \
-    tail -f /dev/null
+    vsftpd /etc/vsftpd.conf
