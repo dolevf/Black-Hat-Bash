@@ -34,7 +34,17 @@ jobs:
         run: | 
           sleep 45 && sudo make test
         working-directory: ./lab
-
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+        
+      - name: Run Python Unit Tests
+        run: |
+          pip3 install pytest requests
+          python3 -m pytest tests/*
+      
       - name: Slack Notification Success
         id: notify_success
         
