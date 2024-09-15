@@ -43,7 +43,7 @@ jobs:
       - name: Run Python Unit Tests
         run: |
           pip3 install pytest requests
-          python3 -m pytest tests/*
+          python3 -m pytest ./lab/tests/*
       
       - name: Slack Notification Success
         id: notify_success
