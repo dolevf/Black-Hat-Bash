@@ -48,9 +48,9 @@ jobs:
       - name: Slack Notification Success
         id: notify_success
         
-        if: steps.deploy.outcome == 'success' && steps.test.outcome == 'success'
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"[SUCCESS] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})"}' ${{ secrets.SLACK_WEBHOOK }}
+        #if: steps.deploy.outcome == 'success' && steps.test.outcome == 'success'
+        #run: |
+        #  curl -X POST -H 'Content-type: application/json' --data '{"text":"[SUCCESS] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}})"}' ${{ secrets.SLACK_WEBHOOK }}
       
       - name: Slack Notification Failure
         id: notify_failure
