@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM ubuntu:24.04
 
 # Add Default Users
 RUN useradd -m -s /bin/bash jmartinez

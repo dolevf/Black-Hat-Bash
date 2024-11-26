@@ -16,8 +16,8 @@ RUN apt-get install -y \
                     python3 \
                     python3-pip \
                     iptables \
-                    gnupg
-RUN pip3 install flask --break-system-packages
+                    gnupg \
+                    python3-flask
 
 # Copy Files to Lab
 WORKDIR /app
