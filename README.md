@@ -1,6 +1,18 @@
 # Black Hat Bash
 Book files for **Black Hat Bash**.
 
+<table>
+  <tr>
+    <td style="vertical-align:top;width:40%">
+      <img src="Cover.png" alt="Black Hat Bash Cover" />
+    </td>
+    <td style="vertical-align:top;width:60%">
+      <p><strong>Black Hat Bash</strong> turns the humble shell into a full‑blown offensive toolkit. Through hands‑on labs and real‑world case studies, you’ll learn to chain commands, automate recon, parse outputs, and craft living‑off‑the‑land attacks against Linux servers—building a reusable arsenal of Bash scripts that save hours of manual effort.</p>
+      <p><a href="https://nostarch.com/black-hat-bash" target="_blank">Buy the book from No Starch Press</a></p>
+    </td>
+  </tr>
+</table>
+
 Enjoy!
 
 ***
