@@ -7,6 +7,7 @@ on:
 jobs:
   install_with_run_sh:
     runs-on: ubuntu-latest
+    name: Install, Run and Test
     steps:
       - name: Install Docker
         run: |
