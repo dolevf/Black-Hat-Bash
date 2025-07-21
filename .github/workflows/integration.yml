@@ -39,8 +39,9 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-        
+
       - name: Run Python Unit Tests
+        id: test-with-python
         run: |
           pip3 install pytest requests
           python3 -m pytest ./lab/tests/*
@@ -48,6 +49,6 @@ jobs:
       - name: Slack Notification Failure
         id: notify_failure
         
-        if: steps.deploy.outcome != 'success' || steps.test.outcome != 'success'
+        if: failure()
         run: |
           curl -X POST -H 'Content-type: application/json' --data '{"text":"[FAILURE] Integration test (https://github.com/dolevf/Black-Hat-Bash/actions/runs/${{github.run_id}}) <!here>" }' ${{secrets.SLACK_WEBHOOK}}
