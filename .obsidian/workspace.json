@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "b80f50cd19775a25",
+    "type": "split",
+    "children": [
+      {
+        "id": "c62e42c7d09efa7d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4649ab58bf0eed06",
+            "type": "leaf",
+            "state": {
+              "type": "pdf",
+              "state": {
+                "file": "black-hat-bash-scripting.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "black-hat-bash-scripting"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a4986d7600b253d1",
+    "type": "split",
+    "children": [
+      {
+        "id": "3dbe39583c2bf4dc",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a5c54f3e6cc30c23",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "844659dcab5b68be",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "9237a2fde4dd7046",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0ac8797369a43099",
+    "type": "split",
+    "children": [
+      {
+        "id": "20893aabdc53c0c7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7cb9037035298027",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Untitled.base",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Untitled"
+            }
+          },
+          {
+            "id": "874ff8b5cd91e539",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Untitled.base",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Untitled"
+            }
+          },
+          {
+            "id": "e91479457550202d",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "92ec8f77588bd682",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Untitled.base",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Untitled"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "a5c54f3e6cc30c23",
+  "lastOpenFiles": [
+    "Cover.png",
+    "README.md",
+    "Untitled.base",
+    "black-hat-bash-scripting.pdf",
+    "ch1/ta3rasa.sh",
+    "ch1",
+    "lab/tests/test_p-web-02.py",
+    "lab/tests/test_p-web-01.py",
+    "lab/tests/test_p-jumpbox-01.py",
+    "lab/tests/test_p-ftp-01.py",
+    "lab/tests/test_c-db-02.py",
+    "lab/tests/test_c-redis-01.py",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/trans.gif",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/object.gif",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/loader.gif",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/anchor.gif",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/video.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-video.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-audio.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/pagebreak.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/pagebreak-2x.png",
+    "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core32/Curve25519/README.md",
+    "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core/Curve25519/README.md",
+    "lab/machines/p-web-02/files/site/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/LICENSE.md",
+    "lab/machines/p-web-02/files/site/wp-content/themes/twentytwentythree/assets/fonts/source-serif-pro/LICENSE.md",
+    "lab/README.md",
+    "ch12/README.md",
+    "ch11/README.md",
+    "ch10/README.md",
+    "ch09/README.md",
+    "ch08/README.md",
+    "ch07/README.md",
+    "ch06/README.md",
+    "ch05/README.md",
+    "ch04/README.md",
+    "ch03/README.md",
+    "ch02/README.md",
+    "ch01/README.md",
+    "CREDITS.md"
+  ]
+}

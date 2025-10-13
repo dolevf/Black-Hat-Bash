@@ -1,0 +1,860 @@
+.theme-dark,
+.theme-light{
+
+  /* Obsidian "Dark" import so light mode looks the same*/
+  --color-scheme: dark;
+  --highlight-mix-blend-mode: lighten;
+  --mono-rgb-0: 0, 0, 0;
+  --mono-rgb-100: 255, 255, 255;
+  --color-red-rgb: 251, 70, 76;
+  --color-red: #fb464c;
+  --color-orange-rgb: 233, 151, 63;
+  --color-orange: #e9973f;
+  --color-yellow-rgb: 224, 222, 113;
+  --color-yellow: #e0de71;
+  --color-green-rgb: 68, 207, 110;
+  --color-green: #44cf6e;
+  --color-cyan-rgb: 83, 223, 221;
+  --color-cyan: #53dfdd;
+  --color-blue-rgb: 2, 122, 255;
+  --color-blue: #027aff;
+  --color-purple-rgb: 168, 130, 255;
+  --color-purple: #a882ff;
+  --color-pink-rgb: 250, 153, 205;
+  --color-pink: #fa99cd;
+  --color-base-00: #1e1e1e;
+  --color-base-05: #212121;
+  --color-base-10: #242424;
+  --color-base-20: #262626;
+  --color-base-25: #2a2a2a;
+  --color-base-30: #363636;
+  --color-base-35: #3f3f3f;
+  --color-base-40: #555555;
+  --color-base-50: #666666;
+  --color-base-60: #999999;
+  --color-base-70: #bababa;
+  --color-base-100: #dadada;
+  --color-accent-hsl: var(--accent-h), var(--accent-s), var(--accent-l);
+  --color-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+  --color-accent-1: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) - 3.8%));
+  --color-accent-2: hsl(var(--accent-h), var(--accent-s), calc(var(--accent-l) + 3.8%));
+  --background-modifier-form-field: var(--color-base-25);
+  --interactive-normal: var(--color-base-30);
+  --interactive-hover: var(--color-base-35);
+  --background-modifier-box-shadow: rgba(0, 0, 0, 0.3);
+  --background-modifier-cover: rgba(10, 10, 10, 0.4);
+  --text-selection: hsla(var(--interactive-accent-hsl), 0.25);
+  --input-shadow: inset 0 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.09), 0 2px 4px 0 rgba(0,0,0,.15), 0 1px 1.5px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.2), 0 0 0 0 transparent;
+  --input-shadow-hover: inset 0 0.5px 1px 0.5px rgba(255, 255, 255, 0.16), 0 2px 3px 0 rgba(0,0,0,.3), 0 1px 1.5px 0 rgba(0,0,0,.2), 0 1px 2px 0 rgba(0,0,0,.4), 0 0 0 0 transparent;
+  --shadow-s: 0px 1px 2px rgba(0, 0, 0, 0.121), 0px 3.4px 6.7px rgba(0, 0, 0, 0.179), 0px 15px 30px rgba(0, 0, 0, 0.3);
+  --shadow-l: 0px 1.8px 7.3px rgba(0, 0, 0, 0.071), 0px 6.3px 24.7px rgba(0, 0, 0, 0.112), 0px 30px 90px rgba(0, 0, 0, 0.2);
+  --pdf-shadow: 0 0 0 1px var(--background-modifier-border);
+  --pdf-thumbnail-shadow: 0 0 0 1px var(--background-modifier-border);
+
+  /* Actual Dracula colors*/
+  --background-primary: #282a36;
+  --background-primary-alt: #44475a;
+  --background-secondary: #20212B;
+  --background-secondary-alt: #282a36;
+  --text-normal: #f8f8f2;
+  --text-on-accent: #282a36;
+  --text-title-h1: #bd93f9;
+  --text-title-h2: #ffb86c;
+  --text-title-h3: #50fa7b;
+  --text-title-h4: #ff5555;
+  --text-title-h5: #f1fa8c;
+  --text-title-h6: #bd93f4;
+  --canvas-color-1: 255,  85,  85;
+  --canvas-color-2: 255, 184, 108;
+  --canvas-color-3: 241, 250, 140;
+  --canvas-color-4:  82, 250, 124;
+  --canvas-color-5: 139, 233, 253;
+  --canvas-color-6: 189, 147, 244;
+  --text-link: var(--text-accent);
+  --markup-code: #ffb86c;
+  --text-tag: #50fa7b;
+  --text-a: #ff79c6;
+  --text-a-hover: #ff79c0;
+  --text-mark: #f1fa8c;
+  --interactive-accent: #50fa7b;
+  --blockquote-border: #b294bb;
+  --interactive-accent-rgb: #f1fa8c;
+  --accent-h: 135;
+  --accent-s: 94%;
+  --accent-l: 65%;
+  --titlebar-background-focused: var(--titlebar-background);
+
+  /* Dracula Code view*/
+  --code-normal: #F8F8F2;
+  --code-background: #20212B;
+  --dracula-foreground: #F8F8F2;
+  --dracula-Comment: #6272A4;
+  --dracula-keyword: #FF79C6;
+  --dracula-definition: #50FA7B;
+  --dracula-variable: #F8F8F2; /*"variable" tags are used everywhere in code, but Dracula usually only uses orange color only for declaration inputs, thus white is less annoying to look at*/
+  --dracula-number: #BD93F9;
+  --dracula-function: #8BE9FD;
+  --dracula-string: #F1FA8C;
+}
+
+/* LINKS & BRACKETS */
+
+/* link */
+
+/* url's */
+
+/* editor */
+
+.cm-url {
+  color: var(--text-link) !important;
+}
+
+/* preview */
+
+.external-link {
+  color: var(--text-link) !important;
+}
+
+
+/* make external links italics to differentiate */
+
+a:not(.internal-link) {
+  font-style: italic;
+}
+
+/* horizontal line in preview */
+
+hr {
+  background-color: var(--text-normal);
+  border-color: var(--text-normal);
+}
+
+.markdown-preview-view hr {
+  background-color: var(--text-normal);
+  border-color: var(--text-normal);
+}
+
+.markdown-rendered hr {
+  background-color: var(--text-normal);
+  border-color: var(--text-normal);
+}
+
+.markdown-embed {
+  padding-left: 8px !important;
+  padding-right: 4px !important;
+  margin-left: 8px !important;
+  margin-right: 4px !important;
+}
+
+/* internal embedded link rendering in preview */
+
+.markdown-embed-title {
+  color: var(--text-link);
+}
+
+
+/* NAKED EMBEDS*/
+
+/* But keeping Border and Scroll! */
+
+.markdown-embed-title {
+  display: none;
+}
+
+.markdown-preview-view .markdown-embed-content > :first-child {
+  margin-top: 0;
+}
+
+.markdown-preview-view .markdown-embed-content > :last-child {
+  margin-bottom: 0;
+}
+
+
+.markdown-embed-link {
+  color: var(--text-a) !important;
+  right: 2px !important;
+}
+
+.markdown-embed-link:hover {
+  color: var(--text-link) !important;
+}
+
+/* NO FILE OPEN PAGE*/
+
+.empty-state-title {
+  color: var(--text-title-h1) !important;
+}
+
+.empty-state-action {
+  color: var(--text-muted) !important;
+}
+
+.empty-state-action:hover {
+  color: var(--text-normal) !important;
+}
+
+/* GRAPH VIEW */
+
+#graph-view-canvas .links {
+  stroke: var(--interactive-accent-rgb) !important;
+}
+
+/* CODEBLOCKS */
+
+
+/* code blocks in preview */
+
+pre code {
+  padding: 5px !important;
+  color: var(--dracula-foreground);
+  line-height: normal;
+  display: block;
+  background-color: var(--background-primary);
+}
+
+.markdown-preview-view pre {
+  padding: 0px !important;
+}
+
+/* in-line code for editor and preview and code block for editor*/
+
+.cm-inline-code {
+  background-color: var(--background-primary-alt) !important;
+  color: var(--dracula-foreground) !important;
+  bottom: 0px !important;
+}
+
+/* Code Appearance */
+
+/* Editing view */
+
+.CodeMirror-code span.cm-inline-code {
+  color: var(--markup-code) !important;
+}
+
+.cm-hmd-codeblock {
+  color: var(--dracula-foreground);
+}
+
+.cm-hmd-codeblock.cm-keyword {
+  color: var(--dracula-keyword);
+}
+
+.cm-def.cm-hmd-codeblock {
+  color: var(--dracula-definition);
+}
+
+.cm-hmd-codeblock.cm-variable {
+  color: var(--dracula-variable);
+}
+
+.cm-hmd-codeblock.cm-operator{
+  color: var(--dracula-keyword);
+}
+
+.cm-hmd-codeblock.cm-number {
+  color: var(--dracula-number);
+}
+
+.cm-builtin.cm-hmd-codeblock {
+  color: var(--dracula-function);
+}
+
+.cm-hmd-codeblock.cm-string {
+  color: var(--dracula-string);
+}
+
+/* Preview */
+
+code {
+  background-color: var(--background-primary);
+  color: var(--dracula-foreground);
+}
+
+.token.function {
+  color: var(--dracula-definition);
+}
+
+.token.operator {
+  color: var(--dracula-keyword);
+}
+
+.token.number {
+  color: var(--dracula-number);
+}
+
+.token.builtin {
+  color: var(--dracula-function);
+}
+
+.token.boolean {
+  color: var(--dracula-number);
+}
+
+.token.string {
+  color: var(--dracula-string);
+}
+
+/* Editor CodeBlock TEXT Appearance - */
+
+.cm-s-obsidian pre.HyperMD-codeblock {
+  color: var(--markup-code) !important;
+}
+
+/* borders */
+
+.cm-s-obsidian span.cm-inline-code {
+  border: 1px solid #525660;
+  border-radius: 4px;
+}
+
+.cm-s-obsidian span.cm-formatting-code.cm-inline-code {
+  border-right-width: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.cm-s-obsidian span.cm-formatting-code.cm-inline-code + span.cm-inline-code {
+  border-right: none;
+  border-left: none;
+  border-radius: 0;
+}
+
+.cm-s-obsidian
+  span.cm-formatting-code.cm-inline-code
+  + span.cm-inline-code
+  + span.cm-formatting-code.cm-inline-code {
+  border-left-width: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-right-width: 1px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* BLOCKQUOTES */
+
+/* editor */
+
+.cm-quote {
+  color: var(--interactive-accent) !important;
+  font-style: italic;
+}
+
+/* preview */
+
+blockquote {
+  color: var(--interactive-accent) !important;
+  font-style: italic;
+  border-color: var(--blockquote-border) !important;
+}
+
+/* IMAGES */
+
+/* embedded images */
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* TABLES */
+
+th {
+  border: 1px solid var(--background-primary-alt) !important;
+}
+
+td {
+  border: 1px solid var(--background-primary-alt) !important
+}
+
+thead {
+  border-bottom: 4px solid var(--background-primary-alt);
+}
+
+.table {
+  background-color: var(--background-secondary-alt);
+  border: 1px solid var(--background-primary-alt);
+  padding: 4px;
+  line-height: normal;
+  display: block;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* SIDEBAR & DOCK ETC. */
+
+/* view action buttons */
+
+.view-action {
+  color: var(--text-muted) !important;
+  text-decoration: none !important;
+}
+
+.view-action:hover,
+.view-action.is-active {
+  color: var(--text-normal) !important;
+}
+
+.status-bar {
+  background-color: var(--background-secondary-alt);
+}
+
+.side-dock-ribbon-action {
+  color: var(--text-muted) !important;
+}
+
+.side-dock-ribbon-action:hover {
+  color: var(--text-normal) !important;
+}
+
+.workspace-tab-header {
+  color: var(--text-muted) !important;
+  text-decoration: none !important;
+}
+
+.workspace-tab-header:hover {
+  color: var(--text-normal) !important;
+}
+
+button.mod-cta {
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+}
+
+.horizontal-tab-nav-item.is-active, .vertical-tab-nav-item.is-active {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+/* searchbar */
+
+.side-dock-panels-container {
+  background-color: var(--background-secondary-alt) !important;
+  color: var(background-secondary-alt);
+}
+
+/* icons at top of panes*/
+
+.file-view-actions a {
+  color: var(--text-muted) !important;
+}
+
+.file-view-actions a:hover {
+  color: var(--text-muted) !important;
+}
+
+/* html tags in editor */
+
+.cm-tag {
+  color: var(--text-tag) !important;
+}
+
+/* .side-dock-ribbon-tab,
+.side-dock-ribbon-action {} */
+
+.side-dock-ribbon-tab.is-active {
+  color: var(--interactive-accent) !important;
+}
+
+.side-dock-ribbon-tab.is-active .side-dock-ribbon-tab-inner:hover {
+  color: #6272a4 !important;
+  background-color: var(--background-secondary);
+}
+
+
+.is-translucent .nav-file-title:not(.is-active) {
+  background-color: transparent;
+}
+
+.is-translucent .nav-folder-title {
+  background-color: transparent;
+}
+
+.nav-file-title:hover {
+  color: var(--text-normal) !important;
+}
+
+.nav-folder-title:hover {
+  color: var(--text-normal) !important;
+}
+
+.nav-action-button.is-active {
+  background-color: var(--background-secondary-alt);
+}
+
+.search-result-file-title {
+  color: var(--text-a) !important;
+  background-color: var(--background-secondary);
+}
+
+.is-translucent .search-result-file-title {
+  background-color: transparent;
+}
+
+.search-result-file-matched-text {
+  color: var(--text-link) !important;
+  background-color: var(--background-secondary);
+}
+
+/* .nav-file-tag {
+  color: #59a2c5;
+  } /* for the PNG text, but can't specifically target "PNG", just all of those filetype tags. */
+
+.nav-file.is-active .nav-file-tag {
+  color: var(--text-normal);
+}
+
+/* hover actions on side dock navigation */
+
+.side-dock-ribbon-tab:hover,
+.side-dock-ribbon-tab-inner:hover,
+.side-dock-ribbon-action:hover,
+.side-dock-ribbon-action.is-active:hover,
+.nav-action-button:hover,
+.side-dock-collapse-btn:hover {
+  color: var(--text-normal);
+}
+
+/* Hover color over tree item flairs */
+.tree-item-self:hover .tree-item-flair {
+  background-color: var(--background-secondary);
+}
+
+/* clean up side bar empty state (e.g. unlinked mentions) */
+
+.search-empty-state {
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  line-height: normal;
+}
+
+/* clean up side bar empty state (e.g. unlinked mentions) */
+
+.search-empty-state {
+  width: auto;
+  padding-left: 10px;
+  padding-right: 5px;
+  line-height: normal;
+}
+
+/* NORMAL TEXT OUTSIDE OF HEADINGS AND CODE */
+
+/* preview */
+
+.markdown-preview-view {
+  color: var(--text-normal);
+  padding-left: 8% !important;
+  padding-right: 4% !important;
+}
+
+.mod-single-child .markdown-preview-view {
+  color: var(--text-normal);
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+}
+
+/* editor */
+
+.cm-s-obsidian {
+  color: var(--text-normal);
+  padding-left: 8% !important;
+  padding-right: 4% !important;
+}
+
+.mod-single-child .cm-s-obsidian {
+  color: var(--text-normal);
+  padding-left: 8% !important;
+  padding-right: 4% !important;
+}
+
+/* HEADINGS */
+
+/* preview */
+
+.markdown-preview-view h1 {
+  color: var(--text-title-h1);
+}
+
+.markdown-preview-view h2 {
+  color: var(--text-title-h2);
+}
+
+.markdown-preview-view h3 {
+  color: var(--text-title-h3);
+}
+
+.markdown-preview-view h4 {
+  color: var(--text-title-h4);
+}
+
+.markdown-preview-view h5 {
+  color: var(--text-title-h5);
+}
+
+.markdown-preview-view h6 {
+  color: var(--text-title-h6);
+}
+
+/* editor */
+
+.cm-header-1 {
+  color: var(--text-title-h1);
+}
+
+.cm-header-2 {
+  color: var(--text-title-h2);
+}
+
+.cm-header-3 {
+  color: var(--text-title-h3);
+}
+
+.cm-header-4 {
+  color: var(--text-title-h4);
+}
+
+.cm-header-5 {
+  color: var(--text-title-h5);
+}
+
+.cm-header-6 {
+  color: var(--text-title-h6);
+}
+
+/* TAGS */
+
+/* preview */
+
+a.tag {
+  color: var(--text-tag);
+}
+
+/* editor */
+
+.cm-hashtag {
+  color: var(--text-tag) !important;
+}
+
+/* BOLD */
+
+/* preview */
+
+strong {
+  color: var(--markup-code);
+}
+
+/* editor */
+
+.cm-strong {
+  color: var(--markup-code);
+}
+
+/* ITALICS */
+
+/* preview */
+
+em {
+  color: var(--interactive-accent);
+}
+
+/* editor */
+
+.cm-em {
+  color: var(--interactive-accent);
+}
+
+/* HIGHLIGHT */
+
+/* preview */
+
+mark {
+  color: var(--background-primary);
+  background-color: var(--text-mark);
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+/* editor */
+
+.cm-highlight {
+  color: var(--background-primary) !important;
+  background-color: var(--text-mark) !important;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+/* COLLAPSED RIBBONS */
+
+.workspace-ribbon.is-collapsed {
+  background-color: var(--background-secondary-alt) !important;
+}
+
+.workspace-ribbon.mod-right.is-collapsed {
+  background-color: var(--background-secondary-alt) !important;
+}
+
+.workspace-ribbon.mod-left.is-collapsed {
+  background-color: var(--background-secondary-alt) !important;
+}
+
+/* POPUP NOTIFICATION*/
+
+.notice {
+  color: var(--text-normal) !important;
+  background-color: var(--blockquote-border) !important;
+}
+
+/* UL, OL, BULLETS, CHECKBOXES & FOLDING ARROWS */
+
+/* task lists */
+
+.markdown-preview-view .task-list-item-checkbox {
+  -webkit-appearance: none;
+  top: 1.3px !important;
+  right: 5px !important;
+  box-sizing: border-box;
+  border: 1px solid var(--accent-2);
+  position: relative;
+  width: 1.25em;
+  height: 1.25em;
+  margin: 0;
+  box-shadow: 0 0 0.1em var(--interactive-accent);
+}
+
+.markdown-preview-view .task-list-item-checkbox:checked::before {
+  content: "✓";
+  position: absolute;
+  color: var(--interactive-accent);
+  line-height: 1.25em;
+  width: 1.2em;
+  text-align: center;
+  text-shadow: 0 0 0.5em var(--accent-2);
+}
+
+.markdown-preview-view .task-list-item-checkbox {
+  top: 0px;
+}
+
+.checkbox-container {
+  background-color: var(--background-primary-alt);
+  border-radius: 14px;
+  display: inline-block;
+  position: relative;
+  top: 4px;
+  user-select: none;
+  width: 42px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.15);
+  transition: background 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+    border 0.15s ease-in-out, opacity 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.checkbox-container.is-enabled {
+  background-color: var(--interactive-accent);
+}
+
+
+.markdown-preview-view mark {
+  color: var(--text-link);
+  background-color: var(--background-primary-alt);
+}
+
+.cm-formatting
+/* This is the color of header hashtags. Don't change. */
+
+.cm-formatting-list-ul .cm-list-1
+/* This is the color of text in lists. Don't change. */
+
+
+/* Subtler code folding arrows */
+
+.CodeMirror-foldgutter-folded:after,
+.CodeMirror-foldgutter-open:after {
+  opacity: 0.5;
+  color: var(--text-link);
+}
+
+.CodeMirror-foldgutter-folded:hover:after,
+.CodeMirror-foldgutter-open:hover:after {
+  opacity: 1;
+  color: var(--text-link);
+}
+
+.CodeMirror-foldgutter-folded:after {
+  content: "\25BA";
+  color: var(--text-link);
+}
+
+.CodeMirror-foldgutter-open:after {
+  content: "\25BC";
+}
+
+/* Bullet Point Relationship Lines */
+
+.cm-hmd-list-indent .cm-tab,
+ul ul {
+  position: relative;
+}
+
+.cm-hmd-list-indent .cm-tab::before,
+ul ul::before {
+  content: "";
+  border-left: 1px solid;
+  color: #92CDD6;
+  position: absolute;
+}
+
+.cm-hmd-list-indent .cm-tab::before {
+  left: 0;
+  top: -5px;
+  bottom: -4px;
+}
+
+ul ul::before {
+  left: 0px;
+  top: 0;
+  bottom: 0;
+}
+
+/* ul, li & ol colors in editor */
+
+.cm-s-obsidian span.cm-formatting-list {
+  color: #8abeb7;
+}
+
+ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.suggestion-highlight {
+  color: var(--interactive-accent)!important;
+}
+
+.is-selected {
+  background-color: var(--blockquote-border)!important;
+}
+
+@media print { 
+  @page {
+    margin: 0mm 0mm 0mm 0mm;
+  }
+  .print .markdown-preview-view {
+      -webkit-print-color-adjust: exact;
+      background-color: #282a36;
+      color: #f8f8f2;
+  }
+  .markdown-rendered code {
+      color: #BABABA !important;
+  }
+}
