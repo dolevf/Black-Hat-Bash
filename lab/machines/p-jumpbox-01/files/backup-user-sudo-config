@@ -1,2 +1,0 @@
-backup ALL=(ALL:ALL) /usr/bin/vi
-backup ALL=(ALL:ALL) /usr/bin/curl

@@ -1,5 +1,0 @@
-# BHB
-log.txt
-
-# Exclude WordPress files
-machines/p-web-02/files/site/wp-*
