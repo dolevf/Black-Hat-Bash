@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "c62e42c7d09efa7d",
+        "id": "99e83fb863c55545",
         "type": "tabs",
         "children": [
           {
@@ -76,7 +76,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "0ac8797369a43099",
@@ -168,12 +169,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "a5c54f3e6cc30c23",
+  "active": "4649ab58bf0eed06",
   "lastOpenFiles": [
+    "black-hat-bash-scripting.pdf",
+    "ch1/ta3rasa.sh~",
     "Cover.png",
     "README.md",
     "Untitled.base",
-    "black-hat-bash-scripting.pdf",
     "ch1/ta3rasa.sh",
     "ch1",
     "lab/tests/test_p-web-02.py",
