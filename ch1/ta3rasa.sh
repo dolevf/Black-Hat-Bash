@@ -2,9 +2,8 @@
 first_name="ahmad"
 
 whole_name(){
-  local last_name
-
-  last_name="alhams"
+local last_name
+last_name="alhams"
   echo "my name is ${first_name} ${last_name}"
 }
 

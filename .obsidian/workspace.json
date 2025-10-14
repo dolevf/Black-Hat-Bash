@@ -76,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "0ac8797369a43099",
@@ -171,28 +170,27 @@
   },
   "active": "4649ab58bf0eed06",
   "lastOpenFiles": [
-    "black-hat-bash-scripting.pdf",
+    "ch1/arrays.sh~",
+    "ch1/arrays.sh",
+    "ch1/nums.sh~",
     "ch1/ta3rasa.sh~",
-    "Cover.png",
-    "README.md",
-    "Untitled.base",
+    "ch1/nums.sh",
+    "ch01/local_scope_variable.sh",
+    "ch01",
+    "ch1/Book_scripts/local_scope_variable.sh",
+    "ch1/Book_scripts",
     "ch1/ta3rasa.sh",
     "ch1",
-    "lab/tests/test_p-web-02.py",
-    "lab/tests/test_p-web-01.py",
-    "lab/tests/test_p-jumpbox-01.py",
-    "lab/tests/test_p-ftp-01.py",
-    "lab/tests/test_c-db-02.py",
-    "lab/tests/test_c-redis-01.py",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/trans.gif",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/object.gif",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/loader.gif",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/lightgray/img/anchor.gif",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/video.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-video.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/video.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-audio.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/pagebreak.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/pagebreak-2x.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/more.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/more-2x.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/gallery.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/gallery-2x.png",
+    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/embedded.png",
     "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core32/Curve25519/README.md",
     "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core/Curve25519/README.md",
     "lab/machines/p-web-02/files/site/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/LICENSE.md",
@@ -210,6 +208,7 @@
     "ch03/README.md",
     "ch02/README.md",
     "ch01/README.md",
-    "CREDITS.md"
+    "CREDITS.md",
+    "README.md"
   ]
 }
