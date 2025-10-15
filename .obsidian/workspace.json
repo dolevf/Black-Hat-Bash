@@ -18,6 +18,20 @@
               "icon": "lucide-file-text",
               "title": "black-hat-bash-scripting"
             }
+          },
+          {
+            "id": "b33aaa0e50525b5a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ch1/Basics.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Basics"
+            }
           }
         ]
       }
@@ -76,7 +90,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "0ac8797369a43099",
@@ -170,17 +185,22 @@
   },
   "active": "4649ab58bf0eed06",
   "lastOpenFiles": [
+    "ch1/args.sh~",
+    "ch1/args.sh",
+    "ch1/positional_args.sh~",
+    "ch1/positional_args.sh",
+    "ch1/test",
+    "ch1/Basics.md",
+    "Pasted image 20251014192418.png",
+    "black-hat-bash-scripting.pdf",
+    "ch1/streams.sh",
+    "README.md",
+    "Cover.png",
+    "ch1/Book_scripts/Untitled.md",
     "ch1/arrays.sh~",
     "ch1/arrays.sh",
     "ch1/nums.sh~",
     "ch1/ta3rasa.sh~",
-    "ch1/nums.sh",
-    "ch01/local_scope_variable.sh",
-    "ch01",
-    "ch1/Book_scripts/local_scope_variable.sh",
-    "ch1/Book_scripts",
-    "ch1/ta3rasa.sh",
-    "ch1",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-video.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/video.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/playlist-audio.png",
@@ -189,8 +209,6 @@
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/more.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/more-2x.png",
     "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/gallery.png",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/gallery-2x.png",
-    "lab/machines/p-web-02/files/site/wp-includes/js/tinymce/skins/wordpress/images/embedded.png",
     "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core32/Curve25519/README.md",
     "lab/machines/p-web-02/files/site/wp-includes/sodium_compat/src/Core/Curve25519/README.md",
     "lab/machines/p-web-02/files/site/wp-content/themes/twentytwentytwo/assets/fonts/source-serif-pro/LICENSE.md",
@@ -208,7 +226,6 @@
     "ch03/README.md",
     "ch02/README.md",
     "ch01/README.md",
-    "CREDITS.md",
-    "README.md"
+    "CREDITS.md"
   ]
 }
