@@ -9,3 +9,4 @@ last_name="alhams"
 
 whole_name
 echo "my name is ${first_name} ${last_name}"
+#me from the remote
